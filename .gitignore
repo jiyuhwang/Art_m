@@ -27,6 +27,6 @@ tmp/
 local.properties
 
 ### first not include this ignore ###
-# .settings/
-# .classpath
-# .project
+.settings/
+.classpath
+.project

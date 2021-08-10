@@ -1,0 +1,366 @@
+
+.background{
+	width : 100%;
+	height : 100%;
+	background-color: black;
+	opacity: 0.4;
+	position: absolute;
+	left : 0;
+	top : 0;
+	z-index: 10;
+}
+.Pmain table th{
+	background-color: #cccccc;
+}
+.Pmain .content_box input{
+	width: inherit;
+	background-color: inherit;
+	margin: 0;
+}
+
+.Pmain #PsearchGbnDP{
+	display: none;
+}
+
+
+textarea{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: inherit;
+}
+
+.Pmain{
+	width : 900px;
+	height : 900px;
+	background-color: #E0E7E9;
+	display: inline-block;
+	font-size: 0px;
+	position: absolute;
+	left : 50%;
+	top: 50%;
+	margin-left : -450px;
+	margin-top : -450px;
+	border-radius: 7px;
+	z-index: 11;
+}
+.Pmain .topBar{
+	width : 100%;
+	background-color: rgba;
+}
+.Pmain .blank{
+	width : 97%;
+	height : 100%;
+	background-color: rgba;
+}
+
+.Pmain .blank_cancelPop{
+	width : 600px;
+	height :20px;
+	background-color: rgba;
+	display: inline-block; 
+}
+.Pmain .profile{
+	width : 300px;
+	height : 425px;
+	background-color: rgba;
+	text-align: center;
+	display: inline-block;
+}
+.Pmain .pBox{
+	width : 180px;
+	height :210px;
+	margin : 0 auto;
+	padding-top: 60px;
+	display: block;
+	font-size: 0px;
+}
+.Pmain .img{
+	width : 180px;
+	height: 180px;
+	background-color: rgba;
+	margin-top:40px;
+	border-radius: 50%;
+}
+.Pmain .pName{
+	margin-top : 50px;
+	padding : 15px 0px;
+	text-align: center;
+	font-size: 14pt;
+	font-weight: bold;
+	border-radius: 9px;
+	border: none;
+	background-color: inherit;
+}
+.Pmain .cButtonB{
+	width : 160px;
+	height : 20px;
+	background-color: rgba;
+	display: inline-block;
+}
+.Pmain .cButtonc{
+	width : 20px;
+	height : 20px;
+	background-color: rgba;
+	vertical-align: top;
+	display: inline-block;
+}
+
+.Pmain .closeBtn{
+	display: inline-block;
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.Pmain .cButtonI{
+	width : 100%;
+	height:100%;
+	cursor: pointer;
+}
+.Pmain .writeBox{
+	width : 600px;
+	height :425px;
+	background-color: rgba;
+	display: inline-block; 
+	vertical-align: top;
+}
+.Pmain .blank1{
+	width : 600px;
+	height :60px;
+	background-color: rgba;
+	display: inline-block; 
+	vertical-align: top;
+	font-size: 30pt;
+}
+.Pmain .writeBoxI{
+	width : 600px;
+	height : 340px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: rgba;
+	font-size: 5px;
+}
+.Pmain input, span{
+	/* font-size: 12px; */
+	text-align: center;
+	padding : 3px 0px;
+	border: none;
+}
+.Pmain .leftBox{
+	margin-left: 20px;
+}
+.Pmain .smallBox{
+	width : 280px;;
+	height : 200px;
+	background-color: rgba;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 5px;
+}
+.Pmain .MsmallBox{
+	width :100%;
+	height : 55px;
+	font-size: 12pt;
+	line-height: 80px;
+}
+
+.Pmain #updateBtnDM, #deleteBtnDM{
+	margin: 0;
+	width: 50px;
+	height: 30px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+
+
+.Pmain .introduce_box{
+	height: 165px;
+	width: 550px;
+	background-color: inherit;
+}
+.Pmain .sogea{
+	background-color: inherit;
+	height: 30px;
+	width : inherit;
+	font-size: 12pt;
+	line-height: 20px;	
+}
+.Pmain .sogea_box{
+	width: inherit;
+	height: 135px;
+	border: 1px solid rgb(191, 191, 191);
+	background-color: inherit;
+	font-size: 12pt;
+	box-sizing: border-box;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.Pmain .informing{
+	 width: 80px;
+	 height: inherit;
+	 background-color: inherit;
+	 text-align: center;
+	 display: inline-block;
+	 padding-bottom: 30px;	
+}
+.Pmain .content_box{
+	border-bottom: 1px solid gray;
+	width: 170px;
+	height: inherit;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+.Pmain .insideMiddle1,.insideMiddle2{
+	width : 80px;
+	height : 100%;
+	border-radius: 3px;
+	z-index: 1;
+	position: relative;
+	border: none;
+	margin-top: 40px;
+}
+.Pmain .insideMiddle1{
+	box-shadow: 4px 4px 5px grey;
+	z-index: 2;
+	position: relative;
+	background-color: #0C4A60;
+	color: white;
+	width:80px;
+	height: 50px;
+}
+.Pmain .insideMiddle2:hover{
+	box-shadow: 4px 4px 5px grey;
+	z-index: 2;
+	position: relative;
+	background-color: #0C4A60;
+	color: white;
+}
+.Pmain .middleSection{
+	width: 100%;
+	height : 50px;
+	display: inline-block;
+}
+.Pmain .brick{
+	width : 40px;
+	height : 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+.Pmain .underLine{
+	width : 650px;
+	height : 100%;
+	border-bottom: 1px solid black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+}
+.Pmain .boxForB{
+	width : 100%;
+	height :350px;
+	background-color: #E0E7E9;
+	/* 810 320  */
+}
+.Pmain .topOfBox{
+	font-size : 0px;
+	width : 810px;
+	height : 70px;
+	margin: 0 auto;
+}
+.Pmain .searchBox{
+	width: 100%;
+	height: 40px;
+	display: inline-block;
+	font-size: 4px;
+		margin-top: 27px;
+}
+.Pmain .searchBox .searchTxt{
+	width : 140px;
+	height : 33px;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+}
+.Pmain .btnDP{
+	width: 60px;
+	height: 40px;
+}
+
+.Pmain select{
+	width : 80px;
+	height: 40px;
+	border: none;
+	background-color: inherit;
+}
+.Pmain .searchBox > button {
+	width : 60px;
+	margin-left: 3px;
+}
+.Pmain .boxForBoard{
+	width: 800px;
+	height: 290px;
+	background-color: white;
+	margin: 0 auto;
+	overflow: auto;
+}
+.Pmain .boxForBoard::-webkit-scrollbar{
+	display: none;
+	}
+.Pmain .blank2{
+	display: inline-block;
+	vertical-align: top;
+	width : 530px;
+	height : 100%;
+	background-color: rgba;
+}
+.Pmain table{
+	width:800px;
+	/*height : 300px; */
+	font-size: 10pt;
+	border-collapse: collapse;
+	 text-align: center;
+	 
+}
+.Pmain table th{
+	 border-bottom: 1px solid black;
+	 border-top: 1px solid black;
+	 height : 40px;
+}
+.Pmain table tr{
+	border-bottom: 1px solid black;
+	 border-top: 1px solid black;
+	 height : 30px;
+}
+.Pmain table td{
+	overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+}
+.Pmain table td:last-child{
+	overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 display: table-caption;
+	 width: 240px;
+	 height: 30px;
+}
+.Pmain table td:nth-child(6){
+	 overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 display: table-cell;
+	 width: 150px
+	 
+}
+
+.Pmain .check{
+	margin : 0;
+}
+.Pmain #pagingWrap span:hover{
+	cursor:pointer;
+}
+	

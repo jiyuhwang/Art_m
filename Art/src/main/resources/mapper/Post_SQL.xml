@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Post"><!-- namespace - 클래스명과 동일 -->
+	<!-- id - 메소드명과 동일 -->
+	<!-- resultType : row 1줄의 형태를 지정 -->
+	<!-- 쿼리 작성 시 ;이 들어가면 실행되지 않음 -->
+	
+	<!-- 작품 등록 -->
+	<insert id="addPost" parameterType="hashmap">
+		INSERT INTO POST(POST_NO, USER_NO, CATEGORY_NO, TITLE, EXPLAIN, POST_FILE, VISIBILITY, REGISTER_DATE, VIDEO_LINK)
+		VALUES(#{postNo}, #{userNo}, #{category}, #{title}, #{explain}, #{postFile2}, #{public_privacy}, SYSDATE, #{postFile3})
+	</insert>
+	
+	<!-- 다음 작품번호 가져오기 -->
+	<select id="getNum" resultType="Integer">
+     	SELECT POST_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 태그 가져오기-->
+	<select id="getTag" parameterType="String" resultType="hashmap">
+     	SELECT TAG_NO
+		FROM TAG
+		WHERE TAG_NAME = #{tagName}
+		AND DEL = 1
+	</select>
+	
+	<!-- 태그 추가 -->
+	<insert id="addTag" parameterType="String">
+		INSERT INTO TAG(TAG_NO, TAG_NAME)
+		VALUES(TAG_SEQ.NEXTVAL, #{tagName})
+	</insert>
+	
+	<!-- 태그 중계테이블 -->
+	<insert id="addMiddleTag" parameterType="hashmap">
+		INSERT INTO POST_TAG(POST_NO, TAG_NO)
+		VALUES(#{postNo}, #{TagNo})
+	</insert>
+	
+	<!-- 사진갤러리 페이지 목록 -->
+	<select id="picList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 1) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+
+	<!-- 사진갤러리 게시글 수 -->
+	<select id="getPicCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 1) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+	</select>
+	
+	<!-- 그림갤러리 페이지 목록 -->
+	<select id="drawList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 2) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 그림갤러리 게시글 수 -->
+	<select id="getDrawCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 2) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+	</select>
+	
+	
+	<!-- 영상갤러리 페이지 목록 -->
+	<select id="videoList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.VIDEO_LINK, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.VIDEO_LINK, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, VIDEO_LINK, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 3) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 영상갤러리 게시글 수 -->
+	<select id="getVideoCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 3) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+	</select>
+	
+	<!-- 작품 상세 정보 -->
+	<select id="getPost" parameterType="hashmap" resultType="hashmap">
+		SELECT A.POST_NO, A.CATEGORY_NO, A.USER_NO, A.USER_NICKNAME, A.INTRODUCE, A.PROFILE_IMG_PATH, A.CATEGORY_NAME, A.TITLE, A.EXPLAIN, A.POST_FILE, A.VIDEO_LINK, A.VISIBILITY, TO_CHAR(A.REGISTER_DATE,'YYYY-MM-DD HH:MI') AS REGISTER_DATE, A.VIEWS, A.TAG_NAME, A.RD, A.LIKECNT
+		FROM (
+		SELECT P.POST_NO, P.CATEGORY_NO, P.USER_NO, U.USER_NICKNAME, U.INTRODUCE, U.PROFILE_IMG_PATH, PC.CATEGORY_NAME, P.TITLE, P.EXPLAIN, P.POST_FILE, P.VIDEO_LINK, P.VISIBILITY, P.VIEWS, P.REGISTER_DATE, T2.TAG_NAME, PL.RD, PL2.LIKECNT
+		FROM POST P INNER JOIN USERS U
+		        ON P.USER_NO = U.USER_NO
+		            INNER JOIN POST_CATEGORY PC
+		        ON P.CATEGORY_NO = PC.CATEGORY_NO
+		            LEFT OUTER JOIN (SELECT PT.POST_NO, LISTAGG(TAG_NAME, ',') WITHIN GROUP(ORDER BY T.TAG_NO) AS TAG_NAME
+		                            FROM POST_TAG PT INNER JOIN TAG T
+		                                        ON PT.TAG_NO = T.TAG_NO
+		                            WHERE T.DEL = 1
+		                            GROUP BY PT.POST_NO) T2
+		        ON P.POST_NO = T2.POST_NO
+		            LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE AS RD
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                            INNER JOIN (SELECT COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        WHERE POST_NO = #{pNo}) PL2
+		                                ON 1=1) A
+		WHERE A.POST_NO = #{pNo}
+	</select>
+	
+	<!-- 조회수 추가 -->
+	<update id="updateViews" parameterType="hashmap">
+		UPDATE POST
+		SET VIEWS = VIEWS + 1
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	<!-- 작품 수정 -->
+	<update id="updatePost" parameterType="hashmap">
+		UPDATE POST SET TITLE = #{title}, EXPLAIN = #{explain}, POST_FILE = #{postFile2}, VISIBILITY = #{public_privacy}, VIDEO_LINK = #{postFile3}
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	<!-- 작품 삭제 -->
+	<update id="deletePost" parameterType="hashmap">
+		UPDATE POST SET DEL = 0
+		WHERE POST_NO = #{pNo}
+	</update>
+	
+	<!-- 중계 테이블 작품_태그 삭제 -->
+	<delete id="deleteTag" parameterType="hashmap">
+		DELETE FROM POST_TAG
+		WHERE POST_NO = #{postNo}
+	</delete>
+	
+	<!-- 나의 사진 갤러리 페이지 목록 -->
+	<select id="myPicList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            <choose>
+										<when test="visibility == 0">
+										 	AND VISIBILITY = 0
+										</when>
+										<when test="visibility == 1">
+										 	AND VISIBILITY = 1
+										</when>
+									 </choose>
+		                            AND CATEGORY_NO = 1) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo}) UP
+	      WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 나의 사진갤러리 게시글 수 -->
+	<select id="getMyPicCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        <choose>
+									<when test="visibility == 0">
+									 	AND VISIBILITY = 0
+									</when>
+									<when test="visibility == 1">
+									 	AND VISIBILITY = 1
+									</when>
+								</choose>
+		                        AND CATEGORY_NO = 1) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo}
+	</select>
+	
+	<!-- 나의 그림갤러리 페이지 목록 -->
+	<select id="myDrawList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            <choose>
+										<when test="visibility == 0">
+										 	AND VISIBILITY = 0
+										</when>
+										<when test="visibility == 1">
+										 	AND VISIBILITY = 1
+										</when>
+									 </choose>
+		                            AND CATEGORY_NO = 2) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo}) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 나의 그림갤러리 게시글 수 -->
+	<select id="getMyDrawCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        <choose>
+										<when test="visibility == 0">
+										 	AND VISIBILITY = 0
+										</when>
+										<when test="visibility == 1">
+										 	AND VISIBILITY = 1
+										</when>
+								</choose>
+		                        AND CATEGORY_NO = 2) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo}
+	</select>
+	
+	<!-- 나의 영상 갤러리 페이지 목록 -->
+	<select id="myVideoList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            <choose>
+										<when test="visibility == 0">
+										 	AND VISIBILITY = 0
+										</when>
+										<when test="visibility == 1">
+										 	AND VISIBILITY = 1
+										</when>
+									 </choose>
+		                            AND CATEGORY_NO = 3) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo}) UP
+	      WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 나의 영상갤러리 게시글 수 -->
+	<select id="getMyVideoCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        <choose>
+									<when test="visibility == 0">
+									 	AND VISIBILITY = 0
+									</when>
+									<when test="visibility == 1">
+									 	AND VISIBILITY = 1
+									</when>
+								</choose>
+		                        AND CATEGORY_NO = 3) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo}
+	</select>
+	
+	
+
+	<!-- 다른사람 사진 갤러리 페이지 목록 -->
+	<select id="otherPicList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.PROFILE_IMG_PATH, UP.INTRODUCE, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, U.PROFILE_IMG_PATH, U.INTRODUCE, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 1) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo2}) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 다른사람 사진갤러리 게시글 수 -->
+	<select id="getOtherPicCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 1) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo2}
+	</select>
+	
+	<!-- 다른사람 그림갤러리 페이지 목록 -->
+	<select id="otherDrawList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 2) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo2}) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 다른사람 그림갤러리 게시글 수 -->
+	<select id="getOtherDrawCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 2) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo2}
+	</select>
+	
+	<!-- 다른사람 영상갤러리 페이지 목록 -->
+	<select id="otherVideoList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY 
+		             <choose>
+						<when test="selectGbn == 0">
+						 	P.REGISTER_DATE DESC
+						</when>
+						<when test="selectGbn == 1">
+						 	NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC
+						</when>
+					 </choose>) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 3) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL
+		      AND U.USER_NO = #{userNo2}) UP
+		WHERE UP.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 다른사람 영상갤러리 게시글 수 -->
+	<select id="getOtherVideoCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS CNT 
+		FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO
+		                        FROM POST
+		                        WHERE DEL = 1
+		                        AND VISIBILITY = 0
+		                        AND CATEGORY_NO = 3) P
+		                ON U.USER_NO = P.USER_NO
+		WHERE U.OUT_DATE IS NULL
+		AND U.USER_NO = #{userNo2}
+	</select>
+	
+	<!-- 작품 좋아요 눌렀을 때 -->
+	<insert id="postOnHeart" parameterType="hashmap">
+		INSERT INTO POST_LIKE(POST_NO, USER_NO)
+		VALUES (#{postNo}, #{userNo})
+	</insert>
+	
+	<!-- 작품 좋아요를 취소했을 때 -->
+	<delete id="postOffHeart" parameterType="hashmap">
+		DELETE FROM POST_LIKE
+		WHERE USER_NO = #{userNo}
+		AND POST_NO = #{postNo}
+	</delete>
+	
+	<!-- 작품 좋아요 눌렀는지 유무 -->
+	<select id="postIsHeart" parameterType="hashmap" resultType="hashmap">
+		SELECT POST_NO
+		FROM POST_LIKE
+		WHERE POST_NO = #{postNo}
+		AND USER_NO = #{userNo}
+	</select>
+	
+	<!-- 작품 좋아요 수 -->
+	<select id="postLikeCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) AS LIKECNT
+		FROM POST_LIKE
+		WHERE POST_NO = #{postNo}
+	</select>
+	
+	<!-- 작품 댓글 수 -->
+	<select id="postCommentCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) AS COMMENTCNT
+		FROM COMMENTS
+		WHERE POST_NO = #{postNo}
+		AND DEL = 1
+	</select>
+	
+	
+	
+	<!-- 작가 좋아요 눌렀을 때 -->
+	<insert id="authorOnHeart" parameterType="hashmap">
+		INSERT INTO AUTHOR_LIKE(AUTHOR_NO, USER_NO)
+		VALUES (#{userNo2}, #{userNo})
+	</insert>
+	
+	<!-- 작가 좋아요를 취소했을 때 -->
+	<delete id="authorOffHeart" parameterType="hashmap">
+		DELETE FROM AUTHOR_LIKE
+		WHERE AUTHOR_NO = #{userNo2}
+		AND USER_NO = #{userNo}
+	</delete>
+	
+	<!-- 작가 좋아요 눌렀는지 유무 -->
+	<select id="authorIsHeart" parameterType="hashmap" resultType="hashmap">
+		SELECT AUTHOR_NO
+		FROM AUTHOR_LIKE
+		WHERE AUTHOR_NO = #{userNo2}
+		AND USER_NO = #{userNo}
+	</select>
+	
+	<!-- 작가 좋아요 수 -->
+	<select id="authorLikeCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) AS LIKECNT
+		FROM AUTHOR_LIKE AL LEFT OUTER JOIN USERS U
+		        ON AL.USER_NO = U.USER_NO
+		WHERE AL.AUTHOR_NO = #{userNo2}
+		AND U.OUT_DATE IS NULL
+	</select>
+	
+	<!-- 작가 좋아요 수2 -->
+	<select id="authorLikeCnt2" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) AS LIKECNT
+		FROM AUTHOR_LIKE AL LEFT OUTER JOIN USERS U
+		        ON AL.USER_NO = U.USER_NO
+		WHERE AL.AUTHOR_NO = #{userNo}
+		AND U.OUT_DATE IS NULL
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="addComment" parameterType="hashmap">
+		INSERT INTO COMMENTS(COMMENT_NO, USER_NO, POST_NO, CONTENT)
+		VALUES(COMMENTS_SEQ.NEXTVAL, #{userNo}, #{postNo}, #{commentWrite})
+	</insert>
+	
+	<!-- 댓글 목록 -->
+	<select id="commentList" parameterType="hashmap" resultType="hashmap">
+		<!-- SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, C.RNUM,
+                C.CONTENT, C.REGISTER_DATE, C.USER_NICKNAME, C.PROFILE_IMG_PATH, C.DEL
+		FROM(SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, ROW_NUMBER() OVER(ORDER BY NVL(C.TOP_COMMENT_NO, C.COMMENT_NO) ASC, C.COMMENT_NO ASC) AS RNUM,
+		                    C.CONTENT, TO_CHAR(C.REGISTER_DATE,'YYYY-MM-DD HH:MI') AS REGISTER_DATE, U.USER_NICKNAME, U.PROFILE_IMG_PATH, C.DEL
+		    FROM COMMENTS C INNER JOIN USERS U
+		                        ON C.USER_NO = U.USER_NO
+		    WHERE C.POST_NO = #{postNo}) C -->
+		   
+		SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, C.RNUM,
+		        C.CONTENT, C.REGISTER_DATE, C.USER_NICKNAME, C.PROFILE_IMG_PATH, C.DEL, NVL(C.CNT, 0) AS CNT, C.INTRODUCE, C.OUT_DATE
+		FROM(SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, ROW_NUMBER() OVER(ORDER BY		
+				    <choose>
+						<when test="commentGbn == 0">
+						 	C.COMMENT_NO DESC
+						</when>
+						<when test="commentGbn == 1">
+						 	C.COMMENT_NO ASC
+						</when>
+						<when test="commentGbn == 2">
+						 	NVL(C2.CNT, 0) DESC, C.COMMENT_NO DESC
+						</when>
+					 </choose>) AS RNUM,
+		                    C.CONTENT, TO_CHAR(C.REGISTER_DATE,'YYYY-MM-DD HH:MI') AS REGISTER_DATE, U.USER_NICKNAME, U.PROFILE_IMG_PATH, U.INTRODUCE, C.DEL, C2.CNT, U.OUT_DATE
+		    FROM COMMENTS C INNER JOIN USERS U
+		                        ON C.USER_NO = U.USER_NO
+		                    LEFT OUTER JOIN (SELECT TOP_COMMENT_NO, COUNT(*) AS CNT
+		                                    FROM COMMENTS
+		                                    WHERE DEL = 1
+		                                    AND TOP_COMMENT_NO IS NOT NULL
+		                                    GROUP BY TOP_COMMENT_NO) C2
+		                        ON C.COMMENT_NO = C2.TOP_COMMENT_NO
+		    WHERE C.POST_NO = #{postNo}
+		    AND C.TOP_COMMENT_NO IS NULL) C
+		WHERE C.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 답글 목록 -->
+	<select id="replyCommentList" parameterType="hashmap" resultType="hashmap">
+		SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, C.RNUM,
+		        C.CONTENT, C.REGISTER_DATE, C.USER_NICKNAME, C.PROFILE_IMG_PATH, C.INTRODUCE, C.DEL, C.OUT_DATE
+		FROM(SELECT C.COMMENT_NO, C.USER_NO, C.POST_NO, C.TOP_COMMENT_NO, ROW_NUMBER() OVER(ORDER BY C.COMMENT_NO ASC) AS RNUM,
+		                    C.CONTENT, TO_CHAR(C.REGISTER_DATE,'YYYY-MM-DD HH:MI') AS REGISTER_DATE, U.USER_NICKNAME, U.PROFILE_IMG_PATH, U.INTRODUCE, C.DEL, U.OUT_DATE
+		    FROM COMMENTS C INNER JOIN USERS U
+		                        ON C.USER_NO = U.USER_NO
+		    WHERE C.TOP_COMMENT_NO = #{cNo}) C
+	</select>
+	
+	<!-- 답글 쓰기 -->
+	<insert id="addReplyComment" parameterType="hashmap">
+		INSERT INTO COMMENTS(COMMENT_NO, USER_NO, POST_NO, TOP_COMMENT_NO, CONTENT)
+		VALUES(COMMENTS_SEQ.NEXTVAL, #{userNo}, #{postNo}, #{topCommentNo}, #{replyCommentWrite})
+	</insert>
+	
+	<!-- 작품 댓글 수 -->
+	<select id="getCommentCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS COMMENTCNT
+		FROM COMMENTS
+		WHERE POST_NO = #{postNo}
+		AND TOP_COMMENT_NO IS NULL
+		AND DEL = 1
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<update id="deleteComment" parameterType="hashmap">
+		UPDATE COMMENTS SET DEL = 0
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<!-- 답글 삭제 -->
+	<update id="deleteReplyComment" parameterType="hashmap">
+		UPDATE COMMENTS SET DEL = 0
+		WHERE COMMENT_NO = #{ReplyCommentNo}
+	</update>
+	
+	<!-- 메인 사진갤러리 -->
+	<select id="mainPicList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 1) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN 1 AND 16
+	</select>
+	
+	<!-- 메인 그림갤러리 -->
+	<select id="mainDrawList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 2) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN 1 AND 16	
+	</select>
+	
+	<!-- 메인 영상갤러리 -->
+	<select id="mainVideoList" parameterType="hashmap" resultType="hashmap">
+		SELECT UP.USER_NICKNAME, UP.USER_NO, UP.TITLE, UP.EXPLAIN, UP.POST_FILE, UP.POST_NO, UP.REGISTER_DATE, UP.LIKECNT
+		FROM (SELECT U.USER_NICKNAME, U.USER_NO, P.TITLE, P.EXPLAIN, P.POST_FILE, P.POST_NO, PL.REGISTER_DATE, PL2.LIKECNT,
+		             ROW_NUMBER() OVER(ORDER BY NVL(PL2.LIKECNT, 0) DESC, P.REGISTER_DATE DESC) AS RNUM
+		      FROM USERS U INNER JOIN (SELECT TITLE, EXPLAIN, POST_FILE, USER_NO, POST_NO, VISIBILITY, REGISTER_DATE
+		                            FROM POST
+		                            WHERE DEL = 1
+		                            AND VISIBILITY = 0
+		                            AND CATEGORY_NO = 3) P
+		                    ON U.USER_NO = P.USER_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, REGISTER_DATE
+		                                        FROM POST_LIKE
+		                                        WHERE USER_NO = #{userNo}) PL
+		                                ON P.POST_NO = PL.POST_NO
+		                        LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS LIKECNT
+		                                        FROM POST_LIKE
+		                                        GROUP BY POST_NO) PL2
+		                                ON P.POST_NO = PL2.POST_NO
+		      WHERE U.OUT_DATE IS NULL) UP
+		WHERE UP.RNUM BETWEEN 1 AND 16
+	</select>
+	
+	<!-- 차트 -->
+	<select id="chart" parameterType="hashmap" resultType="hashmap">
+		SELECT PC.CATEGORY_NAME AS "name", P.CNT AS "y"
+		FROM POST_CATEGORY PC INNER JOIN (SELECT COUNT(*) AS CNT, CATEGORY_NO
+		                                    FROM POST
+		                                    WHERE DEL =1
+		                                    <choose>
+		                                 	    <when test="period == 0">
+												</when>
+												<when test="period == 1">
+												 	AND REGISTER_DATE >= TO_CHAR(SYSDATE -7,'YYYYMMDD')
+												</when>
+												<when test="period == 2">
+												 	AND REGISTER_DATE >= TO_CHAR(ADD_MONTHS(SYSDATE, -1),'YYYYMMDD')
+												</when>
+												<when test="period == 3">
+												 	AND REGISTER_DATE >= TO_CHAR(ADD_MONTHS(SYSDATE, -12),'YYYYMMDD')
+												</when>
+											</choose>
+											<choose>
+												<when test="startDate != null and startDate != ''
+														and endDate == null and endDate == ''">
+													AND REGISTER_DATE >= #{startDate}
+												</when>
+												<when test="startDate == null and startDate == ''
+														and endDate != null and endDate != ''">
+													AND REGISTER_DATE &lt;=  #{endDate}
+												</when>
+												<when test="startDate != null and startFlag != ''
+														and endDate != null and endDate != ''">
+													AND REGISTER_DATE BETWEEN #{startDate} AND #{endDate}
+												</when>
+											</choose>
+		                                   GROUP BY CATEGORY_NO) P
+		                        ON PC.CATEGORY_NO = P.CATEGORY_NO
+	</select>
+	
+	
+	<!-- 팔로워 목록 -->
+	<select id="followerList" parameterType="hashmap" resultType="hashmap">
+		SELECT A.*
+		FROM (SELECT U.USER_NO, U.USER_NICKNAME, U.INTRODUCE, U.NAME, U.PROFILE_IMG_PATH, AL.AUTHOR_NO, ROW_NUMBER() OVER(ORDER BY U.USER_NO DESC) AS RNUM
+		        FROM AUTHOR_LIKE AL INNER JOIN USERS U
+		                        ON AL.USER_NO = U.USER_NO
+		        WHERE AL.AUTHOR_NO = #{followNo}
+		        AND U.OUT_DATE IS NULL) A
+		WHERE A.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 팔로잉 목록 -->
+	<select id="followingList" parameterType="hashmap" resultType="hashmap">
+		SELECT A.*
+		FROM (SELECT U.USER_NO, U.USER_NICKNAME, U.INTRODUCE, U.NAME, U.PROFILE_IMG_PATH, AL.USER_NO AS USER_NO2, ROW_NUMBER() OVER(ORDER BY U.USER_NO DESC) AS RNUM
+		        FROM AUTHOR_LIKE AL INNER JOIN USERS U
+		                        ON AL.AUTHOR_NO = U.USER_NO
+		        WHERE AL.USER_NO = #{followNo}
+		        AND U.OUT_DATE IS NULL) A
+		WHERE A.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<!-- 나의 팔로워 수 -->
+	<select id="followerCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS LIKECNT
+		FROM AUTHOR_LIKE AL LEFT OUTER JOIN USERS U
+		        ON AL.USER_NO = U.USER_NO
+		WHERE AL.AUTHOR_NO = #{followNo}
+		AND U.OUT_DATE IS NULL
+	</select>
+	
+	<!-- 나의 팔로잉 수 -->
+	<select id="followingCnt" parameterType="hashmap" resultType="Integer">
+     	SELECT COUNT(*) AS LIKECNT
+		FROM AUTHOR_LIKE AL LEFT OUTER JOIN USERS U
+		        ON AL.AUTHOR_NO = U.USER_NO
+		WHERE AL.USER_NO = #{followNo}
+		AND U.OUT_DATE IS NULL
+	</select>
+	
+		
+	<!--신고등록할 NO 가져오기 -->
+	<select id="reportSeq" parameterType="hashmap" resultType="Integer">
+		SELECT REPORT_SEQ.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<!-- 신고글 추가 -->
+	<insert id="addReport" parameterType="hashmap">
+		INSERT INTO REPORT
+		VALUES(#{reportNo}, #{adminNo}, #{userNo}, NULL, #{pNo}, #{reportCtt}, 0, SYSDATE, 1)
+	</insert>
+	
+	<!-- 신고_신고분류 중계테이블 -->
+	<insert id="addMidReport" parameterType="hashmap">
+		INSERT INTO REPORT_REPORT_TYPE(REPORT_NO, TYPE_NO)
+		VALUES(#{reportNo}, #{typeNo})
+	</insert>
+	
+	<!-- 신고할 댓글 data 가져오기 -->
+	<select id="getComment" parameterType="hashmap" resultType="hashmap">
+		SELECT COMMENTS.*
+		FROM COMMENTS
+		WHERE COMMENT_NO = #{commentNo}
+	</select>
+	
+	<!-- 댓글신고글 추가 -->
+	<insert id="addCReport" parameterType="hashmap">
+		INSERT INTO REPORT
+		VALUES(#{reportNo}, #{adminNo}, #{userNo}, #{cNo}, NULL, #{reportCtt}, 0, SYSDATE, 1)
+	</insert>
+	
+
+	
+	
+	
+	
+</mapper>

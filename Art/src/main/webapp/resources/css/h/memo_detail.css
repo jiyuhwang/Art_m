@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+.background8 {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: #000000;
+	opacity:0.3;
+	z-index: 300;
+}
+.ctts8 {
+	display: inline-block;
+	width: 600px;
+	height: 450px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -300px;
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	border-radius: 5px;
+	z-index: 400;
+	border-radius: 16px;
+}
+.top_div {
+	padding: 5px;
+	text-align: right;
+}
+.memo_title {
+	display: inline-table;
+	width: 556px;
+	text-align: left;
+	font-weight: bolder;
+	border-bottom: 1px solid #999999;
+}
+
+.star_img {
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+	position: absolute;
+    top: 8px;
+    left: 47px;
+}
+
+.close_img {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+.memo_ctts_div {
+	padding: 5px;
+}
+.memo_ctts_div table {
+	width: 580px;
+	font-size: 10.5pt;
+}
+.memo_ctts_div textarea {
+	resize:none;
+	width: 577px;
+}
+.detail_ctts {
+	width: 570px;
+	height: 250px;
+	border: 1px solid #CCCCCC;
+	overflow: auto;
+	padding: 5px;
+}
+.btn_div {
+	text-align: center;
+    padding-top: 10px;
+}
+.update_input {
+	display: none;
+}
+
+.update_btn_div {
+	text-align: center;
+    padding-top: 10px;
+	display: none;
+}
+
+.save_btn_div {
+	text-align: center;
+    padding-top: 10px;
+	display: block;
+}

@@ -1,0 +1,413 @@
+@charselect "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+
+body {
+	/* font-size: 0pt; */
+	margin: 0;
+	font-family: '돋움';
+}
+
+.noPost {
+	font-size: 15pt;
+	width: 100%;
+}
+
+[type="button"] {
+	cursor: pointer;
+	font-family: '돋움';
+}
+
+.main_title_wrap {
+	width: 100%;
+	height: 100px;
+	border-bottom: 1px solid #eee;
+	margin-top: 50px;
+}
+
+#mainTitle {
+	font-size: 30pt;
+	margin-left: calc(50% - 650px);
+	line-height: 120px;
+}
+
+.background_wrap {
+	background-color: #fbfbfb;
+	padding-bottom: 150px;
+}
+
+.wrap {
+	position: relative;
+	width: 1330px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.profile_wrap {
+	width: 310px;
+	height: 1100px;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	border: 2px solid #d9d9d9;
+	border-radius: 20px;
+	color: black;
+	margin-top: 70px;
+}
+
+.profile2 {
+	width: 200px;
+	height: 200px;
+	border-radius: 70%;
+	overflow: hidden;
+	position: absolute;
+	top: 30px;
+	left: 60px;
+}
+
+
+.profile_img2 {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.profile_name2 {
+	position: absolute;
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	top: 250px;
+	font-size: 20pt;
+}
+
+.profile_like {
+	position: absolute;
+	width: 100%;
+	height: 15px;
+	text-align: center;
+	top: 290px;
+	font-size: 11pt;
+	cursor: pointer;
+}
+
+.profile_like:hover {
+	font-weight: bold;
+	color: #ffad33;
+}
+
+.profile_like_cnt {
+	font-weight: bold;
+}
+
+.profile_introduce {
+	position: absolute;
+	width: 100%;
+	height: 705px;
+	text-align: center;
+	top: 330px;
+	font-size: 14pt;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.profile_introduce_in {
+	padding: 0px 10px;
+}
+
+
+
+
+input[type="checkbox"] {
+    position: absolute;
+    visibility: hidden;
+}
+
+#label {
+    display: block;
+    position: absolute;
+    width: 68px;
+    height: 22px;
+    top: 10px;
+    right: 290px;
+    border-radius: 17px;
+    background-color: #ddd;
+    transition-duration: 0.2s;
+}
+
+#label span {
+    position: absolute;
+    left: -2px;
+    top: -1px;
+    z-index: 1;
+    width: 41px;
+    height: 33px;
+    border-radius: 40%;
+    background-color: #fff;
+    transition-duration: 0.2s;
+}
+
+#label:before,
+#label:after{
+    position: absolute;
+    top: 0;
+    width: 40px;
+    font-size: 11px;
+    line-height: 34px;
+    color: #fff;
+    text-align: center;
+}
+
+#label:before {
+    left: 0;
+    content: '공개';
+}
+
+#label:after {
+    right: 0;
+    content: '비공개';
+}
+
+#checkbox:checked + #label {
+    background-color: #ffad33;
+}
+
+#checkbox:checked + #label span {
+    transform: translateX(40px);
+}
+
+
+.select {
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 90px;
+    padding: 5px;
+    padding-left: 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.gallary_wrap {
+	width: 980px;
+	height: 1200px;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	margin-top: 70px;
+	margin-left: 30px;
+}
+
+.gallary {
+	width: 100%;
+	position: absolute;
+}
+
+.tabs input:nth-of-type(1), .tabs input:nth-of-type(1) ~ div:nth-of-type(1), .tabs input:nth-of-type(2), .tabs input:nth-of-type(2) ~ div:nth-of-type(2), .tabs input:nth-of-type(3), .tabs input:nth-of-type(3) ~ div:nth-of-type(3) {
+    display:none;
+}
+.tabs input:nth-of-type(1):checked ~ div:nth-of-type(1), .tabs input:nth-of-type(2):checked ~ div:nth-of-type(2), .tabs input:nth-of-type(3):checked ~ div:nth-of-type(3) {
+    display: inline-block;
+}
+.tabs > label {
+    display:inline-block;
+    font-size: 12pt;
+    padding:5px;
+    text-align:center;
+    width:130px;
+    line-height:1.8em;
+    font-weight:700;
+    border-radius:3px 3px 0 0;
+    background: white;
+    color: black;
+    border:1px solid #ccc;
+    border-width:1px 1px 0;
+}
+.tabs > label:hover {
+    cursor:pointer;
+}
+
+.tabs input:nth-of-type(1):checked ~ label:nth-of-type(1), .tabs > label[for=gallaryMenu1]:hover {
+    background-color: #ffad33;
+    color:#fff;
+}
+.tabs input:nth-of-type(2):checked ~ label:nth-of-type(2), .tabs > label[for=gallaryMenu2]:hover {
+    background-color: #ffad33;
+    color:#fff;
+}
+.tabs input:nth-of-type(3):checked ~ label:nth-of-type(3), .tabs > label[for=gallaryMenu3]:hover {
+    background-color: #ffad33;
+    color:#fff;
+}
+.tabs .gallary_menu1_contents, .tabs .gallary_menu2_contents, .tabs .gallary_menu3_contents {
+    padding: 2px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    width: 930px;
+    height: 1200px;
+    /* margin-left: 20px; */
+}
+
+.pic {
+	display: inline-block;
+	margin-bottom: 30px;
+	margin-right: 30px;
+	cursor: pointer;
+	width: 300px;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+
+.bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 200;
+}
+
+.pic:hover .bg {
+	background-color: gray;
+	opacity: 0.7;
+}
+
+.pic:hover .contents_title, .pic:hover .contents_in, .pic:hover .contents_heart,
+	.pic:hover .contents_name {
+	opacity: 1;
+	color: white;
+	z-index: 300;
+}
+
+
+.contents_title, .contents_in, .contents_heart, .contents_name {
+	position: absolute;
+	opacity: 0;
+	left: 1.5vw;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	word-wrap:break-word; 
+	z-index: 300;
+	font-size: 1vw;
+}
+
+
+.contents_title {
+	top: 4vh;
+	width: 85%;
+	height: auto;
+	font-size: 17pt;
+	font-weight: bold;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.contents_in {
+	top: 9vh;
+	font-size: inherit;
+	width: 80%;
+	height: 170px;
+	white-space: pre-wrap;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.contents_name {
+	top: 85%;
+	width: 80%;
+	height: auto;
+	font-size: 1vw;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.contents_heart {
+	width: 30px;
+	height: auto;
+	top: 10px;
+	left: 85%;
+	z-index: 500;
+}
+
+
+.pic_wrap, .draw_wrap, .video_wrap {
+	position: absolute;
+	margin-top: 20px;
+}
+
+.pic_wrap :not(:nth-child(3n)), .draw_wrap :not(:nth-child(3n)), .video_wrap :not(:nth-child(3n)) {
+	margin-right: 15px;
+}
+
+#btnGoUpload {
+	width: 110px;
+	height: 35px;
+	margin-left: 270px;
+	border: 1px solid #ccc;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 5px;
+	background-color: white;
+	padding: 2px;
+	cursor: pointer;
+}
+
+#btnGoUpload:hover {
+ 	background-color: #ffad33;
+	color: white;
+}
+
+.select {    
+    margin-top: 10px;
+	margin-left: 10px;
+    width: 100px;
+    padding: 5px;
+    padding-left: 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: black;
+    cursor: pointer;
+}
+
+.pagination {
+	position: absolute;
+	display: inline-block;
+	font-size: 15pt;
+	left: 290px;
+	bottom: 20px;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+
+.on {
+	border: 1px solid black;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.pagination a:hover:not(.on) {
+	background-color: #ddd;
+	border-radius: 5px;
+}

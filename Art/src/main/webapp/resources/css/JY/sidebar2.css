@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+[type="button"] {
+	cursor: pointer;
+	font-family: '돋움';
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.banner {
+	width: 100%;
+	height: 70px;
+	background-color: skyblue;
+}
+
+.header {
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	height: 60px;
+}
+
+#btnMenu {
+	position: absolute;
+	left: 40px;
+	cursor: pointer;
+}
+
+#btnLogo {
+	position: absolute;
+	left: 80px;
+}
+
+#btnSearch {
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	border: 1px solid #cccccc;
+	outline-style: none;
+}
+
+#btnLook {
+	position: absolute;
+	right: 40px;
+	cursor: pointer;
+}
+
+.side_bar {
+	display: none;
+	border: 2px solid gray;
+	background-color: white;
+	width: 300px;
+	height: 630px;
+	position: absolute;
+	top: 65px;
+	left: 40px;
+	z-index: 900;
+	border-radius: 10px;
+}
+
+#sideBarLogo {
+	position: absolute;
+	top: 50px;
+	left: 105px;
+}
+
+.side_bar_phrase {
+	position: absolute;
+	top: 110px;
+	left: 40px;
+	font-size: 15pt;
+}
+
+#btnStart {
+	position: absolute;
+	top: 170px;
+	left: 80px;
+	border: 1px solid #ffad33;
+	color: #ffad33;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18pt;
+	cursor: pointer;
+	border-radius: 20px;
+	background-color: white;
+}
+
+.side_bar_menu {
+	position: absolute;
+	top: 230px;
+	left: 70px;
+	text-align: center;
+	border-top: 1px dashed black;
+	margin-top: 20px;
+	padding-top: 30px;
+	font-size: 18pt;
+}
+
+.forget {
+	position: absolute;
+	bottom:30px;
+	left: 75px;
+	text-decoration: underline;
+	font-size: 10pt;
+}

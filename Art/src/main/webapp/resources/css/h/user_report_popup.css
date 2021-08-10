@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+.font-red {
+	color: red;
+}
+
+.background_r, .background_c {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: #000000;
+	opacity:0.3;
+	z-index: 300;
+}
+	
+.ctts_r, .ctts_c {
+	display: inline-block;
+	width: 800px;
+	height: 714px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -350px;
+    margin-left: -420px;
+	background-color: #FFFFFF;
+	border: 1px solid #999999;
+	border-radius: 5px;
+	z-index: 400;
+	border-radius: 16px;
+	font-size: 16px;
+}
+
+.top_ctt>* {
+	margin-left: 20px
+}
+
+.top_ctt1 {
+	display: block;
+	position: absolute;
+	height: 50px;
+	width: 760px;
+	background-color: black;
+	text-align: left;
+	color: white;
+	margin-top: 20px;
+	top: 0px;
+}
+
+.top_ctt1>div {
+	display: inline-block;
+	margin: 14px;
+	font-size: 18px;
+}
+
+.top_ctt2 {
+	display: block;
+	position: absolute;
+	height: 24px;
+    width: 746px;
+	background-color: #f7f7f7;
+	text-align: left;
+	top: 70px;
+	padding-left: 14px;
+	line-height: 30px;
+}
+
+.top_ctt3 {
+	display: block;
+	position: absolute;
+	height: 40px;
+	width: 746px;
+	background-color: #f7f7f7;
+	text-align: left;
+	top: 94px;
+	padding-left: 14px;
+	line-height: 40px;
+}
+
+.top_ctt4 {
+	display: block;
+	position: absolute;
+	height: 190px;
+	width: 758px;
+	border: 1px solid #cccccc;
+	text-align: left;
+	top: 134px;
+}
+
+.top_ctt4-1 {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	width: 190px;
+	text-align: center;
+	height: 192px;
+	background-color: white;
+	margin-left: 3px;
+	line-height: 184px;
+}
+
+.checkbox_div {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 602px;
+	text-align: center;
+	height: 192px;
+	background-color: white;
+	overflow: auto;
+}
+
+.checkbox_div>div:nth-child(n) {
+	display: inline-block;
+	position: relative;
+	margin: auto;
+	width: 180px;
+	height: 22px;
+	float: left;
+	text-align: left;
+	margin-top: 14px;
+	margin-left: 60px
+}
+
+.checkbox_div>div:nth-child(2n) {
+	display: inline-block;
+	position: relative;
+	margin: auto;
+	width: 300px;
+	height: 22px;
+	float: left;
+	text-align: left;
+	margin-top: 14px;
+	margin-left: 30px;
+}
+
+.report_content textarea {
+	border-style: none;
+}
+
+.report_content textarea:focus {
+	outline: none;
+}
+
+#cttCnt {
+	display: inline-block;
+	width: 100px;
+    height: 50px;
+    position: absolute;
+    bottom: 87px;
+    left: 46px;
+}
+
+.r_content_div {
+	display: block;
+	position: absolute;
+	height: 158px;
+	width: 758px;
+	border: 1px solid #cccccc;
+	text-align: left;
+	bottom: 228px;
+	line-height: 48px;
+}
+
+.r_content-1 {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	width: 190px;
+	text-align: center;
+	height: 100%;
+	background-color: white;
+	margin-left: 3px;
+	line-height: 156px;
+}
+
+.report_content {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 570px;
+	text-align: center;
+	height: 100%;
+	background-color: white;
+	overflow: auto;
+	border: 1px solid #cccccc;
+}
+
+.btm-ctt {
+	display: block;
+	position: absolute;
+	height: 200px;
+	width: 800px;
+	text-align: left;
+	bottom: 28px;
+}
+
+.btm-ctt1{
+	display: block;
+	position: absolute;
+	width: 800px;
+	text-align: left;
+	margin-top: 20px;
+	margin-left: 10px;
+	bottom: 60px;
+}
+
+.btm-ctt2{
+	position: absolute;
+	text-align: center;
+	bottom: 0px;
+	margin-left: 330px;
+}
+
+.btm-ctt3{
+	display: inline-block;
+}
+
+.btn_rot {
+	display: inline-block;
+    background-color: #f7f7f7;
+    color: black;
+    width: 76px;
+    height: 32px;
+    padding-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    bottom: -8px;
+    border-radius: 6px;
+}
+
+.btn_rot:hover {
+	color: #fff;
+	background-color: #EF6C33;
+}
+
+.btn_cancel {
+	display: inline-block;
+    background-color: #f7f7f7;
+    color: black;
+    width: 76px;
+    height: 32px;
+    padding-top: 10px;
+    text-align: center;
+    cursor: pointer;
+    bottom: -8px;
+    border-radius: 6px;
+}
+
+.btn_cancel:hover {
+	color: #fff;
+	background-color: #EF6C33;
+}

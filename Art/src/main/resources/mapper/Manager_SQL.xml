@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Manager"><!-- namespace - 클래스명과 동일 -->
+	<!-- id - 메소드명과 동일 -->
+	<!-- resultType : row 1줄의 형태를 지정 -->
+	<!-- 쿼리 작성 시 ;이 들어가면 실행되지 않음 -->
+	<select id="getMList" resultType="hashmap" parameterType="hashmap">
+		SELECT * 
+		FROM (  SELECT ROW_NUMBER() OVER (ORDER BY USER_NO DESC) AS RNUM, 
+		        USER_NO, USER_ID, USER_NICKNAME, PW, NAME,
+		        SEX,TO_CHAR(BIRTHDAY) AS BIRTHDAY, PHONE_NO,MAIL,TO_CHAR(JOIN_DATE) AS JOIN_DATE,OUT_DATE,
+		        TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE),BIRTHDAY) / 12) as old
+		        FROM USERS
+		        WHERE OUT_DATE IS NULL 
+		        <if test="searchType != null and searchType != ''">
+		        <choose>
+		        	<when test="searchType == 0">
+		        		AND 1=1
+		        	</when>
+		        	<when test="searchType == 1">
+						AND TO_CHAR(JOIN_DATE, 'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+		        	</when>
+		        	<when test="searchType == 2">
+						AND TO_NUMBER(TO_CHAR(JOIN_DATE, 'YYYY')) = TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')) -1
+		        	</when>
+		        </choose>
+		        </if>
+		        <if test="searchGbn != null and searchTxt != ''">
+		        <choose>
+		        	<when test="searchGbn == 0">
+		        	AND USER_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 1">
+					AND NAME LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 2">
+					AND USER_ID LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 3">
+					AND PHONE_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 4">
+		        		<choose>
+				        	<when test="searchTxt == 1">
+								AND SEX = 1
+				        	</when>
+				        	<when test="searchTxt == 0">
+								AND SEX = 0
+				        	</when>
+		        		</choose>
+			        	
+		        	</when>
+		        	<when test="searchGbn == 5">
+					AND TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE),BIRTHDAY) / 12) LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        </choose>
+		        </if>
+		        <choose>
+			        <when test="(startDate != null and startDate !='')and(endDate != null and endDate != '')">
+			        	AND JOIN_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+			        </when>
+			        <when test="(startDate != null and startDate !='')||(endDate == null and endDate == '')">
+			        	AND JOIN_DATE &gt;= TO_DATE('${startDate}')
+			        </when>
+			        <when test="(startDate == null and startDate =='')||(endDate != null and endDate != '')">
+			        	AND JOIN_DATE &lt;= TO_DATE('${endDate}')
+			        </when>
+			        
+		        </choose>
+		        )
+		WHERE RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<select id="outUserList" resultType="hashmap" parameterType="hashmap">
+		SELECT * 
+		FROM (  SELECT ROW_NUMBER() OVER (ORDER BY USER_NO DESC) AS RNUM, 
+		        USER_NO, USER_ID, USER_NICKNAME, PW, NAME,
+		        SEX,TO_CHAR(BIRTHDAY) AS BIRTHDAY, PHONE_NO,MAIL,TO_CHAR(JOIN_DATE) AS JOIN_DATE,TO_CHAR(OUT_DATE) AS OUT_DATE,
+		        TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE),BIRTHDAY) / 12) as old
+		        FROM USERS
+		        WHERE OUT_DATE IS NOT NULL
+		        <if test="searchType != null and searchType != ''">
+		        <choose>
+		        	<when test="searchType == 0">
+		        		AND 1=1
+		        	</when>
+		        	<when test="searchType == 1">
+						AND TO_CHAR(JOIN_DATE, 'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+		        	</when>
+		        	<when test="searchType == 2">
+						AND TO_NUMBER(TO_CHAR(JOIN_DATE, 'YYYY')) = TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')) -1
+		        	</when>
+		        </choose>
+		        </if>
+		        <if test="searchGbn != null and searchTxt != ''">
+		        <choose>
+		        	<when test="searchGbn == 0">
+		        	AND USER_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 1">
+					AND NAME LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 2">
+					AND USER_ID LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 3">
+					AND PHONE_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 4">
+					AND SEX LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 5">
+					AND TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE),BIRTHDAY) / 12) LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        </choose>
+		        </if>
+		        <if test="(startDate != null and startDate !='')||(endDate != null and endDate != '')">
+		        	AND JOIN_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+		        </if>
+		        )
+		WHERE RNUM BETWEEN #{startCnt} AND #{endCnt}
+		
+	</select>
+	
+	<select id="getTList" resultType="hashmap" parameterType="hashmap">
+			SELECT *
+			FROM TAG
+			WHERE DEL = 1
+			
+			<if test="searchTxt !='' and searchTxt != null"> 
+				<!-- null 설정 안했을 때 안돌아 갔음 안정성의 영역이다. 값이 jsp에서 넘어올 경우 키 값은 있고 value는 없기 때문에 null로 입력된다. -->
+				AND TAG_NAME LIKE '%' || #{searchTxt} || '%'
+			</if>
+			
+		 		<choose>
+			        <when test="(startDate != null and startDate !='')and(endDate != null and endDate != '')">
+			        	AND REGISTER_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+			        </when>
+			        <when test="(startDate != null and startDate !='')||(endDate == null and endDate == '')">
+			        	AND REGISTER_DATE &gt;= TO_DATE('${startDate}')
+			        </when>
+			        <when test="(startDate == null and startDate =='')||(endDate != null and endDate != '')">
+			        	AND REGISTER_DATE &lt;= TO_DATE('${endDate}')
+			        </when>
+	       	 	</choose>
+	</select>
+	
+	<insert id="addTag" parameterType="hashmap">
+		INSERT INTO TAG(TAG_NO,TAG_NAME)
+		VALUES (TAG_SEQ.nextval,#{addTag})
+	</insert>
+	
+	<update id="delTag" parameterType="hashmap">
+		UPDATE TAG 
+		SET DEL = CASE WHEN DEL =0 THEN 1 ELSE 0 END
+		WHERE TAG_NO = #{tagNo}
+	</update>
+
+	<select id="getTCnt" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(*)AS CNT
+		FROM USERS
+		WHERE OUT_DATE IS NULL
+		 <if test="searchType != null and searchType != ''">
+		        <choose>
+		        	<when test="searchType == 0">
+		        		AND 1=1
+		        	</when>
+		        	<when test="searchType == 1">
+						AND TO_CHAR(JOIN_DATE, 'YYYY') = TO_CHAR(SYSDATE,'YYYY')
+		        	</when>
+		        	<when test="searchType == 2">
+						AND TO_NUMBER(TO_CHAR(JOIN_DATE, 'YYYY')) = TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')) -1
+		        	</when>
+		        </choose>
+		        </if>
+		        <if test="searchGbn != null and searchTxt != ''">
+		        <choose>
+		        	<when test="searchGbn == 0">
+		        	AND USER_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 1">
+					AND NAME LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 2">
+					AND USER_ID LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 3">
+					AND PHONE_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 4">
+		        		<choose>
+				        	<when test="searchTxt == 1">
+								AND SEX = 1
+				        	</when>
+				        	<when test="searchTxt == 0">
+								AND SEX = 0
+				        	</when>
+		        		</choose>
+			        	
+		        	</when>
+		        	<when test="searchGbn == 5">
+					AND TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE),BIRTHDAY) / 12) LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        </choose>
+		        </if>
+		        <choose>
+			        <when test="(startDate != null and startDate !='')and(endDate != null and endDate != '')">
+			        	AND JOIN_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+			        </when>
+			        <when test="(startDate != null and startDate !='')||(endDate == null and endDate == '')">
+			        	AND JOIN_DATE &gt;= TO_DATE('${startDate}')
+			        </when>
+			        <when test="(startDate == null and startDate =='')||(endDate != null and endDate != '')">
+			        	AND JOIN_DATE &lt;= TO_DATE('${endDate}')
+			        </when>
+			        
+		        </choose>
+	</select>
+	
+	<select id="getGList" resultType="hashmap" parameterType="hashmap">
+	SELECT RNUM,NOTICE_NO, ADMIN_NO, TITLE, CONTENTS, FILE_PATH, VIEWS, TO_CHAR(REGISTER_DATE)AS REGISTER_DATE,DEL
+	FROM(SELECT NOTICE_NO, ADMIN_NO, TITLE, CONTENTS, FILE_PATH, VIEWS, TO_CHAR(REGISTER_DATE)AS REGISTER_DATE
+            ,ROW_NUMBER() OVER(ORDER BY NOTICE_NO ASC) AS RNUM,DEL
+            FROM NOTICE
+        <choose>
+	        <when test="searchGbn != 3">
+	            WHERE DEL=1
+	        </when>
+	        <when test="searchGbn == 3">
+	            WHERE DEL=0
+	        </when>
+        </choose>
+			<if test="searchGbn != null and searchTxt != ''">
+			        <choose>
+			        	<when test="searchGbn == 0">
+			        	AND NOTICE_NO LIKE '%' || #{searchTxt} ||'%'
+			        	</when>
+			        	<when test="searchGbn == 1">
+						AND TITLE LIKE '%' || #{searchTxt} ||'%'
+			        	</when>
+			        	<when test="searchGbn == 2">
+						AND ADMIN_NO LIKE '%' || #{searchTxt} ||'%'
+			        	</when>
+			        	<when test="searchGbn == 3">
+						AND DEL = 0
+			        	</when>
+			        </choose>
+	        </if>
+	        <choose>
+		        <when test="(startDate != null and startDate !='')and(endDate != null and endDate != '')">
+		        	AND REGISTER_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+		        </when>
+		        
+		        <when test="(startDate != null and startDate !='')||(endDate == null and endDate == '')">
+		        	AND REGISTER_DATE &gt;= TO_DATE('${startDate}')
+		        </when>
+		        
+		        <when test="(startDate == null and startDate =='')||(endDate != null and endDate != '')">
+		        	AND REGISTER_DATE &lt;= TO_DATE('${endDate}')
+		        </when>
+			</choose>
+			 <if test="sortO != null and sortO !=''">
+	        	<choose>
+	        		<when test="sortO == 0">
+	        			ORDER BY REGISTER_DATE ASC
+	        		</when>
+	        		<when test="sortO == 1">
+	        			ORDER BY REGISTER_DATE DESC
+	        		</when>
+	        	</choose>
+	        </if>
+			)
+		 WHERE RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<insert id="addGong" parameterType="hashmap">
+	INSERT INTO NOTICE(NOTICE_NO,ADMIN_NO,TITLE,CONTENTS,FILE_PATH)
+	VALUES(NOTICE_SEQ.NEXTVAL, #{adminNo}, #{titleInput}, #{cttsIn}, #{fileName})
+	</insert>
+	
+	
+	<select id="getOutCnt" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(*)AS CNT
+		FROM USERS
+		WHERE OUT_DATE IS NOT NULL
+	</select>
+	
+	<select id="getTagCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM TAG
+		WHERE 1=1
+		    <if test="searchTxt !='' and searchTxt != null"> 
+			<!-- null 설정 안했을 때 안돌아 갔음 안정성의 영역이다. 값이 jsp에서 넘어올 경우 키 값은 있고 value는 없기 때문에 null로 입력된다. -->
+				AND TAG_NAME LIKE '%' || #{searchTxt} || '%'
+			</if>
+			 <choose>
+			        <when test="(startDate != null and startDate !='')and(endDate != null and endDate != '')">
+			        	AND REGISTER_DATE BETWEEN TO_DATE('${startDate}') AND TO_DATE('${endDate}')
+			        </when>
+			        
+			        <when test="(startDate != null and startDate !='')||(endDate == null and endDate == '')">
+			        	AND REGISTER_DATE &gt;= TO_DATE('${startDate}')
+			        </when>
+			        
+			        <when test="(startDate == null and startDate =='')||(endDate != null and endDate != '')">
+			        	AND REGISTER_DATE &lt;= TO_DATE('${endDate}')
+			        </when>
+			        
+		     </choose>
+	</select>
+	
+	
+	
+	<select id="getUser" resultType="hashmap" parameterType="hashmap">
+		SELECT NAME, CASE WHEN SEX=0 THEN '남' ELSE '여' END AS SEX
+		        ,USER_NO, TO_CHAR(BIRTHDAY) AS BIRTHDAY, PHONE_NO,MAIL,INTRODUCE,USER_NICKNAME,PROFILE_IMG_PATH
+				FROM(SELECT NAME, SEX, USER_NO, BIRTHDAY, PHONE_NO, MAIL,INTRODUCE,USER_NICKNAME,PROFILE_IMG_PATH
+					    FROM USERS
+					    WHERE USER_NO = #{userNo})
+	</select>
+	
+	
+	
+	<select id="getDPList" resultType="hashmap" parameterType="hashmap">
+		SELECT P.POST_NO, P.USER_NO, P.CATEGORY_NO, P.TITLE, P.POST_FILE, P.VISIBILITY,
+		        P.VIEWS, P.REGISTER_DATE, P.DEL,
+		        CASE WHEN LIKE_CNT IS NULL THEN 0 ELSE LIKE_CNT END AS LIKE_CNT,
+		        CASE WHEN COMMENT_CNT IS NULL THEN 0 ELSE COMMENT_CNT END AS COMMENT_CNT,
+		        CASE WHEN REPORT_CNT IS NULL THEN 0 ELSE REPORT_CNT END AS REPORT_CNT,
+		        CASE WHEN TAG_NAMES IS NULL THEN '없음' ELSE TAG_NAMES END AS TAG_NAMES,
+		        CASE WHEN P.EXPLAIN IS NULL THEN ' ' ELSE P.EXPLAIN END AS EXPLAIN
+		FROM POST P LEFT OUTER JOIN (SELECT POST_NO,COUNT(*) AS LIKE_CNT
+		                                FROM POST_LIKE
+		                                GROUP BY POST_NO)E
+		                        ON P.POST_NO = E.POST_NO
+		            LEFT OUTER JOIN (SELECT POST_NO, COUNT(COMMENT_NO) AS COMMENT_CNT
+		                             FROM COMMENTS
+		                             GROUP BY POST_NO
+		                             )F
+		                        ON P.POST_NO = F.POST_NO
+		            LEFT OUTER JOIN (SELECT P.POST_NO,LISTAGG(T.TAG_NAME,',') WITHIN GROUP (ORDER BY P.POST_NO) AS TAG_NAMES
+		                                FROM POST_TAG P INNER JOIN TAG T
+		                                            ON P.TAG_NO = T.TAG_NO
+		                                GROUP BY P.POST_NO) T
+		                        ON P.POST_NO = T.POST_NO
+		            LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS REPORT_CNT
+		                                FROM REPORT
+		                                GROUP BY POST_NO
+		                                )Y
+		                        ON P.POST_NO =Y.POST_NO
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	
+	<select id="getDMList" resultType="hashmap" parameterType="hashmap">
+		SELECT M.MEMO_NO, M.MARKING, TO_CHAR(M.ACCUR_DATE) AS ACCUR_DATE,
+				TO_CHAR(M.REGISTER_DATE) AS REGI_DATE,M.CONTENTS,M.ADMIN_NO,A.NAME
+		FROM MEMO M INNER JOIN ADMINISTRATOR A
+                    ON M.ADMIN_NO = A.ADMIN_NO
+		WHERE M.DEL=1
+		AND M.USER_NO = #{userNo}
+		<if test="searchTxt != null and searchTxt != ''">
+					AND CONTENTS LIKE '%' || #{searchTxt} ||'%'
+	 	</if>
+	</select>
+	
+	<update id="deleteOneRow" parameterType="hashmap">
+	<if test="userNo != null and userNo != ''">
+		UPDATE USERS SET OUT_DATE = CASE WHEN OUT_DATE IS NULL THEN SYSDATE ELSE NULL END
+		WHERE USER_NO = #{userNo}
+	</if>
+	</update>
+	
+	<update id="gongRowsDel" parameterType="hashmap">
+
+		UPDATE NOTICE SET DEL = CASE WHEN DEL = 1 THEN 0 ELSE 1 END
+		WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	
+	<update id="updateUser" parameterType="hashmap">
+		UPDATE USERS SET USER_NICKNAME = #{userNick}, PHONE_NO = #{phon_no}, PROFILE_IMG_PATH = #{fileName}, MAIL = #{email},
+                		INTRODUCE = #{sogeaTxt}
+		WHERE USER_NO = #{userNo}
+	</update>
+	
+	<select id="getGongCnt" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(*) AS CNT
+		FROM NOTICE
+		<choose>
+			<when test ="searchGbn == 3">
+				WHERE DEL=0
+			</when>
+			<when test ="searchGbn != 3">
+				WHERE DEL=1
+			</when>
+		</choose>
+		<if test="searchGbn != null and searchTxt != ''">
+		        <choose>
+		        	<when test="searchGbn == 0">
+		        	AND NOTICE_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 1">
+					AND TITLE LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        	<when test="searchGbn == 2">
+					AND ADMIN_NO LIKE '%' || #{searchTxt} ||'%'
+		        	</when>
+		        </choose>
+        </if>
+	</select>
+	
+	<select id="getNotice" parameterType="hashmap" resultType="hashmap">
+	SELECT *
+	FROM NOTICE
+	WHERE NOTICE_NO = #{noticeNo}
+	</select>
+	
+	<update id="updateGong" parameterType="hashmap">
+	UPDATE NOTICE SET TITLE= #{titleInput}, CONTENTS = #{cttsIn}, FILE_PATH = #{changedFileName},REGISTER_DATE=SYSDATE
+	WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<select id="getMailUser" parameterType="hashMap" resultType="hashMap">
+		SELECT USER_NO ,NAME, PHONE_NO, MAIL
+		FROM USERS
+		WHERE USER_NO = #{userNo}
+	</select>
+	
+	
+	<insert id="addMemoHD" parameterType="hashmap">
+		INSERT INTO MEMO(MEMO_NO, USER_NO ,ADMIN_NO, ACCUR_DATE, MARKING, CONTENTS)
+		VALUES (MEMO_SEQ.NEXTVAL, #{userNo}, #{admin}, #{occur}, #{marking}, #{contents})
+	</insert>
+	
+	<update id="updateMemo" parameterType="hashmap">
+	UPDATE MEMO
+	SET ACCUR_DATE = #{occur}, CONTENTS = #{contents}, MARKING = #{marking}
+	WHERE MEMO_NO = #{mNo}
+	</update>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getGallaryMCnt" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(*) AS CNT
+		FROM (SELECT *
+				FROM POST P INNER JOIN USERS U
+				ON P.USER_NO = U.USER_NO) A
+		WHERE 1 = 1
+		<choose>
+			<when test="menuTabFlag == 1">
+				AND A.CATEGORY_NO = 1
+			</when>
+			<when test="menuTabFlag == 2">
+				AND A.CATEGORY_NO = 2
+			</when>
+			<when test="menuTabFlag == 3">
+				AND A.CATEGORY_NO = 3
+			</when>
+		</choose>
+		<if test="srhYearFlag == 0 or srhYearFlag == 1">
+			<choose>
+					<when test="srhYearFlag == 0">
+						AND TO_CHAR(A.REGISTER_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+					</when>
+					<when test="srhYearFlag == 1">
+						AND TO_CHAR(A.REGISTER_DATE, 'YYYY') = '2020'
+					</when>
+			</choose>
+		</if>
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchFlag == 2">
+					AND A.TITLE LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 3">
+					AND A.EXPLAIN LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 4">
+					AND A.NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 5">
+					AND A.POST_NO LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 6">
+					AND A.CATEGORY_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 7">
+					AND (A.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR A.EXPLAIN LIKE '%' || #{searchTxt} || '%')
+				</when>
+				<when test="searchFlag == 8">
+					AND TO_CHAR(A.REGISTER_DATE, 'YYYY') LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="startFlag != null and startFlag != ''
+				or endFlag != null and endFlag != ''">
+			<choose>
+				<when test="startFlag != null and startFlag != ''
+						and endFlag == null and endFlag == ''">
+				AND A.REGISTER_DATE &gt;= #{startFlag}
+				</when>
+				<when test="startFlag == null and startFlag == ''
+						and endFlag != null and endFlag != ''">
+					AND A.REGISTER_DATE &lt;=  #{endFlag}
+				</when>
+					<when test="startFlag != null and startFlag != ''
+						and endFlag != null and endFlag != ''">
+					AND A.REGISTER_DATE BETWEEN #{startFlag} AND #{endFlag}
+				</when>
+			</choose>
+		</if>
+		<if test="delFlag != null and delFlag != ''">
+			<choose>
+				<when test="delFlag == 0">
+					AND A.DEL = 0
+				</when>
+				<when test="delFlag == 1">
+					AND A.DEL = 1
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	
+
+
+	
+	<select id="getPostList" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (SELECT P.POST_NO, P.CATEGORY_NO, PC.CATEGORY_NAME, P.TITLE, U.USER_NICKNAME AS NICKNAME, P.DEL,
+				U.NAME, U.USER_ID, TO_CHAR(P.REGISTER_DATE, 'YYYY-MM-DD') AS REGISTER_DATE,
+				ROW_NUMBER() OVER(ORDER BY P.POST_NO DESC) AS RNUM, P.VIEWS, DECODE(L.LIKE_CNT, NULL, 0, L.LIKE_CNT) AS LIKE_CNT, P.EXPLAIN
+		FROM ((POST P LEFT OUTER JOIN USERS U
+		           				 ON P.USER_NO = U.USER_NO)
+		    LEFT OUTER JOIN POST_CATEGORY PC
+		        	   ON P.CATEGORY_NO = PC.CATEGORY_NO)
+		    LEFT OUTER JOIN (SELECT P.POST_NO, COUNT(L.POST_NO) AS LIKE_CNT
+		                	FROM POST_LIKE L LEFT OUTER JOIN POST P
+		          										 ON L.POST_NO = P.POST_NO 
+		               									 GROUP BY P.POST_NO) L
+		         		  ON P.POST_NO = L.POST_NO
+		WHERE 1 = 1
+		<if test="menuTabFlag != null and menuTabFlag != ''">
+			<choose>
+					<when test="menuTabFlag == 1">
+						AND P.CATEGORY_NO = 1
+					</when>
+					<when test="menuTabFlag == 2">
+						AND P.CATEGORY_NO = 2
+					</when>
+					<when test="menuTabFlag == 3">
+						AND P.CATEGORY_NO = 3
+					</when>
+			</choose>
+		</if>
+		<if test="srhYearFlag != null and srhYearFlag != ''">
+			<choose>
+					<when test="srhYearFlag == 0">
+						AND TO_CHAR(REGISTER_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+					</when>
+					<when test="srhYearFlag == 1">
+						AND TO_CHAR(REGISTER_DATE, 'YYYY') = '2020'
+					</when>
+			</choose>
+		</if>
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchFlag == 2">
+					AND P.TITLE LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 3">
+					AND P.EXPLAIN LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 4">
+					AND U.NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 5">
+					AND P.POST_NO LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 6">
+					AND PC.CATEGORY_NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 7">
+					AND (P.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P.EXPLAIN LIKE '%' || #{searchTxt} || '%')
+				</when>
+				<when test="searchFlag == 8">
+					AND TO_CHAR(REGISTER_DATE, 'YYYY') LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="startFlag != null and startFlag != ''
+				or endFlag != null and endFlag != ''">
+			<choose>
+				<when test="startFlag != null and startFlag != ''
+						and endFlag == null and endFlag == ''">
+				AND REGISTER_DATE &gt;= #{startFlag}
+				</when>
+				<when test="startFlag == null and startFlag == ''
+						and endFlag != null and endFlag != ''">
+					AND REGISTER_DATE &lt;=  #{endFlag}
+				</when>
+					<when test="startFlag != null and startFlag != ''
+						and endFlag != null and endFlag != ''">
+					AND REGISTER_DATE BETWEEN #{startFlag} AND #{endFlag}
+				</when>
+			</choose>
+		</if>
+		<if test="delFlag != null and delFlag != ''">
+		<choose>
+			<when test="delFlag == 0">
+				AND P.DEL = 0
+			</when>
+			<when test="delFlag == 1">
+				AND P.DEL = 1
+			</when>
+		</choose>
+		</if>
+		) WHERE RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	
+
+	
+	
+	<select id="getUserDetail" parameterType="hashmap" resultType="hashmap">
+		SELECT RN.POST_NO, RN.POST_FILE, RN.VIDEO_LINK, SUBSTR(RN.POST_FILE, 21) AS POST_UFILE, RN.CATEGORY_NAME, RN.TITLE, RN.REGISTER_DATE,
+				RN.EXPLAIN, RN.USER_NICKNAME, RN.PROFILE_IMG_PATH, SUBSTR(RN.PROFILE_IMG_PATH, 21) AS PROFILE_IMG_UPATH,
+				RN.INTRODUCE, RN.TAGS, DECODE(RC.COMMENT_CNT, NULL, 0,RC.COMMENT_CNT) AS COMMENT_CNT,
+				RN.VISIBILITY, RN.VIEWS, DECODE(L.LIKE_CNT, NULL, 0, L.LIKE_CNT) AS LIKE_CNT
+		FROM ((SELECT P.POST_NO, P.POST_FILE, C.CATEGORY_NAME, P.TITLE,
+						TO_CHAR(P.REGISTER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS REGISTER_DATE,
+						P.VISIBILITY ,P.VIEWS ,P.EXPLAIN, P.VIDEO_LINK, U.USER_NICKNAME, U.PROFILE_IMG_PATH, U.INTRODUCE, N.TAGS
+		        FROM ((POST P INNER JOIN USERS U
+		                    		ON P.USER_NO = U.USER_NO) INNER JOIN POST_CATEGORY C
+																	ON P.CATEGORY_NO = C.CATEGORY_NO)
+				LEFT OUTER JOIN (SELECT PT.POST_NO, LISTAGG(TAG_NAME, ',') WITHIN GROUP(ORDER BY T.TAG_NO) AS TAGS
+		                 FROM POST_TAG PT INNER JOIN TAG T
+												 ON PT.TAG_NO = T.TAG_NO
+												 GROUP BY PT.POST_NO) N
+		 		 ON P.POST_NO = N.POST_NO) RN
+		 LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) AS COMMENT_CNT
+		                   FROM COMMENTS
+		                    GROUP BY POST_NO) RC
+		            ON RN.POST_NO = RC.POST_NO)
+         LEFT OUTER JOIN (SELECT P.POST_NO, COUNT(L.POST_NO) AS LIKE_CNT
+                	FROM POST_LIKE L LEFT OUTER JOIN POST P
+          										 ON L.POST_NO = P.POST_NO 
+               									 GROUP BY P.POST_NO) L
+                  ON RN.POST_NO = L.POST_NO
+		WHERE RN.POST_NO = #{postNo}
+	</select>
+	
+	<select id="updatePostDetail" parameterType="hashmap">
+		UPDATE POST
+		SET TITLE = #{title},
+			EXPLAIN = #{explain},
+			VISIBILITY = #{public_privacy},
+			POST_FILE = #{postFile2},
+			VIDEO_LINK = #{postFile3}
+		WHERE POST_NO = #{postNo}	
+	</select>
+	
+	<update id="deleteG" parameterType="hashmap">
+		UPDATE POST SET DEL = 0
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	<update id="returnG" parameterType="hashmap">
+		UPDATE POST SET DEL = 1
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	
+	
+	
+	<select id="getReportMCnt" resultType="Integer" parameterType="hashmap">
+		SELECT COUNT(*) AS CNT
+		FROM REPORT R INNER JOIN USERS U
+                     ON R.USER_NO = U.USER_NO
+		WHERE 1 = 1
+		<choose>
+			<when test="tabFlag == 0">
+				AND R.POST_NO IS NOT NULL
+			</when>
+			<when test="tabFlag == 1">
+				AND R.COMMENT_NO IS NOT NULL
+			</when>
+		</choose>
+		<if test="srhYearFlag != null and srhYearFlag != ''">
+			<choose>
+					<when test="srhYearFlag == 0">
+						AND TO_CHAR(R.REGISTER_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+					</when>
+					<when test="srhYearFlag == 1">
+						AND TO_CHAR(R.REGISTER_DATE, 'YYYY') = '2020'
+					</when>
+			</choose>
+		</if>
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchFlag == 2">
+					AND R.CONTENTS LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 3">
+					AND NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 4">
+					AND R.REPORT_NO LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 5">
+					AND TO_CHAR(R.REGISTER_DATE, 'YYYY-MM-DD') LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="startFlag != null and startFlag != ''
+				or endFlag != null and endFlag != ''">
+			<choose>
+				<when test="startFlag != null and startFlag != ''
+						and endFlag == null and endFlag == ''">
+				AND R.REGISTER_DATE &gt;= #{startFlag}
+				</when>
+				<when test="startFlag == null and startFlag == ''
+						and endFlag != null and endFlag != ''">
+					AND R.REGISTER_DATE &lt;=  #{endFlag}
+				</when>
+					<when test="startFlag != null and startFlag != ''
+						and endFlag != null and endFlag != ''">
+					AND R.REGISTER_DATE BETWEEN #{startFlag} AND #{endFlag}
+				</when>
+			</choose>
+		</if>
+		<if test="delFlag != null and delFlag != ''">
+			<choose>
+				<when test="delFlag == 0">
+					AND R.DEL = 0
+				</when>
+				<when test="delFlag == 1">
+					AND R.DEL = 1
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="getReportList" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (SELECT A.REPORT_NO, A.ADMIN_NO, A.USER_NO, A.COMMENT_NO,
+					A.POST_NO, A.CONTENTS, A.REPORT_STATUS, A.DEL,
+					A.FLAGS ,TO_CHAR(A.REGISTER_DATE, 'YYYY-MM-DD') AS REGISTER_DATE,
+		        	A.NAME, A.USER_ID, A.USER_NICKNAME,
+		        	A.C_USERNAME, A.C_USERID, A.C_USERNICK,
+                    B.WRITER_NO, B.WRITER_NAME, B.WRITER_ID,
+					B.WRITER_NICK, ROW_NUMBER() OVER(ORDER BY A.REGISTER_DATE DESC) AS RNUM
+					FROM (SELECT R2.*, NVL(R3.C_USERNAME, ' ') AS C_USERNAME, NVL(R3.C_USERID, ' ') AS C_USERID, NVL(R3.C_USERNICK,' ') AS C_USERNICK
+                            FROM (SELECT R1.*, U.USER_ID, U.USER_NICKNAME, U.NAME
+                                                        FROM (SELECT R.*, RT.FLAGS
+                                                                 FROM (REPORT R INNER JOIN (SELECT RRT.REPORT_NO, LISTAGG(RT.TYPE_NAME, ',') WITHIN GROUP(ORDER BY RT.TYPE_NO) AS FLAGS
+                                                                        FROM REPORT_REPORT_TYPE RRT LEFT OUTER JOIN REPORT_TYPE RT
+                                                                                    ON RRT.TYPE_NO = RT.TYPE_NO
+                                                                        GROUP BY RRT.REPORT_NO) RT
+                                                                        ON R.REPORT_NO = RT.REPORT_NO)) R1 INNER JOIN USERS U
+                                                                                                                ON R1.USER_NO = U.USER_NO) R2
+                            LEFT OUTER JOIN (SELECT COMMENTS.*, USERS.NAME AS C_USERNAME, USERS.USER_ID AS C_USERID, USERS.USER_NICKNAME AS C_USERNICK
+                                                FROM COMMENTS INNER JOIN USERS
+                                                    ON COMMENTS.USER_NO = USERS.USER_NO) R3
+                            ON R2.COMMENT_NO = R3.COMMENT_NO) A
+            LEFT OUTER JOIN (SELECT P.POST_NO, U.USER_NO AS WRITER_NO, U.NAME AS WRITER_NAME, U.USER_ID AS WRITER_ID,
+								U.USER_NICKNAME AS WRITER_NICK
+				              FROM POST P INNER JOIN USERS U
+		        				 ON P.USER_NO = U.USER_NO) B
+        	ON A.POST_NO = B.POST_NO
+		WHERE 1 = 1
+		<if test="tabFlag != null and tabFlag !=''">
+			<choose>
+				<when test="tabFlag == 0">
+					AND A.POST_NO IS NOT NULL
+				</when>
+				<when test="tabFlag == 1">
+					AND A.COMMENT_NO IS NOT NULL
+				</when>
+			</choose>
+		</if>
+		<if test="srhYearFlag != null and srhYearFlag != ''">
+			<choose>
+					<when test="srhYearFlag == 0">
+						AND TO_CHAR(REGISTER_DATE, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY')
+					</when>
+					<when test="srhYearFlag == 1">
+						AND TO_CHAR(REGISTER_DATE, 'YYYY') = '2020'
+					</when>
+			</choose>
+		</if>
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchFlag == 2">
+					AND A.CONTENTS LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 3">
+					AND A.NAME LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 4">
+					AND A.REPORT_NO LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchFlag == 5">
+					AND TO_CHAR(REGISTER_DATE, 'YYYY-MM-DD') LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+		<if test="startFlag != null and startFlag != ''
+				or endFlag != null and endFlag != ''">
+			<choose>
+				<when test="startFlag != null and startFlag != ''
+						and endFlag == null and endFlag == ''">
+				AND REGISTER_DATE &gt;= #{startFlag}
+				</when>
+				<when test="startFlag == null and startFlag == ''
+						and endFlag != null and endFlag != ''">
+					AND REGISTER_DATE &lt;=  #{endFlag}
+				</when>
+					<when test="startFlag != null and startFlag != ''
+						and endFlag != null and endFlag != ''">
+					AND REGISTER_DATE BETWEEN #{startFlag} AND #{endFlag}
+				</when>
+			</choose>
+		</if>
+		<if test="delFlag != null and delFlag != ''">
+			<choose>
+				<when test="delFlag == 0">
+					AND A.DEL = 0
+				</when>
+				<when test="delFlag == 1">
+					AND A.DEL = 1
+				</when>
+			</choose>
+		</if>
+		) WHERE RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+	<update id="deleteR" parameterType="hashmap">
+		UPDATE REPORT SET DEL = 0
+		WHERE REPORT_NO = #{rNo}
+	</update>
+	
+	<update id="returnR" parameterType="hashmap">
+		UPDATE REPORT SET DEL = 1
+		WHERE REPORT_NO = #{rNo}
+	</update>
+	
+	
+	<select id="getReportDetail" parameterType="hashmap" resultType="hashmap">
+		SELECT A.REPORT_NO, A.ADMIN_NO, A.USER_NO, A.COMMENT_NO,
+					A.POST_NO, A.CONTENTS, A.REPORT_STATUS, A.DEL,
+					A.FLAGS ,TO_CHAR(A.REGISTER_DATE, 'YYYY-MM-DD') AS REGISTER_DATE,
+		        	A.NAME, A.USER_ID, A.USER_NICKNAME, A.C_CONTENT, A.ADMIN_NAME,
+		        	A.C_USERNAME, A.C_USERID, A.C_USERNICK, A.C_USERNO,
+                    B.WRITER_NO, B.TITLE ,B.WRITER_NAME, B.WRITER_ID,
+					B.WRITER_NICK, ROW_NUMBER() OVER(ORDER BY A.REGISTER_DATE DESC) AS RNUM
+FROM (SELECT E.*, F.ADMIN_NAME
+FROM (SELECT C.*, NVL(D.C_CONTENT, '댓글없음') AS C_CONTENT, D.C_USERNAME, D.C_USERID, D.C_USERNICK, D.C_USERNO
+FROM (SELECT R1.*, U.USER_ID, U.USER_NICKNAME, U.NAME FROM 
+(SELECT R.*, RT.FLAGS FROM (REPORT R INNER JOIN (SELECT RRT.REPORT_NO, LISTAGG(RT.TYPE_NAME, 
+',') WITHIN GROUP(ORDER BY RT.TYPE_NO) AS FLAGS FROM REPORT_REPORT_TYPE RRT LEFT OUTER JOIN 
+REPORT_TYPE RT ON RRT.TYPE_NO = RT.TYPE_NO GROUP BY RRT.REPORT_NO) RT ON R.REPORT_NO = RT.REPORT_NO)) 
+R1 INNER JOIN USERS U ON R1.USER_NO = U.USER_NO AND  R1.REPORT_NO 
+= #{rNo}) C LEFT OUTER JOIN (SELECT COMMENTS.COMMENT_NO, COMMENTS.CONTENT AS C_CONTENT, USERS.NAME AS C_USERNAME, USERS.USER_ID AS C_USERID,
+USERS.USER_NICKNAME AS C_USERNICK, USERS.USER_NO AS C_USERNO
+FROM COMMENTS INNER JOIN USERS
+                        ON COMMENTS.USER_NO = USERS.USER_NO) D
+ON C.COMMENT_NO = D.COMMENT_NO) E INNER JOIN (SELECT ADMIN_NO, NAME AS ADMIN_NAME
+FROM ADMINISTRATOR) F
+ON E.ADMIN_NO = F.ADMIN_NO) A
+            LEFT OUTER JOIN (SELECT P.POST_NO, P.TITLE, U.USER_NO AS WRITER_NO, U.NAME AS WRITER_NAME, U.USER_ID AS WRITER_ID,
+						U.USER_NICKNAME AS WRITER_NICK
+		              FROM POST P INNER JOIN USERS U
+        				 ON P.USER_NO = U.USER_NO) B
+        		ON A.POST_NO = B.POST_NO
+		
+	</select>
+	
+	<select id="getReportMemo" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM (SELECT ADMIN_NO, REPORT_NO, DEL, MEMO_NO, CONTENTS, ACCUR_DATE, MARKING,
+					TO_CHAR(REGISTER_DATE, 'YYYY-MM-DD') AS REGISTER_DATE,
+						ROW_NUMBER() OVER(ORDER BY REGISTER_DATE DESC) AS RNUM
+				FROM MEMO
+				WHERE DEL = 1)
+		WHERE REPORT_NO = #{rNo}
+	</select>
+	
+		<select id="getMemoDetail" parameterType="hashmap" resultType="hashmap">
+		SELECT M.ADMIN_NO, M.REPORT_NO, M.MEMO_NO, M.CONTENTS,
+		       TO_CHAR(M.ACCUR_DATE, 'YYYY-MM-DD') AS ACCUR_DATE,
+		       M.MARKING, TO_CHAR(M.REGISTER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS MEMO_REGI, N.NAME AS ADMIN_NAME
+		FROM MEMO M INNER JOIN (SELECT ADMIN_NO, NAME
+							     FROM ADMINISTRATOR
+							     WHERE DEL = 1) N
+							ON M.ADMIN_NO = N.ADMIN_NO
+		WHERE M.MEMO_NO = #{mNo}
+	</select>
+
+	<update id="updateReportMemo" parameterType="hashmap">
+		UPDATE MEMO
+		SET ACCUR_DATE = #{occur}, CONTENTS = #{contents}
+		WHERE MEMO_NO = #{mNo}
+	</update>
+	
+	<update id="deleteReportMemo" parameterType="hashmap">
+		UPDATE MEMO SET DEL = 0
+		WHERE MEMO_NO = #{mNo}
+	</update>
+	
+	<insert id="addMemo" parameterType="hashmap">
+		INSERT INTO MEMO(MEMO_NO, REPORT_NO, USER_NO ,ADMIN_NO, ACCUR_DATE, CONTENTS)
+		VALUES (MEMO_SEQ.NEXTVAL, #{rNo}, #{uNo}, #{admin}, #{occur}, #{contents})
+	</insert>
+	
+	
+	
+	<update id="updateReport" parameterType="hashmap">
+		UPDATE REPORT SET REPORT_STATUS = #{newStatus}
+		WHERE REPORT_NO = #{rNo}
+	</update>
+	
+	<update id="deletePost" parameterType="hashmap">
+		UPDATE POST SET DEL = 0
+		WHERE POST_NO = #{postNo}
+	</update>
+	
+	<update id="deleteComment" parameterType="hashmap">
+		UPDATE COMMENTS SET DEL = 0
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+
+	
+	
+</mapper>

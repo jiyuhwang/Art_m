@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+a { text-decoration: none; color: inherit;}
+img { border: 0px; }
+ul { list-style: none;}
+.font-red { color: red;}
+
+/* ----------------------------------------------------초기화 */
+
+
+
+/* ----------------------------------------------------메인시작 */
+.main {
+	background-color: #E0E7E9;
+}
+
+table {
+	text-decoration: none;
+	border-collapse: collapse;
+	text-align: center;
+	border-bottom: 1px solid black;
+	font-size: 10pt;
+}
+
+table tr {
+	cursor: pointer;
+}
+
+table th {
+	font-size: 10pt;
+	border-top: 0.5px solid black;
+	background-color: #cccccc;
+	padding: 3px;
+	height: 30px;
+}
+
+table td{
+	padding : 5px;
+}
+
+.ctts{
+	display: inline-block;
+	width : 1500px;
+	height : 490px;
+	position: absolute;
+	margin-left: 100px;
+}
+.blank2 {
+	display: block;
+	vertical-align : top;
+	width : 100%;
+	height : 60px;
+}
+.menu_tab_wrap {
+	display: block;
+	vertical-align : top;
+	width : 100%;
+	height : 60px;
+}
+
+.tab {
+	display : inline-block;
+	height: 54px;
+	width : 120px;
+	background-color: #6C7A89;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 50px;
+	border-radius: 3px;
+	position: relative;
+	color: white;
+	margin-left: 4px;
+}
+.tab_selected, .tab:hover {
+	display : inline-block;
+	height: 60px;
+	width : 120px;
+	background-color: #0C4A60;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	border-radius: 3px;
+	box-shadow: 5px 0px 2px grey;
+	position: relative;
+	color: white;
+	cursor: pointer;
+	margin-left: 4px;
+}
+
+.menu_txt_wrap { /* 게시글 목록, 댓글목록 아래 빈칸  top에 회색선 준 것*/
+	position: relative;
+	display: block;
+	height : 60px;
+	width : 1500px;
+	border-top : 2px solid  #cccccc;
+	vertical-align: top;
+}
+
+.menu_txt {
+	position: absolute;
+	width : 100%;
+	height : 100%;
+	background-color: #EEEEEE;
+	margin-top: 10px;
+	font-size: 12px;
+	vertical-align: middle;
+	
+}
+
+.menu_txt>span {
+		vertical-align: middle;
+		margin-left: 10px;
+}
+
+.search_flag_div {/* 회원분류.. 등 검색 분류 있는 곳  */
+	display : inline-block;
+	width : 100%;
+	height : 60px;
+	font-size: 15pt;
+}
+
+.search_flag {
+	margin-top: 20px;
+}
+
+.date_srh {
+	display: inline-block;
+}
+
+.del_wrap {
+	text-align: right;	
+}
+
+.del_wrap input[type="button"] {
+	width: 70px;
+	position: absolute;
+}
+
+.del_wrap input[type="button"]:first-child {
+	right: 74px;
+}
+
+.del_wrap input[type="button"]:last-child {
+	right: 0px;
+}
+
+.cnt_wrap{
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+.result_cnt {
+	display: inline-block;
+	color: #0C4A60;
+}
+.button_wrap{
+	display: inline-block;
+	right: 0px;
+	position: absolute;
+}
+
+.result_table {
+	height: 550px;
+	line-height: 32px;
+	overflow: auto;
+}
+
+.deleted_row {
+	background-color: #9E9E9E;
+	text-decoration: line-through;
+	
+}
+
+select, input{/*입력칸 넓히기  */
+	padding: 5px;
+}
+
+#pagingWrap {
+	font-size: 15pt;
+    text-align: center;
+    margin-top: 30px;
+}
+
+#pagingWrap span{
+	margin: 0 5px;
+	cursor: pointer;
+} 

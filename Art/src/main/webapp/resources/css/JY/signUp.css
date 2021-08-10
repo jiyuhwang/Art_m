@@ -1,0 +1,471 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	padding:0;
+}
+
+[type="text"] {
+	font-size: 8pt;
+}
+
+
+
+/* [type="radio"] {
+	width: 30px;
+	height: 30px;
+} */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 화면 전체 렙 */
+.wrapper{
+	width: 90%;
+	margin: 0 auto;
+	border: 1px solid #e5e5e5;	
+}
+
+/* content 랩 */
+.wrap{
+	width : 80%;
+	margin: 0 auto;
+	height: 100%;
+}
+/* 페이지 제목 */
+.subjecet{
+	text-align: center;
+	height: 50px;
+    margin: 0 auto;
+    margin-top: 10vw;
+    margin-bottom: 10vw;
+}
+
+.subjecet span{
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+}
+
+/* 아이디 영역 */
+.id_wrap{
+	width: 100%;
+    margin-top: 40px;
+	display: inline-block;
+}
+.id_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.id_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+#idInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+/* #btnIdCheck {
+    width: 80px;
+	height: 40px;
+    background-color: #ffad33;
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 15px;
+    float: right;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+} */
+
+/* 중복아이디 존재하지 않는경우 */
+.id_input_re_1{
+	color : green;
+	display : none;
+	font-size: 1em;
+}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 내용 입력 안했을 경우 */
+.id_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 닉네임 영역 */
+.nickname_wrap{
+	width: 100%;
+    margin-top: 20px;
+	display: inline-block;
+}
+.nickname_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.nickname_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+#nicknameInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+/* #btnNicknameCheck {
+    width: 80px;
+	height: 40px;
+    background-color: #ffad33;
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 15px;
+    float: right;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+} */
+
+/* 중복닉네임 존재하지 않는경우 */
+.nickname_input_re_1{
+	color : green;
+	display : none;
+	font-size: 1em;
+}
+/* 중복닉네임 존재하는 경우 */
+.nickname_input_re_2{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 내용 입력 안했을 경우 */
+.nickname_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 비밀번호 영역 */
+.pw_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+
+.pw_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+
+.pw_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+
+#pwInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+/* 내용 입력 안했을 경우 */
+.pw_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 비밀번호 확인 영역 */
+.pwck_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.pwck_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.pwck_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+#pwckInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+/* 내용 입력 안했을 경우 */
+.pwck_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 이름 영역 */
+.name_wrap{
+	width: 100%;
+    margin-top: 40px;
+}
+.name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.name_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+#nameInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+.name_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 성별 영역 */
+.sex_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.sex_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.sex_input_box{
+	width: 100%;
+	height: 12vw;
+	font-size: 1em;
+	margin-top: 10px;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+/* 휴대폰번호 영역 */
+.phone_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.phone_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.phone_input_box{
+	width: 100%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+#phoneInput{
+	width: 100%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+.phone_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 생년월일 영역 */
+.birth_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.birth_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.birth_input_box{
+	width: 100%;
+	height: 17vw;
+	border-bottom: 2px solid #e5e5e5;
+}
+
+.birth_select {
+    margin-top: 10px;
+    padding-left: 10px;
+    height: 13vw;
+    width: 25%;
+    border: none;
+    margin-left: 10px;
+    color: #808080;
+    font-size: 1em;
+}
+
+#birthYear, #birthDay {
+    margin-top: 10px;
+    padding-left: 10px;
+    height: 12vw;
+    width: 25%;
+    border: none;
+    font-size: 1em;
+}
+#birthDay {
+	margin-left: 10px;
+}
+
+.birth_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+/* 메일 영역 */
+.mail_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.mail_name{
+	font-size: 1.5em;
+    font-weight: bold;
+}
+.mail_input_box{
+	width: 70%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+    float: left;
+}
+#mailInput{
+	width: 98%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+.mail_check_wrap{
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+.mail_check_input_box{
+    width: 70%;
+	height: 12vw;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+    float: left;
+}
+
+#mail_check_input_box_false{
+    background-color: #ebebe4;
+}
+ 
+#mail_check_input_box_true{
+    background-color: white;
+}
+
+#mailCheckInput{
+	width: 90%;
+	height: 96%;
+	border: none;
+	font-size: 1em;
+	outline: none;
+	border-bottom: 2px solid #e5e5e5;
+}
+#btnMailSend, #btnMailCheck{
+    width: 29%;
+	height: 10vw;
+    background-color: #ffad33;
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.8em;
+    border-radius: 15px;
+    float: right;
+    line-height: 10vw;
+    text-align: center;
+    cursor: pointer;
+}
+
+.incorrect, .correct {
+	font-size: 1em;
+}
+
+.mail_input_re_3{
+	color : red;
+	display : none;
+	font-size: 1em;
+}
+
+/* 가입하기 버튼 */
+.join_button_wrap{
+	margin-top: 50px;
+	margin-bottom: 80px;
+	text-align: center;
+}
+#btnJoin{
+	width: 90%;
+    height: 14vw;
+    margin: 0 auto;
+    background-color: #ffad33;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+
+.correct{
+    color : green;
+}
+.incorrect{
+    color : red;
+}

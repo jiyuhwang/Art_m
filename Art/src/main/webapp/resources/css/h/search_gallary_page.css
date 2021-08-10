@@ -1,0 +1,327 @@
+@charset "UTF-8";
+
+body {
+	font-size: 0pt;
+	margin: 0;
+	font-family: '돋움';
+}
+
+[type="button"] {
+	cursor: pointer;
+	font-family: '돋움';
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.input_txt_wrap {
+	height: 50px;
+    background-color: white;
+    text-align: center;
+    margin-top: 120px;
+}
+
+#srhTxt {
+	display: inline-block;
+	width: 1330px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+#srhTxt [type="text"] {
+	font-size: 40px;
+	border: 0px;
+    width: 100%;
+    color: #333;
+    float: left;
+}
+
+#srhTxt input:focus {
+	outline: none;
+}
+
+.search_tab_wrap {
+	/* text-align: center; */
+    height: 60px;
+    width: 1330px;
+    margin: 0 auto;
+}
+
+.tabs {
+	display: inline-block;
+	width: 1300px;
+	margin: 0 auto;
+	/* text-align: center; */
+	font-size: 16px;
+}
+
+.tabs input:nth-of-type(1), .tabs input:nth-of-type(1) ~ div:nth-of-type(1), .tabs input:nth-of-type(2), .tabs input:nth-of-type(2) ~ div:nth-of-type(2),
+.tabs input:nth-of-type(3), .tabs input:nth-of-type(3) ~ div:nth-of-type(3), .tabs input:nth-of-type(4), .tabs input:nth-of-type(4) ~ div:nth-of-type(4) {
+    display:none;
+}
+.tabs input:nth-of-type(1):checked ~ div:nth-of-type(1), .tabs input:nth-of-type(2):checked ~ div:nth-of-type(2),
+.tabs input:nth-of-type(3):checked ~ div:nth-of-type(3), .tabs input:nth-of-type(4):checked ~ div:nth-of-type(4) {
+    display: inline-block;
+}
+.tabs > label {
+	float: left;
+    width: 80px;
+    padding: 30px 0 6px 0;
+    margin-right: 6px;
+    font-size: 24px;
+    color: #666;
+    margin-top: 14px;
+}
+
+.tabs input:nth-of-type(1):checked ~ label:nth-of-type(1), .tabs > label[for=tabP]:hover {
+    color: #EF6C33;
+    font-weight: bold;
+    border-bottom: 2px solid #EF6C33;
+    cursor: pointer;
+}
+.tabs input:nth-of-type(2):checked ~ label:nth-of-type(2), .tabs > label[for=tabD]:hover {
+    color: #EF6C33;
+    font-weight: bold;
+    border-bottom: 2px solid #EF6C33;
+    cursor: pointer;
+}
+.tabs input:nth-of-type(3):checked ~ label:nth-of-type(3), .tabs > label[for=tabV]:hover {
+    color: #EF6C33;
+    font-weight: bold;
+    border-bottom: 2px solid #EF6C33;
+    cursor: pointer;
+}
+.tabs input:nth-of-type(4):checked ~ label:nth-of-type(4), .tabs > label[for=tabW]:hover {
+    color: #EF6C33;
+    font-weight: bold;
+    border-bottom: 2px solid #EF6C33;
+    cursor: pointer;
+}
+
+/*-----------------------------------------------------------메인  */
+.main {
+	background-color: #fbfbfb;
+}
+
+.ctts {
+	width: 1300px;
+	margin: 0 auto;
+	min-height: 2500px;
+}
+
+.srh_cnt_div {
+	text-align: center;
+}
+
+.srh_flag_div * {
+	text-align: center;
+}
+
+
+.srh_cnt_box {
+	height: 60px;
+	width: 1330px;
+    margin: 0 auto;
+}
+
+.srh_cnt {
+	font-size: 17px;
+	color: #909090;
+	float: left;
+	margin-top: 26px;
+	margin-left: 14px;
+}
+
+.srh_flag_div {
+	height: 20px;
+	float: right;
+	display: inline-block;
+	margin-top: 26px;
+}
+
+.srh_flag_div ul li {
+	float: left;
+	list-style-type: none;
+	transition: 0.5s;
+    font-size: 17px;
+    color: #909090;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 30px;
+}
+
+/* .srh_flag_div ul li:nth-child(1)::before {
+	float: left;
+	color: #EF6C33;
+	list-style-type: disc;
+	content:"\2022";
+	font-weight: bold;
+	font-size: 17px;
+	height: 20px;
+	width: 1em;
+	margin-left: -1em;
+} */
+
+#active:hover::before, #active:active::before, #active::before {
+	float: left;
+	color: #EF6C33;
+	list-style-type: disc;
+	content:"\2022";
+	font-weight: bold;
+	font-size: 17px;
+	height: 20px;
+	width: 1em;
+	margin-left: -1em;
+}
+
+.pic_contents, .draw_contents, .video_contents, .writer_contents {
+	width: 1300px;
+	margin: 0 auto;
+	min-height: 730px;
+	top: 100px;
+}
+/* ----------------------------------------------------------------tab1결과 박스 */
+
+.gallary_div {
+	display: inline-block;
+	width: 400px;
+	margin: 10px;
+	vertical-align: top;
+}
+
+.box_wrap {
+	display: inline-block;
+
+}
+
+.box_img {
+	width: 410px;
+	height: 400px;
+    background-repeat: no-repeat;
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.box_img_txt {
+	margin: 10px;
+}
+
+.box_img_txt_title {
+	display: inline-block;
+	width: calc(100% - 10px);
+	font-size: 22px;
+	text-align: left;
+	word-break: break-all; 
+}
+
+.box_img_txt_writer_div {
+	display: inline-block;
+	width: calc(100% - 10px);
+	font-size: 20px;
+	text-align: left;
+	color: #7b7777;
+	margin: 10px;
+	word-break: break-all; 
+	
+}
+
+.writer_flag {
+	font-size: 14px;
+	font-style: italic;
+	color: #cccccc;
+	font-size: bold;
+}
+
+/* ----------------------------------------------------------------tab2결과 박스 */
+
+.writer_div {
+	width: 620px;
+    height: 200px;
+    background-color: white;
+    margin: 10px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.writer_img {
+	float: left;
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.writer_box_txt {
+	display: inline-block;
+	width: 420px;
+	height: 200px;
+}
+
+.writer_name {
+    font-size: 20pt;
+    overflow: hidden;
+}
+
+.writer_introduce {
+	font-size: 14px;
+	width: 100%;
+    height: 59px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*------------------------------------------------------검색없을 때 */
+
+.search_result {
+	width: 1300px;
+	margin: 0 auto;
+	min-height: 1000px;
+	top: 100px;
+}
+
+
+.search_nothing {
+	display: inline-block;
+	width: 500px;
+	font-size: 30px;
+	margin: auto;
+	position: relative;
+	top: 100px;
+}
+
+/*-----------------------------------------------------paging */
+
+.paging_area {
+	width: 350px;
+	display: inline-block;
+	margin: 0 auto;
+    margin-top: 20px;
+    margin-left: 35%;
+	font-size: 15pt;
+}
+
+.paging_area a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.on {
+	border: 1px solid black;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.paging_area a:hover:not(.on) {
+	background-color: #ddd;
+	border-radius: 5px;
+}

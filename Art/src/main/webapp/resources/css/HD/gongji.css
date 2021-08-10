@@ -1,0 +1,451 @@
+@charset "UTF-8";
+
+body {
+	font-size: 0pt;
+	margin: 0;
+	font-family: '돋움';
+}
+
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+[type="button"] {
+	cursor: pointer;
+	font-family: '돋움';
+}
+
+body::-webkit-scrollbar{
+	display: none;
+}
+
+.main::-webkit-scrollbar{
+	visibility: hidden;
+	
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.hdr {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 180px;
+	border-bottom: 1px solid #eee;
+}
+.inner_hdr {
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	height: 60px;
+}
+
+
+
+
+.pfe {
+	width: 200px;
+	height: 200px;
+	border-radius: 70%;
+	overflow: hidden;
+	position: absolute;
+	top: 60px;
+	left: 48px;
+}
+
+.pfe_img, .pfe_img2, .pfe_img3, .pfe_img4 {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.footer a, .side_bar a, .side_bar2 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+
+#pfeName {
+	position: absolute;
+	width: 300px;
+	height: 20px;
+	text-align: center;
+	top: 280px;
+	font-size: 22pt;
+}
+/* 공지사항 페이지 기본 이미지 파일은 art로 고정 총 300ㅔㅌ */
+.main {
+	width: 100%;
+	height : 950px;
+	background-color: #fbfbfb;
+	display: inline-block;
+	text-align: center;
+	overflow: scroll;
+}
+
+.ctts_wrap{
+	background-color:inherit;
+	width: 1330px;
+	/* height: 1000px; */
+	display: inline-block;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 5pt;
+	/* overflow: scroll; */
+}
+
+.main_ctt:nth-child(1){
+	background-color:inherit;
+	width: 940px;
+	height: 60px;
+	margin: 0 auto;
+	font-size: 10pt;
+	font-weight: bold;
+	color: gray;
+	border: none;
+}
+strong{
+	font-size: 15pt;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+.main_ctt:nth-child(1) .left{
+	background-color: inherit;
+	width: 200px;
+	height: 60px;
+	float: left;
+	text-align: left;
+	line-height: 80px;
+
+}
+.main_ctt:nth-child(1) .right{
+	background-color: inherit;
+	width: 200px;
+	height: 60px;
+	float: right;
+	text-align: right;
+	line-height: 80PX;
+	margin-right: 30px;
+}
+.main_ctt:nth-child(1) .right ul li{
+	float: right;
+	margin-left: 30px;
+	list-style-type: none;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.main_ctt:nth-child(1) .right ul li:hover::before{
+	color: orange;
+	list-style-type: disc;
+	content: "\2022";
+	color:orange;
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+
+.selected::before{
+	color: orange;
+	list-style-type: disc;
+	content: "\2022";
+	color:orange;
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+
+
+.main_ctt2{
+	width:940px;
+	height : 200px;
+	background-color: white;
+	margin: 14px  auto;
+	text-align: center;
+	border-bottom: 1px solid #eee;
+	display: inline-block;
+	overflow: hidden;
+}
+.main_ctt2 .main_ctt2_cover{
+	background-color: white;
+	width: 900px;
+	height: 165px;
+	margin: 16px auto;
+	font-size: 9pt;
+	padding-top: 2px;
+	cursor: pointer;
+}
+.main_ctt2_cover .first{
+	background-color:white;
+	width: 77%;
+	height: 100%;
+	float: right;
+	text-align: left;
+	
+}
+
+.main_ctt2_cover /.sub-ctt-bottom{
+	padding-top: 24px;
+	display: block
+}
+
+.sub-ctt{
+	width: 100%;
+	height: 55px;
+	display: inline-block;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+.main_ctt2_cover .first span{
+	display: inline-block;
+	font-size: 15pt;
+	margin-top: 10px;
+}
+.main_ctt2_cover .first h5{
+	display: inline-block;
+	font-size: 20pt;
+}
+
+.main_ctt2_cover .second{
+	background-color: inherit;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+.main_ctt2_cover .second img{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}	
+.ctts {
+	width: 1330px;
+	margin: auto;
+	position: relative;
+	text-align: center;
+	color: black;
+	height: 110px;
+}
+
+.gong {
+	position:absolute;
+	font-size: 40px;
+	border: 0px;
+    width: 300px;
+    height:30px;
+    color: #333;
+    left : 120px;
+    padding-top: 40px;
+}
+
+#searchTxt input:focus {
+	outline: none;
+}
+
+#cttsTab {
+	display: inline-block;
+	width: 100%;
+	height: 80px;
+	float: left;
+	margin-left: 168px;
+	
+}
+
+#cttsTab li {
+	float: left;
+    width: 80px;
+    padding: 30px 0 10px 0;
+    margin-right: 6px;
+    font-size: 24px;
+    color: #666;
+}
+
+#btnUod {
+	position: absolute;
+	top: 320px;
+	left: 95px;
+}
+
+
+#btnLot {
+	position: absolute;
+	top: 520px;
+	left: 95px;
+}
+
+.wrap {
+	position: relative;
+	width: 75vw;
+	height: 100%;
+	margin-top: 200px;
+	margin: 0 auto;
+}
+
+#editPage {
+	font-size: 35pt;
+	font-weight: bold;
+	margin-top: 120px;
+	margin-bottom: 30px;
+	display: inline-block;
+}
+
+#glySet, #title, #ctts, #tag, #srt {
+	font-size: 20pt;
+	font-weight: bold;
+	display: block;
+	/* margin-bottom: 5px; */
+}
+
+#cttsInW {
+	width: 75vw;
+	height: 500px;
+}
+
+#cttsIn {
+	width: 75vw;
+	height: 100%;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+/* #glySet {
+	margin-top: 30px;
+	font-family: '돋움';
+} */
+#setW {
+	margin-top: 8px;
+	margin-bottom: 15px;
+	width: 75vw;
+	height: 40px;
+}
+
+#set {
+	width: 150px;
+	height: 100%;
+	border-radius: 5px;
+	box-sizing: border-box;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#title, #ctts, #tag, #srt {
+	margin-top: 50px;
+}
+
+#titleInputW, #tagInputW {
+	margin-top: 8px;
+	margin-bottom: 20px;
+	width: 75vw;
+	height: 40px;
+}
+
+#titleInput, #tagInput {
+	width: 75vw;
+	height: 100%;
+	border-radius: 5px;
+	font-size: 20px;
+	cursor: pointer;
+	border: 1px solid gray;
+	outline: none;
+}
+
+#srt {
+	margin-bottom: 8px;
+}
+
+#prcPve {
+	width: 75vw;
+	height: 30px;
+}
+
+#plc, #pve {
+	font-size: 17pt;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.save_ccl {
+	width: 200px;
+	height: 50px;
+	margin-left: 30vw;
+}
+
+#btnSave, #btnCcl {
+	padding: 15px;
+	border: 0px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 50px;
+	font-size: 10pt;
+	display: inline-block;
+}
+
+#btnSave {
+	margin-right: 15px;
+	background-color: #ffad33;
+	color: white;
+}
+
+.ftr {
+	position: absolute;
+	width: 100%;
+	height: 150px;
+	background-color: black;
+	position: relative;
+	color: white;
+	bottom: 0;
+}
+
+#btnLogo2 {
+	position: absolute;
+	top: 30px;
+	left: 150px;
+}
+
+.ftr_pae {
+	font-size: 12pt;
+	color: white;
+	position: absolute;
+	top: 80px;
+	left: 95px;
+}
+
+.footer1 {
+	font-size: 10pt;
+	color: white;
+	width: 310px;
+	/* position: absolute;
+	top: 60px; */
+	line-height: 150px;
+	display: block;
+	margin: 0 auto;
+}
+
+/* #ftr1, #ftr2, #ftr3, #ftr4 {
+	font-size: 10pt;
+	color: white;
+	position: absolute;
+	top: 60px;
+	display: inline-block;
+}
+
+#ftr1 {
+	left: 500px;
+}
+
+#ftr2 {
+	left: 650px;
+}
+
+#ftr3 {
+	left: 780px;
+}
+
+#ftr4 {
+	left: 990px;
+} */

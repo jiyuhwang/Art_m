@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Srh"><!-- namespace - 클래스명과 동일 -->
+	<!-- id - 메소드명과 동일 -->
+	<!-- resultType : row 1줄의 형태를 지정 -->
+	<!-- 쿼리 작성 시 ;이 들어가면 실행되지 않음 -->
+
+	<select id="getSCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM POST P
+		LEFT OUTER JOIN(SELECT USER_NO, USER_ID, NAME, USER_NICKNAME, INTRODUCE
+                         FROM USERS
+                         WHERE OUT_DATE IS NULL) U
+ 		ON P.USER_NO = U.USER_NO
+		WHERE 1 = 1
+		AND P.DEL = 1 AND P.VISIBILITY = 0	
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="tabFlag == 0">
+					AND P.CATEGORY_NO = 1
+					AND (P.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P.EXPLAIN LIKE '%' || #{searchTxt} || '%')				
+				</when>
+				<when test="tabFlag == 1">
+					AND P.CATEGORY_NO = 2
+					AND (P.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P.EXPLAIN LIKE '%' || #{searchTxt} || '%')		
+				</when>
+				<when test="tabFlag == 2">
+					AND P.CATEGORY_NO = 3
+					AND (P.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P.EXPLAIN LIKE '%' || #{searchTxt} || '%')	
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="getSearchList" parameterType="hashmap" resultType="hashmap">
+		SELECT P2.*
+		FROM (SELECT P1.*, DECODE(L.LIKE_CNT, NULL, 0, L.LIKE_CNT) AS LIKE_CNT,
+					ROW_NUMBER() OVER(ORDER BY P1.REGISTER_DATE DESC) AS RNUM
+				FROM (SELECT POST.*, U.USER_NICKNAME
+						FROM POST INNER JOIN USERS U ON POST.USER_NO = U.USER_NO
+						WHERE POST.DEL = 1 AND POST.VISIBILITY = 0) P1
+				LEFT OUTER JOIN (SELECT POST_NO, COUNT(*) LIKE_CNT FROM POST_LIKE GROUP 
+						BY POST_NO) L
+				ON P1.POST_NO = L.POST_NO
+				WHERE 1 = 1
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="tabFlag == 0">
+					AND P1.CATEGORY_NO = 1
+					AND (P1.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P1.EXPLAIN LIKE '%' || #{searchTxt} || '%')				
+				</when>
+				<when test="tabFlag == 1">
+					AND P1.CATEGORY_NO = 2
+					AND (P1.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P1.EXPLAIN LIKE '%' || #{searchTxt} || '%')		
+				</when>
+				<when test="tabFlag == 2">
+					AND P1.CATEGORY_NO = 3
+					AND (P1.TITLE LIKE '%' || #{searchTxt} || '%'
+					OR P1.EXPLAIN LIKE '%' || #{searchTxt} || '%')	
+				</when>
+			</choose>
+		</if>
+		<if test="searchTxt != null and searchTxt != ''
+			and orderFlag!= null and orderFlag != ''">
+			<choose>
+				<when test="orderFlag == 0">
+					ORDER BY LIKE_CNT DESC	
+				</when>
+				<when test="orderFlag == 1">
+					ORDER BY P1.VIEWS DESC		
+				</when>
+				<when test="orderFlag == 2">
+					ORDER BY P1.REGISTER_DATE DESC	
+				</when>
+			</choose>
+		</if>
+		) P2 WHERE (P2.RNUM BETWEEN #{startCnt} AND #{endCnt})
+	</select>
+
+	<select id="getWriterList" parameterType="hashmap" resultType="hashmap">
+		SELECT A.*
+		FROM (SELECT U.USER_NO, U.USER_ID, U.USER_NICKNAME, U.INTRODUCE, U.PROFILE_IMG_PATH, AN.LIKE_CNT,
+		<if test="searchTxt != null and searchTxt != ''
+			and orderFlag!= null and orderFlag != ''">
+			<choose>
+				<when test="orderFlag == 0">
+					ROW_NUMBER() OVER(ORDER BY NVL(AN.LIKE_CNT, 0) DESC) AS RNUM
+				</when>
+				<when test="orderFlag == 2">
+					ROW_NUMBER() OVER(ORDER BY USER_NO DESC) AS RNUM
+				</when>
+			</choose>
+		</if>
+		FROM (SELECT USERS.*
+		        FROM USERS
+		        WHERE OUT_DATE IS NULL
+	        	<if test="searchTxt != null and searchTxt != ''">
+					AND USER_NICKNAME LIKE '%' || #{searchTxt} || '%'
+				</if>) U LEFT OUTER JOIN (SELECT AUTHOR_NO, COUNT(*) LIKE_CNT
+                                          FROM AUTHOR_LIKE
+                                          GROUP BY AUTHOR_NO) AN
+                              ON U.USER_NO = AN.AUTHOR_NO) A
+		WHERE A.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+
+	<select id="getWCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE 1 = 1
+		<if test="searchTxt != null and searchTxt != ''">
+			AND USER_NICKNAME LIKE '%' || #{searchTxt} || '%'
+		</if>
+		AND OUT_DATE IS NULL
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

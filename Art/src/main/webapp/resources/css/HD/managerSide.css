@@ -1,0 +1,127 @@
+.side{
+	width: 200px;
+	height: 940px;
+	background-color: #6C7A89;
+	display: inline-block;
+	box-shadow: 5px 5px 5px grey;
+}
+.blank{
+	height : 60px;
+	background-color: RGBA;
+}
+.member{
+	height : 60px;
+	background-color: RGBA;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	cursor: pointer;
+}
+#active{
+	height : 60px;
+	background-color: #0C4A60;
+	font-style: bold;
+	font-size: 17pt;
+	text-align: center;
+	line-height: 60px;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 5px;
+	color: white;
+	font-style: 고딕;
+	cursor: pointer;
+}
+.tag{
+	height : 60px;
+	background-color: RGBA;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	cursor: pointer;
+}
+.tag:hover{
+	height : 60px;
+	background-color: #0C4A60;
+	font-style: bold;
+	font-size: 17pt;
+	text-align: center;
+	line-height: 60px;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 5px;
+	color: white;
+	font-style: 고딕;
+	cursor: pointer;
+	z-index: 1;/* 이게 왜 안될까요 무슨일이까요 */
+	position: relative;
+}
+.product{
+	height : 60px;
+	background-color: RGBA;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	cursor: pointer;
+}
+
+.product:hover{
+	height : 60px;
+	background-color: #0C4A60;
+	font-style: bold;
+	font-size: 17pt;
+	text-align: center;
+	line-height: 60px;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 5px;
+	color: white;
+	font-style: 고딕;
+	cursor: pointer;
+	z-index: 1;/* 이게 왜 안될까요 무슨일이까요 */
+	position: relative;
+}
+
+.warning{
+	height : 60px;
+	background-color: RGBA;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	cursor: pointer;
+}
+
+.warning:hover{
+	height : 60px;
+	background-color: #0C4A60;
+	font-style: bold;
+	font-size: 17pt;
+	text-align: center;
+	line-height: 60px;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 5px;
+	color: white;
+	font-style: 고딕;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+}
+.gong{
+	height : 60px;
+	background-color: RGBA;
+	font-size: 15pt;
+	text-align: center;
+	line-height: 60px;
+	cursor: pointer;
+}
+.gong:hover{
+		height : 60px;
+	background-color: #0C4A60;
+	font-style: bold;
+	font-size: 17pt;
+	text-align: center;
+	line-height: 60px;
+	box-shadow: 5px 5px 5px grey;
+	border-radius: 5px;
+	color: white;
+	font-style: 고딕;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+}

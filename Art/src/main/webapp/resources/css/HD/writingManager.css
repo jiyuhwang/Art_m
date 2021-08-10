@@ -1,0 +1,326 @@
+@charset "UTF-8";
+
+body {
+	font-size: 0pt;
+	margin: 0;
+	font-family: '돋움';
+}
+
+[type="button"] {
+	cursor: pointer;
+	font-family: '돋움';
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#fileBtn{
+font-size:25pt;
+ margin-bottom:20px;
+ border:none;
+ background-color : inherit;
+}
+
+.hdr {
+	margin-top: 20px;
+	position: relative;
+	width: 100%;
+	height: 60px;
+}
+
+#btnMenu {
+	position: absolute;
+	left: 40px;
+	cursor: pointer;
+}
+
+#btnLogo {
+	position: absolute;
+	left: 80px;
+}
+
+#srhW {
+	width: 300px;
+	height: 45px;
+	position: absolute;
+	right: 100px;
+	display: none;
+}
+
+#btnSrh {
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	border: 1px solid #cccccc;
+	outline-style: none;
+}
+
+#btnLook {
+	position: absolute;
+	right: 40px;
+	cursor: pointer;
+}
+
+
+#btnUod, #btnLot {
+	border: 1px solid #ffad33;
+	color: #ffad33;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 18pt;
+	cursor: pointer;
+	border-radius: 20px;
+	background-color: white;
+}
+
+.pfe {
+	width: 200px;
+	height: 200px;
+	border-radius: 70%;
+	overflow: hidden;
+	position: absolute;
+	top: 50px;
+	left: 48px;
+}
+
+.pfe_img, .pfe_img2, .pfe_img3, .pfe_img4 {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#pfeName {
+	position: absolute;
+	width: 300px;
+	height: 20px;
+	text-align: center;
+	top: 260px;
+	font-size: 22pt;
+}
+
+#btnUod {
+	position: absolute;
+	top: 310px;
+	left: 95px;
+}
+
+
+#btnLot {
+	position: absolute;
+	top: 550px;
+	left: 95px;
+}
+
+.wrap {
+	position: relative;
+	width: 1320px;
+	height: 100%;
+	margin: 0 auto;
+	margin-top: 120px;
+	
+}
+
+#uploadWrap {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	border: 5px solid #ccc;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+#upload {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background-image: url("../../images/JY/upload.png");
+	background-repeat: no-repeat;
+	background-size: 100px 100px;
+	top: calc(50% - 70px);
+	left: calc(50% - 50px);
+	border: none;
+	background-color: white;
+}
+
+#uploadTxt {
+	font-size: 20pt;
+	position: relative;
+	top: 250px;
+}
+
+#editPage {
+	font-size: 35pt;
+	font-weight: bold;
+	margin-top: 120px;
+	margin-bottom: 30px;
+	display: inline-block;
+}
+
+#glySet, #title, #ctts, #tag, #srt {
+	font-size: 20pt;
+	font-weight: bold;
+	display: block;
+	/* margin-bottom: 5px; */
+}
+
+#ctts {
+	margin-bottom: 10px;
+}
+
+#cttsInW {
+	width: 1320px;
+	height: 600px;
+}
+
+#cttsIn {
+	width: 1320px;
+	height: 100%;
+	border-radius: 5px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 30pt;
+	padding: 10px;
+}
+
+/* #glySet {
+	margin-top: 30px;
+	font-family: '돋움';
+} */
+#setW {
+	width: 1320px;
+	height: 40px;
+}
+
+#set {
+	width: 150px;
+	height: 100%;
+	border-radius: 5px;
+	box-sizing: border-box;
+	font-size: 20px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#title, #ctts, #tag, #srt {
+	margin-top: 50px;
+}
+
+#titleInputW, #tagInputW {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	width: 1320px;
+	height: 40px;
+}
+
+#tagInputW {
+	margin-top: 80px;
+}
+
+#titleInput {
+	width: 800px;
+	height: 100%;
+	font-size: 40px;
+	outline: none;
+	border: 0;
+	border-bottom: 2px solid #ccc;
+	padding: 10px 0px;
+}
+
+#tagInput {
+	width: 800px;
+	height: 100%;
+	font-size: 30px;
+	cursor: pointer;
+	outline: none;
+	border: 0;
+	border-bottom: 2px solid #ccc;
+}
+
+#srt {
+	margin-bottom: 8px;
+}
+
+#plcPve {
+	width: 1320px;
+	height: 30px;
+}
+
+#plc, #pve {
+	font-size: 17pt;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.save_ccl {
+	width: 100%;
+	height: 50px;
+	/* margin-left: 30vw; */
+	text-align: center;
+}
+
+#btnSave, #btnCcl {
+	padding: 15px;
+	border: 0px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 50px;
+	font-size: 15pt;
+	display: inline-block;
+}
+
+#btnSave {
+	margin-right: 15px;
+	background-color: #ffad33;
+	color: white;
+}
+
+.ftr {
+	width: 100%;
+	height: 150px;
+	background-color: black;
+	position: relative;
+	color: white;
+	margin-top: 500px;
+}
+
+#btnLogo2 {
+	position: absolute;
+	top: 30px;
+	left: 150px;
+}
+
+.ftr_pae {
+	font-size: 12pt;
+	color: white;
+	position: absolute;
+	top: 80px;
+	left: 95px;
+}
+
+#ftr1, #ftr2, #ftr3, #ftr4 {
+	font-size: 10pt;
+	color: white;
+	position: absolute;
+	top: 60px;
+	display: inline-block;
+}
+
+#ftr1 {
+	left: 500px;
+}
+
+#ftr2 {
+	left: 650px;
+}
+
+#ftr3 {
+	left: 780px;
+}
+
+#ftr4 {
+	left: 990px;
+}

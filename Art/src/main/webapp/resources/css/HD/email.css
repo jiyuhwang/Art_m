@@ -1,0 +1,214 @@
+
+.PbackgroundM{
+	width : 100%;
+	height : 100%;
+	background-color: black;
+	opacity: 0.4;
+	position: absolute;
+	left : 0;
+	top : 0;
+	z-index:10;
+	display: none;
+}
+.PmainM{
+	width : 950px;
+	height : 800px;
+	background-color: #E0E7E9;
+	display: inline-block;
+	font-size: 0px;
+	position: absolute;
+	left : 50%;
+	top: 50%;
+	margin-left : -450px;
+	margin-top : -450px;
+	font-size: 0px;
+	border-radius: 7px;
+	z-index:11;
+	display: none;
+}
+.PmainM .blank{
+	width :100%;
+	height : 30px;
+	background-color: RGBA;
+	font-size: 25pt;
+	padding-left: 40px;
+}
+.PmainM .blank1{
+	width : 100%;
+	height : 30px;
+	background-color: RGBA;
+	
+}
+.PmainM .sideBlank{
+	width : 10px;
+	height : 670px;
+	display : inline-block;
+	background-color: RGBA;
+}
+.PmainM .contentBoard{
+	width :470px;
+	height: 670px;
+	background-color:  RGBA;
+	display: inline-block;
+	vertical-align: top;
+}
+.PmainM .contentBoard2{
+	
+	width :470px;
+	height: 670px;
+	background-color:  RGBA;
+	display: inline-block;
+	vertical-align: top;
+}
+.PmainM .forTitle{
+	width : 100%;
+	height: 50px;
+	background-color: #E0E7E9;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 50px;
+	font-size: 15pt;
+}
+.PmainM .contentBlank{
+	width : 100%;
+	height: 30px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: RGBA;
+}
+.PmainM .forText{
+	width : 100%;
+	height : 540px;
+	background-color:  RGBA;
+	display: inline-block;
+	font-size: 15pt;
+	
+}
+.PmainM .forBoard{
+	margin-top : 10px;
+	width : 450px;
+	height : 450px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+	overflow : auto;
+	
+}
+.PmainM .contentBlank2{
+	width : 60%;
+	height : 60px;
+	background-color:  RGBA;
+	display: inline-block;
+}
+.PmainM button{
+	display: inline-block;
+	vertical-align: top;
+	width : 80px;
+	height : 60px;
+	font-size: 15pt;
+	font-weight: bold;
+	border-radius: 6px;
+	margin-bottom: 10px;
+	border: none;
+	
+}
+.PmainM .forButton{
+	font-size : 5pt;
+	display: inline-block;
+	vertical-align: top;
+	width :100%;
+	height : 60px;
+}
+.PmainM input{
+	width: 380px;
+	height: 30px;
+	border: none;
+	border-radius: 3px;
+	
+}
+.PmainM span{
+	padding-right: 8px;
+}
+.PmainM .downSide{
+	width : 300px;
+	height:30px;
+}
+.PmainM .forTitle #fileBtn{
+	height: 40px;
+	font-size : 10pt;
+	margin-top: 7px;
+	width: 70px;
+}
+.PmainM textarea{
+	width : 450px;
+	height: 430px;
+	vertical-align: top;
+	text-align: left;
+	overflow : auto;
+	margin-top: 9px; 
+}
+.PmainM .contentBlank button{
+	width : 80px;
+	height : 30px;
+	font-size: 12pt;	
+}
+.PmainM .contentBlank button:hover{
+	width : 80px;
+	height : 30px;
+	font-size: 12pt;	
+	background-color: #0C4A60;
+	color: white;
+}
+.PmainM .pick{
+	background-color: #0C4A60;
+	color: white;
+	width: 80px;
+	height: 30px;
+}
+.PmainM #canel_btnM, #sendBtnM{
+	width: 70px;
+	height: 50px;
+}
+.PmainM #attMail{
+	display: none;
+}
+.PmainM #selectUser{
+	background-color:inherit;
+	color: black;
+	width: 150px;
+	height: 50px;
+	border: none;
+	border-radius: 3px;
+	font-size: 16pt;
+	font-weight: bold;
+	line-height: 80px;
+}
+
+.PmainM table{
+	border-collapse : collapse;
+	width : 450px;
+	font-size: 9pt;
+	margin: 0 auto;
+	text-align: center;
+}
+.PmainM table th{
+	border-top :1px solid black;
+	border-bottom: 1px solid black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-size: 10pt;
+	background-color: #cccccc;
+
+}
+.PmainM table td{
+	border-top :1px solid black;
+	border-bottom: 1px solid black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+.PmainM .check{
+	padding: 0;
+	margin: 0;
+	width : 10px;
+	height: 10px;
+}

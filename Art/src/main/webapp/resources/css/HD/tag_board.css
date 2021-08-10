@@ -1,0 +1,229 @@
+body{
+    margin: 0;
+    font-size: 0px;
+    min-width: 1330px;
+    }
+    .wrapper{
+        width: 100%;
+        height: 100%;
+    }
+    
+    .content {
+        background-color: #E0E7E9;
+        
+    }
+    
+    a{ 
+        text-decoration: none; /*기본, 글자 중간에 선이든 뭐든 없음*/
+        color:inherit; /*기본*/
+    }
+    
+   /*  table{
+         border-collapse: collapse;
+         text-align: center;
+         font-size: 10pt;
+         width: 1500px;
+         
+    }
+    table td{
+        padding : 30px;
+        font-size: 15pt;
+        opacity: 1;
+        cursor: pointer;
+    }
+	*/
+    .main3-table .td:hover{
+        background-color: #6C7A89;
+        cursor: pointer;
+    }
+    
+
+    .main3-table .td{
+    width: 10%;
+    height: 80px;
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 15pt;
+    text-align: center;
+    line-height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+    
+    .main{
+        display: inline-block;
+        width : 1500px;
+        height : 490px;
+        position: absolute;
+        background-color: RGBA;
+        margin-left: 100px;
+    }
+    .blank2{
+        display: block;
+        vertical-align : top;
+        width : 100%;
+        height : 60px;
+        background-color: RGBA;
+    }
+    .bigClass{
+        display: block;
+        vertical-align : top;
+        width : 100%;
+        height : 60px;
+        background-color: RGBA;
+    }
+    
+    .bigClass-1{
+        display : inline-block;
+        height: 60px;
+        width : 120px;
+        background-color: #0C4A60;
+        font-size: 15pt;
+        text-align: center;
+        line-height: 60px;
+        border-radius: 3px;
+        box-shadow: 5px 2px 2px grey;
+    
+        color: white;
+        font-weight: 300;
+        position: relative;
+    }
+    .bigClass-2{
+        display : inline-block;
+        height: 60px;
+        width : 120px;
+        background-color: #6C7A89;
+        font-size: 15pt;
+        text-align: center;
+        line-height: 60px;
+        border-radius: 3px;
+    
+        position: relative;
+        color: white;
+        font-weight: 300;
+        margin-left: 6px;
+    }
+    
+    .bigClass-2:hover{
+        display : inline-block;
+        height: 60px;
+        width : 120px;
+        background-color: #0C4A60;
+        font-size: 15pt;
+        text-align: center;
+        line-height: 60px;
+        border-radius: 3px;
+        box-shadow: 5px 0px 2px grey;
+        position: relative;
+        color: white;
+        font-weight: 300;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    
+    .main1 { /* 게시글 목록, 댓글목록 아래 빈칸  top에 회색선 준 것*/
+        position: relative;
+        display: block;
+        height : 60px;
+        width : 1500px;
+        border-top : 2px solid  #cccccc;
+        vertical-align: top;
+    }
+    
+    .main1-1 {
+        position: absolute;
+        width : 100%;
+        height : 100%;
+        background-color: #EEEEEE;
+        margin-top: 10px;
+        font-size: 12px;
+        vertical-align: middle;
+        
+    }
+    
+    .main1-1>span {
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+    .active{
+    	background-color: #6C7A89;
+    	width: 10%;
+	    height: 80px;
+	    display: inline-block;
+	    box-sizing: border-box;
+	    font-size: 15pt;
+	    text-align: center;
+	    line-height: 80px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+    }
+    
+    .font-red {
+        color: red;
+    }
+    
+    .main2 {/* 회원분류.. 등 검색 분류 있는 곳  */
+        display : inline-block;
+        width : 100%;
+        height : 60px;
+        font-size: 15pt;
+    }
+    
+    .main2-1 {
+        margin-top: 20px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    .date_search {
+        display: inline-block;
+        
+    }
+    .main3{/* 저장 삭제 있는 div */
+        width : 400px;
+        height: 30px;
+        background-color: grba;
+        float: right;
+        font-size: 2px;
+        text-align: right;
+        margin-bottom: 10px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 20px;
+        font-size: 15pt;
+    }
+    
+    .main3 [type=text]{
+    	display:none;
+    	background-color: inherit;
+    	border: 1px solid gray;
+    	border-radius: 5px;
+    }
+    .main3-table::-webkit-scroller{
+    	display: none;
+    }
+    
+    .main3-table {
+        height: 550px;
+        overflow: auto;
+        margin-top: 20px;
+    }
+    .status{
+        width : 99%;
+        height : 20px;
+        background-color: #6C7A89;
+        margin-top: 5px;
+        font-size: 5pt;
+        line-height: 20px;
+        padding-left: 10px;
+        border-radius: 5px;
+    }
+    
+    select, input{
+        padding: 5px;/* 이게 무엇인가...??? */
+    }
+    label{
+        margin-left: 10px;	
+    }

@@ -1,0 +1,161 @@
+body{
+font-size: 0pt;
+}
+.memoBackground{
+	width : 100%;
+	height : 100%;
+	background-color: black;
+	opacity: 0.4;
+	position: absolute;
+	left : 0;
+	top : 0;
+	z-index: 999;
+}
+.popMemo{
+	width : 600px;
+	height : 600px;
+	background-color: #E0E7E9;
+	display: inline-block;
+	font-size: 0px;
+	position: absolute;
+	left : 50%;
+	top: 50%;
+	margin-left : -320px;
+	margin-top : -300px;
+	z-index: 1000;
+	border-radius: 7px;
+}
+#cttBox{
+	font-size:15pt;
+	display:inline-block;
+	width: 400px;
+    height: 290px;
+    vertical-align: top;
+    margin-left: 15px;
+    overflow: auto;
+}
+.popMemo .blank{
+	width : 100%;
+	height : 30px;
+	background-color: rgba;
+	border-radius: 7px;
+}
+.popMemo .title{
+	font-size: 20pt;
+	text-align: center;
+}
+.popMemo #memoWriter{
+	margin-left: 15px;
+    background-color: inherit;
+    border: none;
+    border-bottom: 1px solid gray;
+    height: 20px;
+}
+.popMemo .ctt_box{
+	width : 100%;
+	height : 300px;
+	background-color:rgba;
+	display: inline-block;
+	position: relative;
+}
+.popMemo .what{
+	width : 100px;
+	height : 100%;
+	background-color: rgba;
+	display: inline-block;
+	font-size: 15pt;
+	text-align: center;
+	position: relative;
+	vertical-align: top;
+}
+.popMemo textarea{
+	border: none;
+	background-color: white;
+}
+.popMemo .what1{
+	width : 100px;
+	height : 40px;
+	background-color: rgba;
+	display: inline-block;
+	font-size: 15pt;
+	text-align: center;
+	position: relative;
+	vertical-align: top;
+}
+.popMemo .ctt{
+	width : 500px;
+	height : 290px;
+	display: inline-block;	
+}
+.popMemo .text{
+	display: inline-block;
+	overflow: auto;
+	width : 400px;
+	height : 290px;
+	vertical-align: top;
+	margin-left : 15px;
+	overflow: auto;
+}
+.popMemo .date_box{
+	width : 100%;
+	height: 40px;
+	display: inline-block;
+	vertical-align: top;
+	line-height: 30px;
+}
+
+.popMemo .time{
+	margin-left : 15px;
+	height: 20px;
+	width : 100px;
+}
+.popMemo .date1{
+	margin-left : 15px;
+	height: 20px;
+	width : 120px;
+}
+.popMemo input[type="checkbox"] {
+    display:none;
+}
+.popMemo input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 33px;
+    height: 24px;
+    margin: 3px 0 0 12px;
+    vertical-align: middle;
+    background: url(../../images/HD/checkbox.svg) left top no-repeat;
+    cursor: pointer;
+    background-size: cover;
+}
+
+.popMemo input[type="checkbox"]:checked + label span {
+     background:url(../../images/HD/checkbox.svg)  -33px top no-repeat;
+     background-size: cover;
+}
+.popMemo .last_box{
+	height: 45px;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+.popMemo .last_box_blank{
+	height: 45px;
+	width: 70%;
+	display: inline-block;
+	vertical-align: top;
+}
+.popMemo .btn{
+	height: 45px;
+	width : 70px;
+	display: inline-block;
+	vertical-align: top;
+	margin-right : 10px;
+	border-style: none;
+	border-radius: 7px;
+	font-weight: bold;
+	float:right;
+}
+.popMemo .btn:hover{
+	background-color: #0C4A60;
+	color: white;
+}

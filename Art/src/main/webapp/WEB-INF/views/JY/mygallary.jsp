@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>나의 갤러리</title>
 <link rel="stylesheet" href="resources/css/JY/mygallary.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -49,7 +50,7 @@ $(document).ready(function() {
 	$("html, body").animate({ scrollTop: 0 }, "fast")
 
 	
-	$('#btnGoUpload').click(function() {
+	$('.btnGoUpload').click(function() {
 		location.href =	"write";
 	});
 	
@@ -66,7 +67,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$(".pic_wrap, .draw_wrap, .video_wrap").on("dblclick", "div", function() {
+	$(".pic_wrap, .draw_wrap, .video_wrap").on("click", "div", function() {
 		$("#pNo").val($(this).attr("pno"));
 		$("#postNo").val($(this).attr("pno"));
 		$("#actionForm").attr("action", "detail");
@@ -200,14 +201,6 @@ function picList(list) {
 			for(var p of list) {
 				html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"pic" + p.POST_NO + "\">";					
 				html += "<div class=\"bg\">";
-				html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-				/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
-				if(p.REGISTER_DATE == null) {
-					html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-				} else {
-					html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-				}
-				html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
 				html += "</div>";
 				html += "</div>";
 		
@@ -229,14 +222,6 @@ function drawList(list) {
 		for(var p of list) {
 			html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"draw" + p.POST_NO + "\">";					
 			html += "<div class=\"bg\">";
-			html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-			/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
-			if(p.REGISTER_DATE == null) {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-			} else {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-			}
-			html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
 			html += "</div>";
 			html += "</div>";
 	
@@ -258,14 +243,6 @@ function videoList(list) {
 		for(var p of list) {
 			html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"video" + p.POST_NO + "\">";					
 			html += "<div class=\"bg\">";
-			html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-			/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
-			if(p.REGISTER_DATE == null) {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-			} else {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-			}
-			html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
 			html += "</div>";
 			html += "</div>";
 	
@@ -282,21 +259,15 @@ function videoList(list) {
 function drawPaging(pb) {
 	var html ="";
 	
-	html += "<a page=\"1\"><<</a>";
 	if($("#page").val() == "1") {
 		html += "<a page=\"1\"><</a>";		
 	} else {
 		html += "<a page=\"" + ($("#page").val() - 1) + "\"><</a>";
 	}
 	
-	for(var i = pb.startPcount ; i <= pb.endPcount; i++){
-		if($("#page").val() == i) {
-			html += "<a class=\"on\" page=\"" + i + "\">" + i + "</a>";			
-		} else {
-			html += "<a page=\"" + i + "\">" + i + "</a>";			
-			
-		}
-	}
+	
+	html += "<a class=\"on\" page=\"" + $("#page").val() + "\">" + $("#page").val() + "</a>";			
+		
 	
 	if($("#page").val() == pb.maxPcount) {
 		html += "<a page=\"" + pb.maxPcount + "\">></a>";
@@ -304,7 +275,6 @@ function drawPaging(pb) {
 		html += "<a page=\"" + ($("#page").val() * 1 + 1) + "\">></a>";
 	}
 	
-	html += "<a page=\"" + pb.maxPcount + "\">>></a";
 	
 	$(".pagination").html(html);
 }
@@ -335,7 +305,6 @@ function drawPaging(pb) {
 	<div class="background_wrap">
 	<div class="wrap">
 		<div class="profile_wrap">
-
 			<c:choose>
 				<c:when test="${empty sUserProfileImg}">
 					<div class="profile2">
@@ -353,40 +322,44 @@ function drawPaging(pb) {
 			<div class="profile_like">
 				<span class="profile_like_cnt">구독자 ${data.LIKECNT} | 관심작가 ${cnt}</span>
 			</div>
-			<%-- <div class="profile_like2">팔로우수
-				<span class="profile_like_cnt2">${cnt}</span>
-			</div> --%>
+			<br/>
 			<div class="profile_introduce">
-				<div class="profile_introduce_in">${sUserIntroduce}</div>
+				${sUserIntroduce}
 			</div>
 		</div>
 		<div class="gallary_wrap">
 			<div class="gallary">
-				<div class="tabs">
+				<div class="tabs">			
 					<input id="gallaryMenu1" type="radio" value="0" name="tab" checked="checked" />
 					<input id="gallaryMenu2" type="radio" value="1" name="tab" />
 					<input id="gallaryMenu3" type="radio" value="2" name="tab" />
-					<label for="gallaryMenu1">사진작품관</label>
-					<label for="gallaryMenu2">그림작품관</label>
-					<label for="gallaryMenu3">영상작품관</label>
+					<label for="gallaryMenu1">사진<br/>작품관</label>
+					<label for="gallaryMenu2">그림<br/>작품관</label>
+					<label for="gallaryMenu3">영상<br/>작품관</label>
+					<input type="hidden" id="visibility" name="visibility" value="0"/>
 					<input type="checkbox" id="checkbox" checked>
 						<label id="label" for="checkbox">
 						<span></span>
 					</label>
-					<input type="hidden" id="visibility" name="visibility" value="0"/>
-					
-					<input id="btnGoUpload" type="button" value="작품 등록하기">
-					<select class="select" name="selectGbn">
-						<option value="0" selected="selected">최신순</option>
-						<option value="1">좋아요순</option>
-					</select>
 					<div class="gallary_menu1_contents">
+						<select class="select" name="selectGbn">
+							<option value="0" selected="selected">최신순</option>
+							<option value="1">좋아요순</option>
+						</select>
 						<div class="pic_wrap"></div> 
 					</div>
 					<div class="gallary_menu2_contents">
+						<select class="select" name="selectGbn">
+							<option value="0" selected="selected">최신순</option>
+							<option value="1">좋아요순</option>
+						</select>
 						<div class="draw_wrap"></div> 
 					</div>
 					<div class="gallary_menu3_contents">
+						<select class="select" name="selectGbn">
+							<option value="0" selected="selected">최신순</option>
+							<option value="1">좋아요순</option>
+						</select>
 						<div class="video_wrap"></div> 
 					</div>
 				</div>

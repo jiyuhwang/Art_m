@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>전체 갤러리</title>
 <link rel="stylesheet" href="resources/css/JY/gallary.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -47,7 +48,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$(".pic_wrap, .draw_wrap, .video_wrap").on("dblclick", "div", function() {
+	$(".pic_wrap, .draw_wrap, .video_wrap").on("click", "div", function() {
 		$("#pNo").val($(this).attr("pno"));
 		$("#postNo").val($(this).attr("pno"));
 		$("#actionForm").attr("action", "detail");
@@ -170,18 +171,7 @@ $(document).ready(function() {
 			for(var p of list) {
 				html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"pic" + p.POST_NO + "\">";					
 				html += "<div class=\"bg\">";
-				html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-				/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
 				
-				
-				
-			if(p.REGISTER_DATE == null) {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-			} else {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-			}
-			
-				html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
 				html += "</div>";
 				html += "</div>";
 		
@@ -197,14 +187,7 @@ $(document).ready(function() {
 		for(var p of list) {
 			html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"draw" + p.POST_NO + "\">";					
 			html += "<div class=\"bg\">";
-			html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-			/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
-			if(p.REGISTER_DATE == null) {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-			} else {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-			}
-			html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
+			
 			html += "</div>";
 			html += "</div>";
 	
@@ -220,14 +203,7 @@ $(document).ready(function() {
 		for(var p of list) {
 			html += "<div pno = \"" + p.POST_NO + "\"class = \"pic\" id=\"video" + p.POST_NO + "\">";					
 			html += "<div class=\"bg\">";
-			html += "<div class=\"contents_title\">" + p.TITLE + "</div>";
-			/* html += "<div class=\"contents_in\">" + p.EXPLAIN + "</div>"; */
-			if(p.REGISTER_DATE == null) {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart3.png\" alt=\"투명하트\" width=\"40px\" height=\"40px\">";
-			} else {
-				html += "<img class=\"contents_heart\" src=\"resources/images/JY/heart2.png\" alt=\"빨간하트\" width=\"40px\" height=\"40px\">";
-			}
-			html += "<div class=\"contents_name\"> " + p.USER_NICKNAME + "</div>";
+			
 			html += "</div>";
 			html += "</div>";
 	
@@ -262,21 +238,15 @@ $(document).ready(function() {
 	function drawPaging(pb) {
 		var html ="";
 		
-		html += "<a page=\"1\"><<</a>";
 		if($("#page").val() == "1") {
 			html += "<a page=\"1\"><</a>";		
 		} else {
 			html += "<a page=\"" + ($("#page").val() - 1) + "\"><</a>";
 		}
 		
-		for(var i = pb.startPcount ; i <= pb.endPcount; i++){
-			if($("#page").val() == i) {
-				html += "<a class=\"on\" page=\"" + i + "\">" + i + "</a>";			
-			} else {
-				html += "<a page=\"" + i + "\">" + i + "</a>";			
-				
-			}
-		}
+	
+		html += "<a class=\"on\" page=\"" + $("#page").val() + "\">" + $("#page").val() + "</a>";			
+	
 		
 		if($("#page").val() == pb.maxPcount) {
 			html += "<a page=\"" + pb.maxPcount + "\">></a>";
@@ -284,7 +254,6 @@ $(document).ready(function() {
 			html += "<a page=\"" + ($("#page").val() * 1 + 1) + "\">></a>";
 		}
 		
-		html += "<a page=\"" + pb.maxPcount + "\">>></a";
 		
 		$(".pagination").html(html);
 	}
@@ -322,9 +291,9 @@ $(document).ready(function() {
 				<input id="gallaryMenu1" type="radio" value="0" name="tab" checked="checked" />
 				<input id="gallaryMenu2" type="radio" value="1" name="tab" />
 				<input id="gallaryMenu3" type="radio" value="2" name="tab" />
-				<label for="gallaryMenu1">사진작품관</label>
-				<label for="gallaryMenu2">그림작품관</label>
-				<label for="gallaryMenu3">영상작품관</label>
+				<label for="gallaryMenu1">사진<br/>작품관</label>
+				<label for="gallaryMenu2">그림<br/>작품관</label>
+				<label for="gallaryMenu3">영상<br/>작품관</label>
 				<select class="select" name="selectGbn">
 					<option value="0" selected="selected">최신순</option>
 					<option value="1">좋아요순</option>
@@ -339,8 +308,8 @@ $(document).ready(function() {
 					<div class="video_wrap"></div> 
 				</div>
 			</div>
-		</div>
 		<div class="pagination"></div>
+		</div>
 	</div>
 	</form>
 	<br />

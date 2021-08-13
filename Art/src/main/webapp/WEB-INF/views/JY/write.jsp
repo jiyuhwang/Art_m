@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>작품 등록하기</title>
 <link rel="stylesheet" href="resources/css/JY/write.css">
-
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="resources/script/ckeditor/ckeditor.js"></script>
@@ -15,6 +15,10 @@
 <script type="text/javascript">
 function enterValue(){
 		
+		if(document.getElementsByClassName('badge').length == 5) {
+			alert("태그는 5개까지 입력가능합니다.");
+			return false;
+		} else {
 		var tagSpan = document.createElement('span');
 		var x = document.createElement('span');	
 		var xMark = 'x';
@@ -40,6 +44,9 @@ function enterValue(){
 		}else if(string3 == string){
 			
 		}
+		
+		}
+		
 
 	}
 	
@@ -50,8 +57,12 @@ $(document).ready(function() {
 		resize_enabled : false,
 		language : "ko",
 		enterMode : "2",
-		width: "1330",
-		height: "500",
+		toolbarGroups : [
+			{ name: 'basicstyles', groups: ['basicstyles']},
+			{ name: 'paragraph', groups: ['align']},
+			{ name: 'colors', groups: ['colors']},
+			{ name: 'insert', groups: ['insert']}
+		],
 		removeButtons: 'Subscript,Superscript,Flash,PageBreak,Iframe,Language,BidiRtl,BidiLtr,CreateDiv,ShowBlocks,Save,NewPage,Preview,Templates,Image'
 	});
 	
@@ -215,7 +226,7 @@ $(document).ready(function() {
 		<div class="contents_in_w"><textarea id="contentsIn" name="explain" cols="80" rows="10" placeholder="작품을 뽐내주세요."></textarea></div>
 
 		<div class="tag_input_w">
-			<input id="tagId" type="text" placeholder="태그 입력 후 스페이스나 엔터를 눌러주세요."  onkeyup="if(window.event.keyCode==13||window.event.keyCode==32||window.event.keyCode==188){(enterValue())}"/>
+			<input id="tagId" type="text" placeholder="태그 입력 후 엔터키를 눌러주세요." maxlength="5" onkeyup="if(window.event.keyCode==13){(enterValue())}"/>
 			<div id="tag" class="tagsinput"></div>
 		</div>
 		<div class="secret">공개 설정</div>

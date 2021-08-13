@@ -2,13 +2,10 @@
 
 iframe {
 	max-width: 100%;
-	min-width: 80%;
 	min-height: 500px;
-	margin-left: 150px;
 }
 
 body {
-	font-size: 0pt;
 	margin: 0;
 	font-family: '돋움';
 }
@@ -135,106 +132,50 @@ body {
 
 #btnLike {
 	position: absolute;
-	right: 250px;
-	top: 2px;
+	top: 5px;
+	right: 140px;
 	cursor: pointer;
 }
 
 #likeCnt {
 	position: absolute;
 	font-size: 12pt;
-	top: 5px;
-	right: 235px;
+	top: 10px;
+	right: 125px;
 	font-weight: bold;
 }
 
-#btnShare {
-	position: absolute;
-	top: 2px;
-	right: 90px;
-	cursor: pointer;
-}
-
-.share_wrap {
-	display: none;
-	position: absolute;
-	width: 270px;
-	height: 80px;
-	border: 1px solid #ccc;
-	top: 50px;
-	right: 40px;
-}
-
-.share {
-	position: absolute;
-	font-size: 10pt;
-	top: 5px;
-	left: 15px;
-}
-
-#shareAddress {
-	position: absolute;
-	top: 40px;
-	left: 15px;
-	font-size: 10pt;
-	width: 190px;
-	border-radius: 5px;
-}
-
-#btnShareAddress {
-	position: absolute;
-	top: 40px;
-	right: 15px;
-	font-size: 10pt;
-	color: white;
-	background-color: #ffad33;
-	padding: 3px 2px;
-	border: 1px solid #ffad33;
-	border-radius: 10px;
-}
 
 #btnComment {
 	position: absolute;
-	right: 200px;
-	top: 3px;
+	top: 9px;
+	right: 95px;
 	cursor: pointer;
 }
 
 .comment_cnt {
 	position: absolute;
 	font-size: 12pt;
-	top: 5px;
-	right: 175px;
+	top: 10px;
+	right: 75px;
 	font-weight: bold;
 	cursor: pointer;
 }
 
 #btnEdit {
 	position: absolute;
-	top: 3px;
-	right: 135px;
+	top: 8px;
+	right: 45px;
 	cursor: pointer;
 }
 
 #btnDelete {
 	position: absolute;
-	right: 90px;
+	right: 10px;
+    top: 5px;
 	cursor: pointer;
 }
 
-#btnDot1 {
-	position: absolute;
-	right: 40px;
-	cursor: pointer;
-}
-
-#btnDot2 {
-	position: absolute;
-	right: 40px;
-	cursor: pointer;
-	display: none;
-	
-}
 
 .side_bar {
 	display: none;
@@ -334,151 +275,101 @@ body {
 
 #btnLike2 {
 	position: absolute;
-	right: 205px;
+	top: 5px;
+	right: 110px;
 	cursor: pointer;
 }
 
 #likeCnt2 {
 	position: absolute;
 	font-size: 12pt;
-	top: 2px;
-	right: 190px;
+	top: 10px;
+	right: 95px;
 	font-weight: bold;
 }
 
 #btnComment2 {
 	position: absolute;
-	top: 2px;
-	right: 155px;
+	top: 7px;
+	right: 65px;
 	cursor: pointer;
 }
 
 .comment_cnt12 {
 	position: absolute;
 	font-size: 12pt;
-	top: 2px;
-	right: 130px;
+	top: 9px;
+	right: 44px;
 	font-weight: bold;
 	cursor: pointer;
 }
 
-#btnShare2 {
-	position: absolute;
-	top: 2px;
-	right: 90px;
-	cursor: pointer;
-}
 
-.share_wrap2 {
-	display: none;
-	position: absolute;
-	width: 270px;
-	height: 80px;
-	border: 1px solid #ccc;
-	top: 60px;
-	right: 40px;
-}
-
-.share2 {
-	position: absolute;
-	font-size: 10pt;
-	top: 5px;
-	left: 15px;
-}
-
-#shareAddress2 {
-	position: absolute;
-	top: 40px;
-	left: 15px;
-	font-size: 10pt;
-	width: 190px;
-	border-radius: 5px;
-}
-
-#btnShareAddress2 {
-	position: absolute;
-	top: 40px;
-	right: 15px;
-	font-size: 10pt;
-	color: white;
-	background-color: #ffad33;
-	padding: 3px 2px;
-	border: 1px solid #ffad33;
-	border-radius: 10px;
-}
 
 #btnDeclation2 {
 	position: absolute;
-	right: 90px;
+	top: 5px;
+	right: 15px;
 	cursor: pointer;
 }
 
-#btnDot12 {
-	position: absolute;
-	right: 40px;
-	cursor: pointer;
-}
 
-#btnDot22 {
-	position: absolute;
-	right: 40px;
-	cursor: pointer;
-	display: none;
-	
-}
 
 
 /*----------------------------------------------------------  */
 
 .wrap {
 	position: relative;
-	width: 1330PX;
+	width: 100%;
 	height: 100%;
-	margin-top: 200px;
 	margin: 0 auto;
 }
 
 .category {
-	font-size: 16pt;
-	margin-top: 100px;
-	margin-bottom: 10px;
-	display: inline-block;
+	font-size: 1.3em;
+	margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    display: block;
+    width: 90%;
 }
 
 .title {
-	font-size: 30pt;
-	font-weight: bold;
-	display: block;
-	margin-bottom: 10px;
+	font-size: 2.5em;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    margin-bottom: 10px;
 }
 
 .comment_wrap1 {
-	width: 80px;
+	width: 65px;
 	height: 30px;
 	border: 2px solid #ffad33;
 	border-radius: 20px;
 	display: inline-block;
 	position: absolute;
 	cursor: pointer;
-	right: 5px;
-	float: right;
+	right: 3%;
 }
 
 .comment {
-	font-size: 12pt;
+	font-size: 1em;
 	color: #959595;
 	display: inline-block;
-	width: 60px;
+	width: 40px;
 	height: 30px;
 	position: absolute;
-	left: 35px;
+	left: 30px;
 	top: 7px;
 }
 
 .profile2_wrap {
-	width: 1330px;
+	width: 95%;
 	height: 250px;
-	position: relative;
+    position: relative;
+    margin: 0 auto;
 	margin-bottom: 120px;
 	background-color: #fbfbfb;
 	margin-top: 80px;
@@ -486,14 +377,14 @@ body {
 }
 
 .profile2 {
-	width: 200px;
-	height: 200px;
+	width: 80px;
+	height: 80px;
 	border-radius: 70%;
 	overflow: hidden;
 	display: inline-block;
 	vertical-align: middle;
 	position: absolute;
-	top: 25px;
+	top: 20px;
 	right: 30px;
 }
 
@@ -506,7 +397,7 @@ body {
 }
 
 .profile_name2 {
-	font-size: 20pt;
+	font-size: 1.2em;
 	color: #333333;
 	display: inline-block;
 	vertical-align: middle;
@@ -517,32 +408,33 @@ body {
 	border-bottom: 2px solid #333333;
 }
 
-.profile_name2:hover {
-	color: #ffad33;
-	font-weight: bold;
-}
-
 .profile_introduce {
-	font-size: 10pt;
+	font-size: 0.8em;
 	color: #959595;
-	width: 75%;
-	top: 100px;
+	width: 85%;
+	top: 105px;
 	left: 30px;
 	position: absolute;
+	overflow-x: scroll;
+    height: 34vw;
 }
 
 .contents_date {
-	font-size: 12pt;
-	/* color: #d9d9d9; */
+	font-size: 1em;
 	color: #ccc;
 	display: inline-block;
 }
 
 .views {
 	margin-left: 20px;
-	font-size: 12pt;
+	font-size: 1em;
 	color: #ccc;
 	display: inline-block;
+}
+
+.date_view {
+	width: 90%;
+	margin: 0 auto;
 }
 
 #contentsLikeCountWrap {
@@ -562,23 +454,24 @@ body {
 }
 
 .contents_wrap {
-	width: 100%;
-	height: 50%;
-	margin-top: 100px;
+	width: 90%;
+    height: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
 }
 
 
 .contents_img {
 	display: block;
-	margin: 120px auto 0;
-	max-width: 1200px;
-	min-width: 800px;
+	margin: 60px auto 0;
+	width: 100%;
   	height: auto;
 }
 
 .contents {
-	margin-top: 50px;
-	margin-bottom: 150px;
+	width: 90%;
+    margin: 50px auto 150px;
 	display: block;
 	font-size: 12pt;
 }
@@ -587,25 +480,27 @@ body {
 }
 
 .tag_wrap {
-	width: 80%;
-	height: 40px;
-	position: relative;
-	display: inline-block;
+	width: 90%;
+	display: block;
+	margin: 0 auto;
+	overflow-x: scroll;
 }
 
 .tag {
-	font-size: 13pt;
+	font-size: 0.7em;
 	padding: 5px 12px 5px 5px;
 	background-color: #ffad33;
 	border: 2px solid #ffad33;
 	color: white;
+	display: inline-block;
 	border-radius: 20px;
 	margin-right: 7px;
+	margin-top: 5px;
 }
 
 .comment_wrap2 {
-	margin-top: 50px;
-	display: none;
+	width: 90%;
+    margin: 50px auto 0;
 }
 
 .comment_title {
@@ -627,13 +522,12 @@ body {
 }
 
 .reply {
-	width: 10px;
+	width: 6px;
 	height: 10px;
 	border-left: 2px solid #ccc;
 	border-bottom: 2px solid #ccc;
 	position: absolute;
 	top: 30px;
-	left: 20px;
 }
 .reply_comment_form1_w1, .reply_comment_form1_w2 {
 	width: 100%;
@@ -679,12 +573,12 @@ body {
     padding: 5px;
 	margin-top: 10px;
 	position: absolute;
-	right: 0px;
+	right: 3%;
 	margin-bottom: 30px;
 }
 
 #replyBtnCommentUpload {
-	right: 10px;
+	right: 0;
 }
 
 .profile3, .reply_profile3 {
@@ -759,6 +653,10 @@ body {
 	height: 15px;
 }
 
+.btn_reply_upload_comment_delete_w {
+	position: relative;
+}
+
 .btnReplyUpload, #replyBtnReplyUpload {
 	font-size: 10pt;
 	color: white;
@@ -776,13 +674,17 @@ body {
     border: 1px solid #ffad33;
     padding: 5px;
 	position: absolute;
-	right: 0;
+	right: 1%;
 	border-radius: 5px;
+}
+
+#btnCommentDelete {
+	top: 10px;
 }
 
 
 .pagination {
-	font-size: 15pt;
+	font-size: 1em;
 	width: 100%;
 	height: 50px;
 	text-align: center;
@@ -819,7 +721,7 @@ body {
 
 .select_cnt_box {
 	height: 60px;
-	width: 1330px;
+	width: 100%;
     margin: 0 auto;
 }
 

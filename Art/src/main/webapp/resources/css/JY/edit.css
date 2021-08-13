@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 body {
-	font-size: 0pt;
 	margin: 0;
 	font-family: '돋움';
 }
@@ -48,11 +47,10 @@ a {
 
 .wrap {
 	position: relative;
-	width: 1320px;
+	width: 95%;
 	height: 100%;
 	margin: 0 auto;
 	margin-top: 120px;
-	
 }
 
 .upload_wrap {
@@ -63,7 +61,6 @@ a {
 	margin: 0 auto;
 	margin-bottom: 50px;
 	text-align: center;
-	
 }
 
 #postFile {
@@ -71,9 +68,9 @@ a {
 }
 
 #video {
-	width: 800px;
+	width: 100%;
 	height: 100%;
-	font-size: 30px;
+	font-size: 1.7em;
 	cursor: pointer;
 	outline: none;
 	border: 0;
@@ -84,19 +81,18 @@ a {
 
 #uploadFile {
 	z-index: 700;
+	width: 100%;
 }
 
 #upload {
 	position: absolute;
-	width: 400px;
-	height: 400px;
+	width: 100%;
+	height: 100%;
 	background-image: url("../../images/JY/upload.png");
 	background-repeat: no-repeat;
 	background-size: 100px 100px;
 	background-position: center;
-	/* top: calc(50% - 70px);
-	left: calc(50% - 50px); */
-	left: calc(50% - 200px);
+	left: 0;
 	background-color: white;
 	opacity: 0;
 	border: 5px solid #ccc;
@@ -120,12 +116,12 @@ a {
 }
 
 .contents_in_w {
-	width: 1320px;
-	height: 600px;
+	width: 100%;
+	height: 230px;
 }
 
 #contentsIn {
-	width: 1320px;
+	width: 100%;
 	height: 100%;
 	border-radius: 5px;
 	margin-top: 30px;
@@ -135,18 +131,20 @@ a {
 }
 
 .select_w {
-	width: 1320px;
+	width: 100%;
 	height: 40px;
+	margin-bottom: 100px;
 }
 
 .select {
-	width: 150px;
+	width: 200px;
 	height: 100%;
 	border-radius: 5px;
 	box-sizing: border-box;
 	font-size: 20px;
 	cursor: pointer;
 	text-decoration: none;
+	background-color: white;
 }
 
 #title, #contents, .secret {
@@ -156,7 +154,7 @@ a {
 .title_input_w, .tag_input_w {
 	margin-top: 50px;
 	margin-bottom: 50px;
-	width: 1320px;
+	width: 100%;
 	height: 40px;
 }
 
@@ -165,9 +163,9 @@ a {
 }
 
 #titleInput {
-	width: 800px;
+	width: 100%;
 	height: 100%;
-	font-size: 40px;
+	font-size: 2em;
 	cursor: pointer;
 	outline: none;
 	border: 0;
@@ -176,9 +174,9 @@ a {
 }
 
 #tagInput {
-	width: 800px;
+	width: 100%;
 	height: 100%;
-	font-size: 30px;
+	font-size: 2em;
 	cursor: pointer;
 	outline: none;
 	border: 0;
@@ -203,18 +201,16 @@ a {
 }
 
 #tagId {
- 	width: 60%;
+ 	width: 100%;
  	height: 50px;
  	border: none;
- 	font-size: 18pt;
+ 	font-size: 1.1em;
  	border-bottom: 2px solid #ccc;
 }
 
 .tagsinput{	
 	width: 100%;
 	height: 34px;
-	padding: 6px 12px;
-	
 }
 
 .xClass{
@@ -234,7 +230,7 @@ a {
 }
 
 .public_privacy {
-	width: 1320px;
+	width: 100%;
 	height: 30px;
 }
 

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>작품 수정하기</title>
 <link rel="stylesheet" href="resources/css/JY/edit.css">
 
@@ -16,6 +17,10 @@
 <script type="text/javascript">
 function enterValue(){
 	
+	if(document.getElementsByClassName('badge').length == 5) {
+		alert("태그는 5개까지 입력가능합니다.");
+		return false;
+	} else {
 	var tagSpan = document.createElement('span');
 	var x = document.createElement('span');	
 	var xMark = 'x';
@@ -41,15 +46,20 @@ function enterValue(){
 	}else if(string3 == string){
 		
 	}
+	
+	}
 
 }
 
 
 $(document).ready(function() {
-	console.log($('#postNo').val());
-	console.log($('#uploadFile').attr("src"));
-	console.log($('#uploadFile').attr("src").substring(18)); 
 	
+	$("#tagId").on("keypress", function(e) {
+		if(e.keyCode == 13 && $(".badge").length == 5) {
+			alert("태그는 5개까지 입력가능합니다.");
+			return false;
+		}
+	});	
 	
 	var Tag = $("#tagId2").val().split(',');
 	console.log(Tag);
@@ -68,13 +78,7 @@ $(document).ready(function() {
 		result.append(tagSpan);  			
 	}
 	
-	
-/* 	$("#btnCancel").on("click", function () {
-		var Text = $( '.badge' ).text();
-		var Tag = Text.split('x');
-		$('#tag2').val(Tag);
-		console.log($('#tag2').val());
-	}); */
+
 	
 	$("#tag").on("click", ".xClass", function() {
 		$(this).parent().remove();
@@ -84,8 +88,12 @@ $(document).ready(function() {
 		resize_enabled : false,
 		language : "ko",
 		enterMode : "2",
-		width: "1330",
-		height: "500",
+		toolbarGroups : [
+			{ name: 'basicstyles', groups: ['basicstyles']},
+			{ name: 'paragraph', groups: ['align']},
+			{ name: 'colors', groups: ['colors']},
+			{ name: 'insert', groups: ['insert']}
+		],
 		removeButtons: 'Subscript,Superscript,Flash,PageBreak,Iframe,Language,BidiRtl,BidiLtr,CreateDiv,ShowBlocks,Save,NewPage,Preview,Templates,Image'
 	});
 	
@@ -255,7 +263,7 @@ $(document).ready(function() {
 			<%-- <c:forEach var="i" items="${array}">
 				<input id="tagId" value ="${i}" type="text" placeholder="태그 입력 후 스페이스나 엔터를 눌러주세요."  onkeyup="if(window.event.keyCode==13||window.event.keyCode==32||window.event.keyCode==188){(enterValue())}"/>
 			</c:forEach> --%>
-			<input id="tagId" value ="" type="text" placeholder="태그 입력 후 스페이스나 엔터를 눌러주세요."  onkeyup="if(window.event.keyCode==13||window.event.keyCode==32||window.event.keyCode==188){(enterValue())}"/>
+			<input id="tagId" value ="" type="text" placeholder="태그 입력 후 엔터키를 눌러주세요." maxlength="5" onkeyup="if(window.event.keyCode==13){(enterValue())}"/>
 			<div id="tag" class="tagsinput"></div>
 		</div>
 		<div class="secret">공개 설정</div>

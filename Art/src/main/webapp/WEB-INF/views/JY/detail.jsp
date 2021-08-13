@@ -26,28 +26,6 @@ $(document).ready(function() {
 		
 	
 	
-	$('#leftArrow').click(function() {
-		if($('#listPage').val() == "0") {
-			$("#goForm").attr("action", "gallary");
-			$("#goForm").submit();
-		} else if($('#listPage').val() == "1") {
-			$("#goForm").attr("action", "mygallary");
-			$("#goForm").submit();
-		} else if($('#listPage').val() == "2") {
-			$("#goForm").attr("action", "othergallary");
-			$("#goForm").submit();
-		} else if($('#listPage').val() == "3") {
-			$("#goForm").attr("action", "searchGallaryPage");
-			$("#goForm").submit();
-		} else if($('#listPage').val() == "4") {
-			$("#goForm").attr("action", "main");
-			$("#goForm").submit();
-		} else if($('#listPage').val() == "5") {
-			$("#goForm").attr("action", "myreport");
-			$("#goForm").submit();
-		}
-	})
-	
 	$(".pagination").on("click", "a",  function() {
 		$("#page2").val($(this).attr("page"));
 		reloadList();
@@ -58,18 +36,12 @@ $(document).ready(function() {
 	
 	if($("#userNo").val() != $("#authorNo").val()) {
 		$(".btnCommentDelete").hide();
-		//$("#replyBtnCommentDelete").hide();
 		$(".header").hide();
-		$(".share_wrap").hide();
 		$(".header2").show();
-		$(".share_wrap2").show();
 	} else {
 		$(".btnCommentDelete").show();
-		//$("#replyBtnCommentDelete").show();
 		$(".header").show();
-		$(".share_wrap").show();
 		$(".header2").hide();
-		$(".share_wrap2").hide();
 	}
 	
 	
@@ -138,7 +110,7 @@ $(document).ready(function() {
 			$('.share_wrap2').hide();
 		}
 	})
-	
+	$('.comment_wrap2').hide();
 	$('.comment_wrap1').click(function() {
 		reloadList();
 		if ($('.comment_wrap2').css('display') == 'none') {
@@ -154,11 +126,6 @@ $(document).ready(function() {
 	
 
 	
-	$('#btnShare').hide();
-	$("#btnDot2, #btnDot22").hide();
-	$("#btnDeclation2").hide();
-	$(".share_wrap").hide();
-	$(".share_wrap2").hide();
 	
 	
 	$('#btnDot1').click(function() {
@@ -185,53 +152,36 @@ $(document).ready(function() {
 		$("#btnDot1").show();
 	})
 	
-	$('#btnDot12').click(function() {
-		$('#btnShare2').hide();
-		$('#btnLike2').hide();
-		$('.like_cnt').hide();
-		$('#btnComment2').hide();
-		$('.comment_cnt12').hide();
-		$(this).hide();
-		$("#btnDot22").show();
-		$("#btnDeclation2").show();
-		
-		//신고버튼 클릭시 팝업창 띄우기
-		$("#btnDeclation2").on("click", function(){
-			
-			if($('#userNo').val() != "") {
-			
-				var params= $("#goForm").serialize();
-				
-				$.ajax({
-					url: "userReport",
-					type: "post",
-					dataType: "json",
-					data: params,
-					success: function(res) {				
-						reportPopup(res.data, res.userNo);
-					},
-					error: function(request, status, error) {
-						console.log(error);
-					}
-				});
-			
-			} else {
-				alert("로그인 후 이용해주세요.");
-			}
 
-		});//신고버튼함수end
-	})
+		
+	//신고버튼 클릭시 팝업창 띄우기
+	$("#btnDeclation2").on("click", function(){
+		
+		if($('#userNo').val() != "") {
+		
+			var params= $("#goForm").serialize();
+			
+			$.ajax({
+				url: "userReport",
+				type: "post",
+				dataType: "json",
+				data: params,
+				success: function(res) {				
+					reportPopup(res.data, res.userNo);
+				},
+				error: function(request, status, error) {
+					console.log(error);
+				}
+			});
+		
+		} else {
+			alert("로그인 후 이용해주세요.");
+		}
+
+	});//신고버튼함수end
+
 	
-	$('#btnDot22').click(function() {
-		$('#btnShare2').show();
-		$('#btnLike2').show();
-		$('.like_cnt').show();
-		$('#btnComment2').show();
-		$('.comment_cnt12').show();
-		$(this).hide();
-		$("#btnDot12").show();
-		$("#btnDeclation2").hide();
-	})
+
 	
 	$('#btnComment, .comment_cnt_wrap').click(function(){
 		
@@ -838,21 +788,14 @@ function replyCommentList(list, cNo) {
 function drawPaging(pb) {
 	var html ="";
 	
-	html += "<a page=\"1\"><<</a>";
 	if($("#page2").val() == "1") {
 		html += "<a page=\"1\"><</a>";		
 	} else {
 		html += "<a page=\"" + ($("#page2").val() - 1) + "\"><</a>";
 	}
 	
-	for(var i = pb.startPcount ; i <= pb.endPcount; i++){
-		if($("#page2").val() == i) {
-			html += "<a class=\"on\" page=\"" + i + "\">" + i + "</a>";			
-		} else {
-			html += "<a page=\"" + i + "\">" + i + "</a>";			
-			
-		}
-	}
+	html += "<a class=\"on\" page=\"" + $("#page2").val() + "\">" + $("#page2").val() + "</a>";			
+
 	
 	if($("#page2").val() == pb.maxPcount) {
 		html += "<a page=\"" + pb.maxPcount + "\">></a>";
@@ -860,7 +803,6 @@ function drawPaging(pb) {
 		html += "<a page=\"" + ($("#page2").val() * 1 + 1) + "\">></a>";
 	}
 	
-	html += "<a page=\"" + pb.maxPcount + "\">>></a";
 	
 	$(".pagination").html(html);
 }
@@ -988,15 +930,9 @@ function CopyUrl2()
 		html +="			<div class=\"top_ctt1\">";
 		html +="			<div>신고하기</div>";
 		html +="			</div>";
-		html +="			<div class=\"top_ctt2\">";
-		html +="			<b>신고합니다.</b>";
-		html +="			</div>";
-		html +="			<div class=\"top_ctt3\">";
-		html +="			아래 내용을 제출합니다.";
-		html +="			</div>";
 		html +="			<div class=\"top_ctt4\">";
-		html +="				<div class=\"top_ctt4-1\">신고사유</div>";
-		html +="				<div class=\"checkbox_div\">";
+/* 		html +="				<div class=\"top_ctt4-1\">신고사유</div>";
+ */		html +="				<div class=\"checkbox_div\">";
 		html +="					<div>";
 		html +="						<input type=\"checkbox\"id=\"c1\" value=\"0\" class=\"check_one\"/>";
 		html +="						<label for=\"c1\">홍보,영리목적</label>";
@@ -1036,20 +972,16 @@ function CopyUrl2()
 		html +="				</div>";
 		html +="			</div>";
 		html +="			<div class=\"r_content_div\">";
-		html +="				<div class=\"r_content-1\">내용<br/><span id=\"cttCnt\"></span></div>";
-		html +="				<div class=\"report_content\">";
-		html +="				<textarea rows=\"16\" cols=\"78\" name=\"reportCtt\" id=\"reportCtt\"></textarea></div>";
+/* 		html +="				<div class=\"r_content-1\">내용<br/><span id=\"cttCnt\"></span></div>";
+ */		html +="				<div class=\"report_content\">";
+		html +="				<textarea placeholder=\"신고 내용을 입력해주세요.\" rows=\"8\" cols=\"85\" name=\"reportCtt\" id=\"reportCtt\"></textarea></div>";
 		html +="			</div>";
 		html +="		</div><!-- --------------------------------------------top-ctt -->";
 		html +="		<div class=\"btm-ctt\">";
 		html +="			<div class=\"btm-ctt1\">";
 		html +="				<ul>";
-		html +="					<li><span class=\"font-red\">허위신고</span>일 경우 신고자에 대한 제재가 있을 수 있습니다.</li>";
-		html +="					<li>신고내용의 사유에 따라 사용자를 처벌하는 시간이 다소 걸릴 수 있습니다.</li>";
 		html +="					<li>이 글이 신고사유에 해당하는 글인지 다시 한 번 <span class=\"font-red\">확인</span>하시기 바랍니다.<br/>";
 		html +="					<li>신고하게 된 이유를 자세히 써주시면 운영자의 관련 결정에 도움이 됩니다.</li>";
-		html +="					신고기능은 글 작성자에게 <span class=\"font-red\">피해</span>를 줄 수 있으며, <span class=\"font-red\">3회</span> 부정신고 시";
-		html +="					<span class=\"font-red\">영구적</span>으로 이용이 제한됩니다.</li>";
 		html +="				</ul>";
 		html +="			</div>";
 		html +="			<div class=\"btm-ctt2\">";
@@ -1166,14 +1098,7 @@ function CopyUrl2()
 		html +="			<div class=\"top_ctt1\">";
 		html +="			<div>신고하기</div>";
 		html +="			</div>";
-		html +="			<div class=\"top_ctt2\">";
-		html +="			<b>신고합니다.</b>";
-		html +="			</div>";
-		html +="			<div class=\"top_ctt3\">";
-		html +="			아래 내용을 제출합니다.";
-		html +="			</div>";
 		html +="			<div class=\"top_ctt4\">";
-		html +="				<div class=\"top_ctt4-1\">신고사유</div>";
 		html +="				<div class=\"checkbox_div\">";
 		html +="					<div>";
 		html +="						<input type=\"checkbox\"id=\"c1\" value=\"0\" class=\"check_one\"/>";
@@ -1214,20 +1139,15 @@ function CopyUrl2()
 		html +="				</div>";
 		html +="			</div>";
 		html +="			<div class=\"r_content_div\">";
-		html +="				<div class=\"r_content-1\">내용<br/><span id=\"cttCnt\"></span></div>";
 		html +="				<div class=\"report_content\">";
-		html +="				<textarea rows=\"16\" cols=\"78\" name=\"reportCtt\" id=\"reportCtt\"></textarea></div>";
+		html +="				<textarea placeholder=\"신고 내용을 입력해주세요.\"rows=\"8\" cols=\"85\" name=\"reportCtt\" id=\"reportCtt\"></textarea></div>";
 		html +="			</div>";
 		html +="		</div><!-- --------------------------------------------top-ctt -->";
 		html +="		<div class=\"btm-ctt\">";
 		html +="			<div class=\"btm-ctt1\">";
 		html +="				<ul>";
-		html +="					<li><span class=\"font-red\">허위신고</span>일 경우 신고자에 대한 제재가 있을 수 있습니다.</li>";
-		html +="					<li>신고내용의 사유에 따라 사용자를 처벌하는 시간이 다소 걸릴 수 있습니다.</li>";
 		html +="					<li>이 글이 신고사유에 해당하는 글인지 다시 한 번 <span class=\"font-red\">확인</span>하시기 바랍니다.<br/>";
 		html +="					<li>신고하게 된 이유를 자세히 써주시면 운영자의 관련 결정에 도움이 됩니다.</li>";
-		html +="					신고기능은 글 작성자에게 <span class=\"font-red\">피해</span>를 줄 수 있으며, <span class=\"font-red\">3회</span> 부정신고 시";
-		html +="					<span class=\"font-red\">영구적</span>으로 이용이 제한됩니다.</li>";
 		html +="				</ul>";
 		html +="			</div>";
 		html +="			<div class=\"btm-ctt2\">";
@@ -1356,9 +1276,6 @@ function CopyUrl2()
 </head>
 <body>
 
-	<img src="resources/images/JY/left_arrow2.png" id="leftArrow"
-		alt="왼쪽 화살표" width="50px" height="50px">
-
 	<!-- 글 작가와 본인이 동일할 때 -->
 	<div class="header">
 		<img src="resources/images/JY/menu.png" id="btnMenu" alt="메뉴"
@@ -1382,21 +1299,10 @@ function CopyUrl2()
 		<img src="resources/images/JY/comment2.png" id="btnComment" alt="댓글"
 			width="20px" height="20px">
 		<div class="comment_cnt_wrap"></div>
-		<img src="resources/images/JY/share.png" id="btnShare" alt="공유"
-			width="20px" height="20px"> <img
-			src="resources/images/JY/dot1.png" id="btnDot1" alt="메뉴" width="25px"
-			height="25px"> <img src="resources/images/JY/dot2.png"
-			id="btnDot2" alt="메뉴" width="25px" height="25px"> <img
-			src="resources/images/JY/edit.png" id="btnEdit" alt="수정" width="20px"
-			height="20px"> <img src="resources/images/JY/delete.png"
-			id="btnDelete" alt="삭제" width="25px" height="25px">
+		<img src="resources/images/JY/edit.png" id="btnEdit" alt="수정" width="20px" height="20px">
+		<img src="resources/images/JY/delete.png" id="btnDelete" alt="삭제" width="25px" height="25px">
 	</div>
-	<div class="share_wrap">
-		<div class="share">아트 글을 공유해보세요.</div>
-		<input type="text" id="shareAddress"
-			value="http://localhost:8090/art/detail" /> <input type="button"
-			id="btnShareAddress" value="Copy" onclick="javascript:CopyUrl()" />
-	</div>
+
 
 
 	<!-- 글 작가와 본인이 동일하지않을 때 -->
@@ -1416,16 +1322,10 @@ function CopyUrl2()
 		<div class="like_cnt_wrap">
 			<%-- <div id="likeCnt2" class="like_cnt">${data.LIKECNT}</div> --%>
 		</div>
-		<img src="resources/images/JY/share.png" id="btnShare2" alt="공유" width="20px" height="20px">
-		<img src="resources/images/JY/dot1.png" id="btnDot12" alt="메뉴" width="25px" height="25px">
-		<img src="resources/images/JY/dot2.png" id="btnDot22" alt="메뉴" width="25px" height="25px">
+		
 		<img src="resources/images/JY/declation.png" id="btnDeclation2" alt="신고" width="20px" height="20px">
 	</div>
-	<div class="share_wrap2">
-		<div class="share2">아트 글을 공유해보세요.</div>
-		<input type="text" id="shareAddress2" value="http://localhost:8090/art/detail" />
-		<input type="button" id="btnShareAddress2" value="Copy" onclick="javascript:CopyUrl2()" />
-	</div>
+
 
 
 
@@ -1458,9 +1358,6 @@ function CopyUrl2()
 				<a href="profile">마이페이지</a>
 			</div>
 			<br />
-			<div class="side_bar_menu4">
-				<a href="gongji">공지사항</a>
-			</div>
 		</div>
 		<input type="button" id="btnLogout" value="로그아웃">
 	</div>
@@ -1481,9 +1378,6 @@ function CopyUrl2()
 				<a href="gallary">작품 보러가기</a>
 			</div>
 			<br/>
-			<div class="side_bar_menu3x">
-				<a href="gongji">공지사항</a>
-			</div>
 		</div>
 		<div class="forget">
 			<a href="idfind">계정을 잊어버리셨나요?</a>
@@ -1506,16 +1400,21 @@ function CopyUrl2()
 
 		<div class="category">${data.CATEGORY_NAME}</div>
 		<div class="title">${data.TITLE}</div>
-		<div class="contents_date">${data.REGISTER_DATE}</div>
-		<div class="views">조회수 ${data.VIEWS}</div>
+		<div class="date_view">
+			<div class="contents_date">${data.REGISTER_DATE}</div>
+			<div class="views">조회수 ${data.VIEWS}</div>
+		</div>
 		<br /> <br />
 		<div class="contents">${data.EXPLAIN}</div>
-		<c:if test="${!empty array}">
-			<c:forEach var="i" items="${array}">
-				<i class="tag"># ${i}</i>
-			</c:forEach>
-		</c:if>
-
+		<div class="tag_wrap">
+			<c:if test="${!empty array}">
+				<c:forEach var="i" items="${array}">
+					<i class="tag"># ${i}</i>
+				</c:forEach>
+			</c:if>
+		</div>
+		<br/>
+		<br/>
 		<div class="comment_wrap1">
 			<img class="comment_img" src="resources/images/JY/comment.png" width="30px" height="30px">
 			<div class="comment">댓글</div>

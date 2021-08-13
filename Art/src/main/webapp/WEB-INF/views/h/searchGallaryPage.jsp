@@ -460,7 +460,7 @@ $(document).ready(function() {
 			<input type="hidden" id="page" name="page" value="${page}" />
 			<input type="hidden" id="mainGallary" name="listPage" value="3"/>
 		</div>
-		<div class="srh_cnt_div">
+		<div class="srh_cnt_div"> 
 			<div class="srh_cnt_box">	
 			<span class="srh_cnt">검색 결과 <span class="spanCnt"></span>건</span>			
 			</div>

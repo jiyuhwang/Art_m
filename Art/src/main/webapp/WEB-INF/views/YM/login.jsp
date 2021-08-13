@@ -15,7 +15,7 @@ body {
 .wrap {
 	font-size: 1em;
     margin: 0 auto;
-    width: 81%;
+    width: 87%;
     text-align: center;
 }
 

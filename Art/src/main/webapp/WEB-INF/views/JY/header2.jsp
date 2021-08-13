@@ -33,24 +33,24 @@ a {
 
 #btnMenu {
 	position: absolute;
-	left: 40px;
+	left: 2vw;
 	cursor: pointer;
 }
 
 #btnLogo {
 	position: absolute;
-	left: 80px;
+	left: 10vw;
 }
 
 #btnStart2 {
 	position: absolute;
-	right: 100px;
+	right: 15%;
 	border: 1px solid #ffad33;
 	color: #ffad33;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 15pt;
+	font-size: 1em;
 	padding: 10px;
 	cursor: pointer;
 	border-radius: 20px;
@@ -67,7 +67,7 @@ a {
 
 #btnLook {
 	position: absolute;
-	right: 40px;
+	right: 2vw;
 	cursor: pointer;
 }
 
@@ -214,18 +214,6 @@ $(document).ready(function() {
 			
 			<br/>
 			
-			<c:choose>
-				<c:when test="${param.url == 'gongji'}">
-					<div class="side_bar_menu3x">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="side_bar_menu3">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:otherwise>
-			</c:choose>
 		</div>
 		<div class="forget">
 			<a href="idfind">계정을 잊어버리셨나요?</a>

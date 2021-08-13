@@ -409,7 +409,7 @@ function handleOnInput(el, maxlength) {
 				<span class="pw_input_re_3">필수 정보입니다.</span>
 			</div>
 			<div class="pwck_wrap">
-				<div class="pwck_name">비밀번호 재확인</div>
+				<div class="pwck_name">비밀번호 확인</div>
 				<div class="pwck_input_box">
 					<input id="pwckInput" type="password" onchange="check_pw()" placeholder="비밀번호 재입력">
 					<span id="check2"></span>

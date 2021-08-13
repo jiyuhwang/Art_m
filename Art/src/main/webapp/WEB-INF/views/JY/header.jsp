@@ -27,13 +27,13 @@ body {
 
 #btnMenu {
 	position: absolute;
-	left: 40px;
+	left: 2vw;
 	cursor: pointer;
 }
 
 #btnLogo {
 	position: absolute;
-	left: 80px;
+	left: 10vw;
 }
 
 #searchW {
@@ -54,7 +54,7 @@ body {
 
 #btnLook {
 	position: absolute;
-	right: 40px;
+	right: 2vw;
 	cursor: pointer;
 }
 
@@ -246,18 +246,6 @@ $(document).ready(function() {
 
 			<br />
 			
-			<c:choose>
-				<c:when test="${param.url == 'gongji'}">
-					<div class="side_bar_menu4x">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="side_bar_menu4">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:otherwise>
-			</c:choose>
 		</div>
 		<input type="button" id="btnLogout" value="로그아웃">
 	</div>

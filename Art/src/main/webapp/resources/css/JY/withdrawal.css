@@ -10,67 +10,31 @@ body {
 }
 
 .wrap {
-	width: 1330px;
+	width: 100%;
 	height: 100%;
-	margin: 110px auto;
-}
-
-.btn_menu {
-	width: 300px;
-	height: 500px;
-	display: inline-block;
-	vertical-align: top;
-	margin-right: 30px;
-}
-
-.report:hover, .privacy:hover, .stop:hover, .profile_manage:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
-
-
-.set {
-	width: 190px;
-	height: 50px;
-	font-size: 25pt;
-	font-weight: bold;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-.profile_manage, .privacy, .stop, .report {
-	width: 190px;
-	height: 50px;
-	font-size: 15pt;
-	font-weight: bold;
-	background-color: white;
-	color: black;
-	border-top: 1px solid #d9d9d9;
-	line-height: 50px;
-	text-align: center;
-	margin-bottom: 5px;
-}
-
-.stop {
-	background-color: black;
-	color: white;
-	border-bottom: 1px solid #d9d9d9;
+	margin: 40px auto;
 }
 
 .contents {
-	width: 700px;
-	height: 500px;
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 10px;
-	font-size: 17px;
+	width: 98%;
+    height: 500px;
+    margin: 0 auto;
+    vertical-align: top;
+}
+
+.select {
+	padding: 2%;
+	height: 55px;
+	margin-bottom: 30px;
+	margin-left: 2%;
+	border-radius: 5px;
 }
 
 .title {
-	width: 100%;
-	height: 50px;
-	font-size: 25pt;
+	width: 98%;
+    height: 50px;
+    font-size: 25pt;
+    margin: 0 auto;
 	font-weight: bold;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #d9d9d9;
@@ -89,9 +53,6 @@ body {
 .ico_dot{
 	width: 500px;
 	height: 40px;
-	margin: 30px 10px;
-	display:inline-block;
-   
 }
 
 .inp_comm {
@@ -128,8 +89,8 @@ body {
 }
 
 input[type=checkbox] {
-	width: 15px;
-	height: 15px;
+	width: 20px;
+	height: 20px;
 }
 
 /* ------------- */
@@ -144,15 +105,15 @@ input[type=checkbox] {
 	height: 900px;
 }
 .main{
-	width : 400px;
-	height: 300px;
+	width : 90%;
+	max-height: 80vh;
 	background-color: white;
     border: 4px solid black;
 	position: absolute;
 	left : 50%;
 	top: 50%;
-	margin-left : -180px;
-	margin-top : -190px;
+	margin-left: -45%;
+    margin-top: -10%;
 	font-size: 15pt;
 }
 .topBlank{
@@ -190,6 +151,7 @@ input[type=checkbox] {
 	cursor: pointer;
 	border: none;
 	margin-top: 40px;
+	background-color: #ccc;
 }
 .main button:hover{
 	background-color: #ffad33;

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>개인정보 관리</title>
 <link rel="stylesheet" href="resources/css/JY/myreport.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -14,6 +15,18 @@
 $(document).ready(function() {
 	reportPostList();
 	reportCommentList();
+	
+	$('.select').on("change", function() {
+		if($("select[name=category]").val() == '0') {
+			location.href = "myreport";
+		} else if($("select[name=category]").val() == '1') {
+			location.href = "profile";
+		} else if($("select[name=category]").val() == '2') {
+			location.href = "set";
+		} else {
+			location.href = "withdrawal";
+		}
+	});
 	
 	
 	$(".profile_manage").on("click", function() {
@@ -358,16 +371,15 @@ function drawReportCommentList(list2){
 	</c:choose>
 	
 	<div class="wrap">
-		<div class="btn_menu">
-			<div class="set">마이페이지</div>
-			<div class="report">나의 신고목록</div>
-			<div class="profile_manage">프로필관리</div>
-			<div class="privacy">개인정보관리</div>
-			<div class="stop">탈퇴하기</div>
-		</div>
+		<select class="select" name="category">
+			<option value="0" selected="selected">나의 신고목록</option>
+			<option value="1">프로필관리</option>
+			<option value="2">개인정보관리</option>
+			<option value="3">탈퇴하기</option>
+		</select>
 		<div class="contents">
 			<div class="title">신고목록</div>
-			<div class="report_type">A : 홍보·영리목적, B : 부적절한 홍보, C : 불법 정보, D : 음란 또는 청소년에게 부적합한내용, E : 욕설·비방·차별 혐오<br/>F : 도배·스팸, G : 개인정보 노출 거래, H : 저작권 및 명예훼손, I : 기타</div>
+			<div class="report_type">A : 홍보·영리목적, B : 부적절한 홍보, C : 불법 정보,<br/>D : 음란 또는 청소년에게 부적합한내용,<br/>E : 욕설·비방·차별 혐오,F : 도배·스팸,<br/>G : 개인정보 노출 거래, H : 저작권 및 명예훼손,<br/>I : 기타</div>
 			<div class="report_wrap">
 			<div class="report_wrap2">
 				<div class="tabs">

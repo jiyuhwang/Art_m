@@ -14,7 +14,6 @@
 	position: relative;
 	color: white;
 	/* margin-top: 200px; */
-	bottom: 0;
 }
 
 #btnLogo2 {

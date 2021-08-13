@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 body {
-	font-size: 0pt;
 	margin: 0;
 	font-family: '돋움';
 }
@@ -16,68 +15,31 @@ body {
 }
 
 .wrap {
-	width: 1330px;
+	width: 100%;
 	height: 100%;
-	margin: 110px auto 200px;
-}
-
-.btn_menu {
-	width: 300px;
-	height: 800px;
-	display: inline-block;
-	vertical-align: top;
-	margin-right: 30px;
-}
-
-.report:hover, .privacy:hover, .stop:hover, .profile_manage:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
+	margin: 40px auto 200px;
 }
 
 .contents {
-	width: 700px;
-	height: 800px;
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 10px;
+	width: 98%;
+    height: 800px;
+    margin: 0 auto;
+    vertical-align: top;
 }
 
-.set {
-	width: 190px;
-	height: 50px;
-	font-size: 25pt;
-	font-weight: bold;
-	text-align: center;
+.select {
+	padding: 2%;
+	height: 55px;
 	margin-bottom: 30px;
-}
-
-.profile_manage, .privacy, .stop, .report {
-	width: 190px;
-	height: 50px;
-	font-size: 15pt;
-	font-weight: bold;
-	background-color: white;
-	color: black;
-	border-top: 1px solid #d9d9d9;
-	line-height: 50px;
-	text-align: center;
-	margin-bottom: 5px;
-}
-
-.profile_manage {
-	background-color: black;
-	color: white;
-}
-
-.stop {
-	border-bottom: 1px solid #d9d9d9;
+	margin-left: 2%;
+	border-radius: 5px;
 }
 
 .title {
-	width: 100%;
-	height: 50px;
-	font-size: 25pt;
+	width: 98%;
+    height: 50px;
+    font-size: 25pt;
+    margin: 0 auto;
 	font-weight: bold;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #d9d9d9;
@@ -112,12 +74,8 @@ body {
 	display: inline-block;
 }
 
-.btn_profile_upload_w {
-	margin-left: 35%;
-}
-
 .btn_profile_delete_w {
-	margin-left: 3%;
+	margin-left: 10px;
 }
 
 #btnProfileUpload, #btnProfileDelete {
@@ -126,6 +84,7 @@ body {
 	background-color: #ffad33;
 	border-color: #ffad33;
 	display: inline-block;
+	border-radius: 5px;
 }
 
 #nickname {
@@ -181,10 +140,10 @@ td {
 }
 
 .save_cancel {
-	width: 200px;
-	height: 50px;
-	margin-left: 45%;
-	margin-bottom: 100px;
+	width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 100px;
 }
 
 #btnSave, #btnCancel {
@@ -200,7 +159,13 @@ td {
 }
 
 #btnSave {
-	margin-right: 15px;
 	background-color: #ffad33;
 	color: white;
+}
+
+.btn_wrap {
+	width: 100%;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 30px;
 }

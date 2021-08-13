@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 body {
-	font-size: 0pt;
 	margin: 0;
 	font-family: '돋움';
 }
@@ -20,20 +19,20 @@ a {
 	height: 50px;
     background-color: white;
     text-align: center;
-    margin-top: 120px;
+    margin-top: 40px;
 }
 
 #srhTxt {
 	display: inline-block;
-	width: 1330px;
+	width: 99%;
 	height: 50px;
 	margin: 0 auto;
 }
 
 #srhTxt [type="text"] {
-	font-size: 40px;
+	font-size: 2em;
 	border: 0px;
-    width: 100%;
+    width: 99%;
     color: #333;
     float: left;
 }
@@ -45,13 +44,13 @@ a {
 .search_tab_wrap {
 	/* text-align: center; */
     height: 60px;
-    width: 1330px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .tabs {
 	display: inline-block;
-	width: 1300px;
+	width: 100%;
 	margin: 0 auto;
 	/* text-align: center; */
 	font-size: 16px;
@@ -68,8 +67,8 @@ a {
 .tabs > label {
 	float: left;
     width: 80px;
-    padding: 30px 0 6px 0;
-    margin-right: 6px;
+    padding: 20px 0 6px 0;
+    margin-left: 6px;
     font-size: 24px;
     color: #666;
     margin-top: 14px;
@@ -106,9 +105,9 @@ a {
 }
 
 .ctts {
-	width: 1300px;
+	width: 100%;
 	margin: 0 auto;
-	min-height: 2500px;
+	height: 370vw;
 }
 
 .srh_cnt_div {
@@ -119,10 +118,13 @@ a {
 	text-align: center;
 }
 
+.srh_flag {
+	padding-left: 20px;
+}
 
 .srh_cnt_box {
 	height: 60px;
-	width: 1330px;
+	width: 100%;
     margin: 0 auto;
 }
 
@@ -135,10 +137,10 @@ a {
 }
 
 .srh_flag_div {
-	height: 20px;
-	float: right;
+	height: 50px;
+	float: left;
 	display: inline-block;
-	margin-top: 26px;
+	margin-top: 10px;
 }
 
 .srh_flag_div ul li {
@@ -149,20 +151,11 @@ a {
     color: #909090;
     cursor: pointer;
     height: 20px;
-    margin-left: 30px;
 }
 
-/* .srh_flag_div ul li:nth-child(1)::before {
-	float: left;
-	color: #EF6C33;
-	list-style-type: disc;
-	content:"\2022";
-	font-weight: bold;
-	font-size: 17px;
-	height: 20px;
-	width: 1em;
-	margin-left: -1em;
-} */
+.views_order, .recency {
+	margin-left: 30px;
+}
 
 #active:hover::before, #active:active::before, #active::before {
 	float: left;
@@ -177,18 +170,19 @@ a {
 }
 
 .pic_contents, .draw_contents, .video_contents, .writer_contents {
-	width: 1300px;
+	width: 100%;
 	margin: 0 auto;
 	min-height: 730px;
 	top: 100px;
+	margin-top: 15px;
 }
 /* ----------------------------------------------------------------tab1결과 박스 */
 
 .gallary_div {
 	display: inline-block;
-	width: 400px;
-	margin: 10px;
-	vertical-align: top;
+    width: 32%;
+    /* margin: 10px; */
+    vertical-align: top;
 }
 
 .box_wrap {
@@ -197,11 +191,11 @@ a {
 }
 
 .box_img {
-	width: 410px;
-	height: 400px;
+	width: 100%;
+    height: 30vw;
     background-repeat: no-repeat;
-	background-size: 100%;
-	cursor: pointer;
+    background-size: 100%;
+    margin-left: 3%;
 }
 
 .box_img_txt {
@@ -211,7 +205,7 @@ a {
 .box_img_txt_title {
 	display: inline-block;
 	width: calc(100% - 10px);
-	font-size: 22px;
+	font-size: 1em;
 	text-align: left;
 	word-break: break-all; 
 }
@@ -219,10 +213,10 @@ a {
 .box_img_txt_writer_div {
 	display: inline-block;
 	width: calc(100% - 10px);
-	font-size: 20px;
+	font-size: 1em;
 	text-align: left;
 	color: #7b7777;
-	margin: 10px;
+	margin-top: 5px;
 	word-break: break-all; 
 	
 }
@@ -237,29 +231,27 @@ a {
 /* ----------------------------------------------------------------tab2결과 박스 */
 
 .writer_div {
-	width: 620px;
+	width: 98%;
     height: 200px;
     background-color: white;
-    margin: 10px 10px;
+    margin: 10px auto 0px;
     text-align: center;
     border-bottom: 1px solid #eee;
-    display: inline-block;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .writer_img {
 	float: left;
-    width: 200px;
-    height: 200px;
+    width: 30%;
+    height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .writer_box_txt {
 	display: inline-block;
-	width: 420px;
-	height: 200px;
+	width: 70%;
+	height: 100%;
 }
 
 .writer_name {
@@ -279,7 +271,7 @@ a {
 /*------------------------------------------------------검색없을 때 */
 
 .search_result {
-	width: 1300px;
+	width: 100%;
 	margin: 0 auto;
 	min-height: 1000px;
 	top: 100px;
@@ -288,8 +280,8 @@ a {
 
 .search_nothing {
 	display: inline-block;
-	width: 500px;
-	font-size: 30px;
+	width: 100%;
+    font-size: 1.3em;
 	margin: auto;
 	position: relative;
 	top: 100px;
@@ -298,18 +290,15 @@ a {
 /*-----------------------------------------------------paging */
 
 .paging_area {
-	width: 350px;
-	display: inline-block;
-	margin: 0 auto;
-    margin-top: 20px;
-    margin-left: 35%;
-	font-size: 15pt;
+	font-size: 1em;
+    left: 45%;
+    margin-top: 50px;
+    text-align: center;
 }
 
 .paging_area a {
 	color: black;
-	float: left;
-	padding: 8px 16px;
+	padding: 5px 10px;
 	text-decoration: none;
 	margin: 0 5px;
 	cursor: pointer;

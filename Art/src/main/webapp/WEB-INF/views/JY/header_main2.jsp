@@ -53,13 +53,13 @@ a {
 
 #btnStart2, #btnLogout2 {
 	position: absolute;
-	right: 100px;
+	right: 15%;
 	border: 1px solid #ffad33;
 	color: #ffad33;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 15pt;
+	font-size: 1em;
 	padding: 10px;
 	cursor: pointer;
 	border-radius: 20px;
@@ -254,18 +254,6 @@ a {
 			
 			<br />
 			
-			<c:choose>
-				<c:when test="${param.url == 'gongji'}">
-					<div class="side_bar_menu3x">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="side_bar_menu3">
-						<a href="gongji">공지사항</a>
-					</div>
-				</c:otherwise>
-			</c:choose>
 
 		</div>
 		<div class="forget">

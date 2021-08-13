@@ -229,7 +229,6 @@ a {
 			<br />
 			<div class="side_bar_menu3"><a href="profile">마이페이지</a></div>
 			<br />
-			<div class="side_bar_menu4"><a href="gongji">공지사항</a></div>
 		</div>
 		<input type="button" id="btnLogout" value="로그아웃">
 	</div>

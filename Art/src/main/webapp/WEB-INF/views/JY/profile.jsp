@@ -5,12 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>프로필관리</title>
 <link rel="stylesheet" href="resources/css/JY/profile.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	$('.select').on("change", function() {
+		if($("select[name=category]").val() == '0') {
+			location.href = "myreport";
+		} else if($("select[name=category]").val() == '1') {
+			location.href = "profile";
+		} else if($("select[name=category]").val() == '2') {
+			location.href = "set";
+		} else {
+			location.href = "withdrawal";
+		}
+	});
+	
 	
 	$(".profile_manage").on("click", function() {
 		location.href = "profile";
@@ -164,15 +177,14 @@ $(document).ready(function() {
 	</c:choose>
 
 	<div class="wrap">
-		<div class="btn_menu">
-			<div class="set">마이페이지</div>
-			<div class="report">나의 신고목록</div>
-			<div class="profile_manage">프로필관리</div>
-			<div class="privacy">개인정보관리</div>
-			<div class="stop">탈퇴하기</div>
-		</div>
+		<select class="select" name="category">
+			<option value="0">나의 신고목록</option>
+			<option value="1" selected="selected">프로필관리</option>
+			<option value="2">개인정보관리</option>
+			<option value="3">탈퇴하기</option>
+		</select>
+		<div class="title">프로필 관리</div>
 		<div class="contents">
-			<div class="title">프로필 관리</div>
 			
 			<c:choose>
 				<c:when test="${empty sUserProfileImg}">
@@ -186,11 +198,11 @@ $(document).ready(function() {
 				    </div>
 				</c:otherwise>
 			</c:choose>
-	    
-		    <div class="btn_profile_upload_w"><input id="btnProfileUpload" type="button" value="첨부하기"></div>
-		    <div class="btn_profile_delete_w"><input id="btnProfileDelete" type="button" value="삭제하기"></div>
-		    <input type="hidden" name="profileImg" id="profileImg" value="${data.PROFILE_IMG_PATH}"/>   
-		    
+	    	<div class="btn_wrap">
+			    <div class="btn_profile_upload_w"><input id="btnProfileUpload" type="button" value="첨부하기"></div>
+			    <div class="btn_profile_delete_w"><input id="btnProfileDelete" type="button" value="삭제하기"></div>
+			    <input type="hidden" name="profileImg" id="profileImg" value="${data.PROFILE_IMG_PATH}"/>   
+		    </div>
 			<table cellspacing="0" class="table">
 				<tr height="50px">
 					<th>닉네임</th>
@@ -203,7 +215,7 @@ $(document).ready(function() {
 				</tr>
 				<tr height="300px">
 					<th>내 소개</th>
-					<td><input id="introduce" name="userIntroduce" type="text" value="${data.INTRODUCE}" size="40" maxlength="500"/></td>
+					<td><textarea id="introduce" name="userIntroduce" size="40" rows="10" cols="15" maxlength="500">${data.INTRODUCE}</textarea></td>
 				</tr>
 			</table>
 			<div class="save_cancel">

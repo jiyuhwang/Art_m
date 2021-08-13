@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 body {
-	font-size: 0pt;
 	margin: 0;
 	font-family: '돋움';
 }
@@ -37,12 +36,12 @@ tr {
 }
 
 #year, #day {
-	width: 160px;
+	width: 30%;
 	height: 50px;
 }
 
 .month {
-	width: 140px;
+	width: 30%;
 	height: 55px;
 }
 
@@ -53,12 +52,12 @@ tr {
 }
 
 #email {
-	width: 370px;
+	width: 58%;
 	height: 50px;
 }
 
 #email3, #pwCheck, #nowPw, #phone4 {
-	width: 400px;
+	width: 70%;
 	height: 50px;
 	padding: 1px;
 }
@@ -84,74 +83,38 @@ tr {
 
 .agree {
 	width: 148px;
-    height: 30px;
-    margin: 0px 10px;
-    padding-left: 6px;
+    height: 25px;
+    margin-top: 5px;
+    padding-left: 5px;
 }
 
 .wrap {
-	width: 1330px;
+	width: 100%;
 	height: 100%;
-	margin: 110px auto;
+	margin: 40px auto 380px;
 }
 
-.btn_menu {
-	width: 300px;
-	height: 800px;
-	display: inline-block;
-	vertical-align: top;
-	margin-right: 30px;
-}
-
-.report:hover, .privacy:hover, .stop:hover, .profile_manage:hover {
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
 
 .contents {
-	width: 700px;
-	height: 800px;
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 10px;
+	width: 98%;
+    height: 450px;
+    margin: 0 auto;
+    vertical-align: top;
 }
 
-.set {
-	width: 190px;
-	height: 50px;
-	font-size: 25pt;
-	font-weight: bold;
-	text-align: center;
+.select {
+	padding: 2%;
+	height: 55px;
 	margin-bottom: 30px;
-}
-
-.profile_manage, .privacy, .stop, .report {
-	width: 190px;
-	height: 50px;
-	font-size: 15pt;
-	font-weight: bold;
-	background-color: white;
-	color: black;
-	border-top: 1px solid #d9d9d9;
-	line-height: 50px;
-	text-align: center;
-	margin-bottom: 5px;
-}
-
-.privacy {
-	background-color: black;
-	color: white;
-}
-
-.stop {
-	border-bottom: 1px solid #d9d9d9;
+	margin-left: 2%;
+	border-radius: 5px;
 }
 
 .title {
-	width: 100%;
-	height: 50px;
-	font-size: 25pt;
+	width: 98%;
+    height: 50px;
+    font-size: 25pt;
+    margin: 0 auto;
 	font-weight: bold;
 	margin-bottom: 30px;
 	border-bottom: 1px solid #d9d9d9;
@@ -159,6 +122,7 @@ tr {
 }
 
 .table {
+	width: 100%;
 	color: black;
 	font-size: 10pt;
 	font-weight: bold;
@@ -171,22 +135,21 @@ table {
 
 td, th {
 	border-bottom: 1px solid #d9d9d9;
-	padding: 10px;
+	padding: 1%;
 }
 
 th {
-	width: 120px;
+	width: 20%;
 	background-color: #e6e6e6;
 }
 
 td {
-	width: 500px;
+	width: 80%;
 }
 
 .save_cancel {
-	width: 160px;
-	height: 50px;
-	margin: 0 auto;
+	text-align: center;
+	height: 50px;	
 }
 
 #btnSave {

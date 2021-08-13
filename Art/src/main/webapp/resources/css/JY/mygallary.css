@@ -1,4 +1,4 @@
-@charselect "UTF-8";
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 
 
@@ -33,7 +33,6 @@ body {
 .background_wrap {
 	background-color: #fbfbfb;
 	padding-bottom: 150px;
-	padding-top: 40px;
 }
 
 .wrap {
@@ -204,7 +203,6 @@ input[type="checkbox"] {
     text-align:center;
     width: 20%;
     line-height: 1em;
-    font-weight:700;
     border-radius:3px 3px 0 0;
     background: white;
     color: black;

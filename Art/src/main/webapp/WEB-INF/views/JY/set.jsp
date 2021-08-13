@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>개인정보 관리</title>
 <link rel="stylesheet" href="resources/css/JY/set.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -45,6 +46,17 @@ var code = "";                //이메일전송 인증번호 저장위한 코드
 
 $(document).ready(function() {
 
+	$('.select').on("change", function() {
+		if($("select[name=category]").val() == '0') {
+			location.href = "myreport";
+		} else if($("select[name=category]").val() == '1') {
+			location.href = "profile";
+		} else if($("select[name=category]").val() == '2') {
+			location.href = "set";
+		} else {
+			location.href = "withdrawal";
+		}
+	});
 	
 	$("#pw").change(function(){
 	    checkPassword($('#pw').val());
@@ -324,29 +336,28 @@ $(document).ready(function() {
 	</c:choose>
 	
 	<div class="wrap">
-		<div class="btn_menu">
-			<div class="set">마이페이지</div>
-			<div class="report">나의 신고목록</div>
-			<div class="profile_manage">프로필관리</div>
-			<div class="privacy">개인정보관리</div>
-			<div class="stop">탈퇴하기</div>
-		</div>
+		<select class="select" name="category">
+			<option value="0">나의 신고목록</option>
+			<option value="1">프로필관리</option>
+			<option value="2" selected="selected">개인정보관리</option>
+			<option value="3">탈퇴하기</option>
+		</select>
+		<div class="title">개인정보 관리</div>
 		<div class="contents">
-			<div class="title">개인정보 관리</div>
 			<table cellspacing="0" class="table">
 				<tr>
-					<th>현재 비밀번호</th>
+					<th>현재<br/>비밀번호</th>
 					<td>
 						<input id="nowPw" type="password" size="10" maxlength="200" placeholder="현재 비밀번호를 입력해주세요."/>
 						<input id="btnEditPw" type="button" value="수정"/>
 					</td>
 				</tr>
 				<tr>
-					<th>새 비밀번호</th>
+					<th>새<br/>비밀번호</th>
 					<td><input id="pw" type="password" onchange="check_pw()" size="10" maxlength="200" placeholder="새 비밀번호를 입력해주세요."/></td>
 				</tr>
 				<tr>
-					<th>새비밀번호 확인</th>
+					<th>새<br/>비밀번호<br/>확인</th>
 					<td><input id="pwCheck" type="password" onchange="check_pw()" size="10" maxlength="200" placeholder="새 비밀번호를 확인해주세요."/>
 						<input id="pwSend" type="button" value="수정하기">
 						<br/>
@@ -397,7 +408,7 @@ $(document).ready(function() {
 					</td>
 				</tr>
 				<tr>
-					<th>휴대폰번호</th>
+					<th>휴대폰<br/>번호</th>
 					<td>
 						<input id="phone" type="number" name="userPhone" value="${data.PHONE_NO}"/>
 					</td>
@@ -416,7 +427,7 @@ $(document).ready(function() {
 					</td>
 				</tr>
 				<tr>
-					<th>정보수신여부</th>
+					<th>정보수신<br/>여부</th>
 					<td rowspan="2" >서비스 관련 소식 및 프로모션 메일을
 						<c:choose>
 							<c:when test="${data.EVENT_AGREEMENT == 0}">

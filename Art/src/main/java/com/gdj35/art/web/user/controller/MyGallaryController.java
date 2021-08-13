@@ -130,7 +130,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getMyPicCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -160,7 +160,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getMyDrawCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -189,7 +189,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getMyVideoCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -220,7 +220,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getOtherPicCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -250,7 +250,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getOtherDrawCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -279,7 +279,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getOtherVideoCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 9, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -328,7 +328,7 @@ public class MyGallaryController {
 		int cnt = iMyGallaryService.getPicCnt(params);
 		
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 16, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -358,7 +358,7 @@ public class MyGallaryController {
 		
 		int cnt = iMyGallaryService.getDrawCnt(params);
 		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 16, 5);
+		PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 		
 	
 		params.put("startCnt", Integer.toString(pb.getStartCount()));
@@ -387,7 +387,7 @@ public class MyGallaryController {
 			
 			int cnt = iMyGallaryService.getVideoCnt(params);
 			
-			PagingBean pb = iPagingService.getPagingBean(page, cnt, 16, 5);
+			PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 			
 		
 			params.put("startCnt", Integer.toString(pb.getStartCount()));

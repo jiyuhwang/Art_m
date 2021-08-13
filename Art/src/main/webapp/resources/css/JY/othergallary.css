@@ -36,7 +36,6 @@ b {
 .background_wrap {
 	background-color: #fbfbfb;
 	padding-bottom: 150px;
-	padding-top: 40px;
 }
 
 .wrap {
@@ -135,7 +134,6 @@ b {
     text-align:center;
     width: 20%;
     line-height: 1em;
-    font-weight:700;
     border-radius:3px 3px 0 0;
     background: white;
     color: black;

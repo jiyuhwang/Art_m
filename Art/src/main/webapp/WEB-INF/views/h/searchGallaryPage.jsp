@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>작품 검색페이지</title>
 <link rel="stylesheet" type="text/css" href="resources/css/h/search_gallary_page.css"/>
 
@@ -405,21 +406,14 @@ $(document).ready(function() {
 	function drawPaging(pb) {
 		var html ="";
 		
-		html += "<a page=\"1\"><<</a>";
 		if($("#page").val() == "1") {
 			html += "<a page=\"1\"><</a>";		
 		} else {
 			html += "<a page=\"" + ($("#page").val() - 1) + "\"><</a>";
 		}
 		
-		for(var i = pb.startPcount ; i <= pb.endPcount; i++){
-			if($("#page").val() == i) {
-				html += "<a class=\"on\" page=\"" + i + "\">" + i + "</a>";			
-			} else {
-				html += "<a page=\"" + i + "\">" + i + "</a>";			
-				
-			}
-		}
+		html += "<a class=\"on\" page=\"" + $("#page").val() + "\">" + $("#page").val() + "</a>";			
+			
 		
 		if($("#page").val() == pb.maxPcount) {
 			html += "<a page=\"" + pb.maxPcount + "\">></a>";
@@ -427,30 +421,9 @@ $(document).ready(function() {
 			html += "<a page=\"" + ($("#page").val() * 1 + 1) + "\">></a>";
 		}
 		
-		html += "<a page=\"" + pb.maxPcount + "\">>></a";
 		
 		$(".paging_area").html(html);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 
@@ -480,7 +453,7 @@ $(document).ready(function() {
 			<input type="hidden" id="authorNo" name="authorNo" value="">
 			<input type="hidden" id="userNo3" name="userNo" value="">
 			<input type="hidden" id="userNo2" name="userNo2" value="">
-			<input type="hidden" id="userNickname" name="userNickname" value="">"
+			<input type="hidden" id="userNickname" name="userNickname" value="">
 			<input type="hidden" id="userProfileImg" name="userProfileImg" value="">
 			<input type="hidden" id="userIntroduce" name="userIntroduce" value="">
 			<input type="hidden" id="postNo" name="postNo" />
@@ -489,7 +462,9 @@ $(document).ready(function() {
 		</div>
 		<div class="srh_cnt_div">
 			<div class="srh_cnt_box">	
-			<span class="srh_cnt">작품 검색 결과 <span class="spanCnt"></span>건</span>";				
+			<span class="srh_cnt">검색 결과 <span class="spanCnt"></span>건</span>			
+			</div>
+		</div>	
 				<div class="srh_flag_div">
 					<ul class="srh_flag">
 						<li class="accuracy" id="active">좋아요수</li>
@@ -497,8 +472,6 @@ $(document).ready(function() {
 						<li class="recency">최신</li>
 					</ul>
 				</div>
-			</div>
-		</div>	
 	</div>
 	<div class="main">
 		<div class="ctts">

@@ -35,7 +35,7 @@ body {
 .wrap {
 	position: relative;
 	width: 100%;
-	height: 160vw;
+	height: 190vw;
 	margin: 0 auto;
 }
 
@@ -116,7 +116,7 @@ body {
 .pic_wrap, .draw_wrap, .video_wrap {
 	position: absolute;
 	margin-top: 20px;
-	width: 100%;
+	width: 99%;
 }
 
 .pic_wrap :not(:nth-child(3n)), .draw_wrap :not(:nth-child(3n)), .video_wrap :not(:nth-child(3n)) {

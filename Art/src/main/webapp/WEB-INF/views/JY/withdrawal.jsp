@@ -5,12 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-sacle = 1.0, user-scalable=no" />
 <title>탈퇴하기</title>
 <link rel="stylesheet" href="resources/css/JY/withdrawal.css">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
+	$('.select').on("change", function() {
+		if($("select[name=category]").val() == '0') {
+			location.href = "myreport";
+		} else if($("select[name=category]").val() == '1') {
+			location.href = "profile";
+		} else if($("select[name=category]").val() == '2') {
+			location.href = "set";
+		} else {
+			location.href = "withdrawal";
+		}
+	});
+	
 	$('.background').hide();
 	$('.main').hide();
 	
@@ -131,13 +145,12 @@ $(document).ready(function() {
 	</c:choose>
 	
 	<div class="wrap">
-		<div class="btn_menu">
-			<div class="set">마이페이지</div>
-			<div class="report">나의 신고목록</div>
-			<div class="profile_manage">프로필관리</div>
-			<div class="privacy">개인정보관리</div>
-			<div class="stop">탈퇴하기</div>
-		</div>
+		<select class="select" name="category">
+			<option value="0">나의 신고목록</option>
+			<option value="1">프로필관리</option>
+			<option value="2">개인정보관리</option>
+			<option value="3" selected="selected">탈퇴하기</option>
+		</select>
 		<div class="contents">
 			<div class="title">탈퇴하기</div>
 			<div class="box">
@@ -146,11 +159,12 @@ $(document).ready(function() {
 					 <br>
 					 <b>모든 데이터는 복구가 불가능합니다.</b>
 					 <br>
-					  아래 사항을 확인하신 후에 신중하게 결정해 주세요.
+					  아래 사항을 확인하신 후에<br/>신중하게 결정해 주세요.<br/>
 				 </div>
-				 <span class="ico_dot"> 작성한 글, 작품 모든 정보가 삭제됩니다.<br>작성한 댓글은 사라지지 않으니 미리 확인하시기 바랍니다.</span><br>
+				 <br/>
+				 <span class="ico_dot"> 작성한 글, 작품 모든 정보가 삭제됩니다.<br>작성한 댓글은 사라지지 않으니<br/>미리 확인하시기 바랍니다.</span><br/><br>
 				  <div class="screen_out">
-				   <label > 안내사항을 모두 확인하였으며, 이에 동의합니다.</label><input type="checkbox" id="out" name="out" value="0">
+				   <label > 안내사항을 모두 확인하였으며,<br/>이에 동의합니다.</label><input type="checkbox" id="out" name="out" value="0">
 				  <br><br>
 				   <input type="button" class="stopbtn" value="탈퇴하기">
 				  </div>
@@ -163,7 +177,7 @@ $(document).ready(function() {
 		<div class = "topBlank"></div>
 			<div class = "middleBlank">
 				<div class = "title2">비밀번호를 입력해주세요.</div>
-				<input type="password" id="pwCheck" value=""/>
+				<input type="password" id="pwCheck" value=""/><br/>
 				<button class ="a1">cancel</button>
 				<button class ="a2">ok</button>
 			</div>

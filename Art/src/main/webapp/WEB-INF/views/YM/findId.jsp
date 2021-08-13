@@ -25,7 +25,7 @@ body {
 
 .tabs {
 	display: block;
-	width: 71%;
+	width: 80%;
 	margin: 50px auto;
 	font-size: 16px;
 }

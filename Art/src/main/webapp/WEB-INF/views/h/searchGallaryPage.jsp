@@ -443,7 +443,7 @@ $(document).ready(function() {
 	</c:choose>
 <form action="#" id="actionForm" name="go" method="post" target="">
 	<div class="input_txt_wrap">
-		<div id="srhTxt">
+		<div id="srhTxt"> 
 			<input type="hidden" id="visibility" name="visibility" value="0"/>
 			<input type="text" id="searchTxt" name="searchTxt" placeholder="검색어를 입력해주세요." value="${param.searchTxt}"/>
 			<input type="hidden" id="searchOldTxt" value="${param.searchTxt}"/>

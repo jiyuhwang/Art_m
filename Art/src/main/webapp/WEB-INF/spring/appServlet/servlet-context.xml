@@ -33,7 +33,7 @@
 	</beans:bean>
 	
 	<!-- Exception Resolver -->
-	<beans:bean id="exceptionMapping" 	class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<beans:bean id="exceptionMapping" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<beans:property name="exceptionMappings">
 			<beans:props>
 				<beans:prop key="java.lang.Exception">/exception/EXCEPTION_INFO</beans:prop>
